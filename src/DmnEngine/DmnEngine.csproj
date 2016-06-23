@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{87FA98A2-5A31-4167-A3E0-B70E37718C2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Softengi.DmnEngine</RootNamespace>
+    <AssemblyName>Softengi.DmnEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DmnEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlTypes\Artifact.cs" />
+    <Compile Include="XmlTypes\Association.cs" />
+    <Compile Include="XmlTypes\Binding.cs" />
+    <Compile Include="XmlTypes\Drg\BusinessKnowledgeModel.cs" />
+    <Compile Include="XmlTypes\Context.cs" />
+    <Compile Include="XmlTypes\ContextEntry.cs" />
+    <Compile Include="XmlTypes\DecisionRule.cs" />
+    <Compile Include="XmlTypes\Definitions.cs" />
+    <Compile Include="XmlTypes\DecisionService.cs" />
+    <Compile Include="XmlTypes\AssociationDirection.cs" />
+    <Compile Include="XmlTypes\DmnElement.cs" />
+    <Compile Include="XmlTypes\DmnElementExtensionElements.cs" />
+    <Compile Include="XmlTypes\DmnElementReference.cs" />
+    <Compile Include="XmlTypes\DecisionTableOrientation.cs" />
+    <Compile Include="XmlTypes\BuiltInAggregator.cs" />
+    <Compile Include="XmlTypes\BusinessContextElement.cs" />
+    <Compile Include="XmlTypes\DecisionTable.cs" />
+    <Compile Include="XmlTypes\Drg\AuthorityRequirement.cs" />
+    <Compile Include="XmlTypes\Drg\Decision.cs" />
+    <Compile Include="XmlTypes\Drg\DrgElement.cs" />
+    <Compile Include="XmlTypes\ElementCollection.cs" />
+    <Compile Include="XmlTypes\Import.cs" />
+    <Compile Include="XmlTypes\ImportedValues.cs" />
+    <Compile Include="XmlTypes\InformationItem.cs" />
+    <Compile Include="XmlTypes\InputClause.cs" />
+    <Compile Include="XmlTypes\ItemDefinition.cs" />
+    <Compile Include="XmlTypes\Drg\KnowledgeRequirement.cs" />
+    <Compile Include="XmlTypes\Drg\KnowledgeSource.cs" />
+    <Compile Include="XmlTypes\LiteralExpression.cs" />
+    <Compile Include="XmlTypes\NamedElement.cs" />
+    <Compile Include="XmlTypes\Invocation.cs" />
+    <Compile Include="XmlTypes\List.cs" />
+    <Compile Include="XmlTypes\FunctionDefinition.cs" />
+    <Compile Include="XmlTypes\HitPolicy.cs" />
+    <Compile Include="XmlTypes\Drg\InformationRequirement.cs" />
+    <Compile Include="XmlTypes\OrganizationUnit.cs" />
+    <Compile Include="XmlTypes\OutputClause.cs" />
+    <Compile Include="XmlTypes\PerformanceIndicator.cs" />
+    <Compile Include="XmlTypes\Relation.cs" />
+    <Compile Include="XmlTypes\Drg\InputData.cs" />
+    <Compile Include="XmlTypes\Expression.cs" />
+    <Compile Include="XmlTypes\TextAnnotation.cs" />
+    <Compile Include="XmlTypes\UnaryTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dmn.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
