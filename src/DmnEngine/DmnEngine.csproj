@@ -29,6 +29,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Label="YltParsers">
+    <Names>SFeel</Names>
+  </PropertyGroup>
+  <PropertyGroup Label="YltProperties">
+    <YltTools>$(SolutionDir)packages\YaccLexTools.0.2.2\tools\</YltTools>
+    <GplexTool>"$(YltTools)gplex.exe"</GplexTool>
+    <GppgTool>"$(YltTools)gppg.exe"</GppgTool>
+  </PropertyGroup>
+  <PropertyGroup Label="GenerateSFeelProperties">
+    <SFeelParser>$(ProjectDir)Sfeel\Parser\SFeel</SFeelParser>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -41,7 +52,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DmnEngine.cs" />
+    <Compile Include="GplexBuffers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SFeel\Ast\AstNode.cs" />
+    <Compile Include="SFeel\Ast\Comparison.cs" />
+    <Compile Include="SFeel\Ast\ComparisonOperator.cs" />
+    <Compile Include="SFeel\Ast\InputValue.cs" />
+    <Compile Include="SFeel\Ast\Literal.cs" />
+    <Compile Include="SFeel\Ast\Logical.cs" />
+    <Compile Include="SFeel\Ast\Not.cs" />
+    <Compile Include="SFeel\Ast\Or.cs" />
+    <Compile Include="SFeel\Ast\QualifiedName.cs" />
+    <Compile Include="SFeel\Ast\Range.cs" />
+    <Compile Include="ShiftReduceParserCode.cs" />
     <Compile Include="XmlTypes\Artifact.cs" />
     <Compile Include="XmlTypes\Association.cs" />
     <Compile Include="XmlTypes\Binding.cs" />
@@ -90,8 +113,47 @@
     <None Include="dmn.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup Label="SFeelFiles">
+    <Compile Include="SFeel\Parser\SFeel.Parser.cs">
+      <DependentUpon>SFeel.parser</DependentUpon>
+    </Compile>
+    <Compile Include="SFeel\Parser\SFeel.Parser.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SFeel.Language.grammar.y</DependentUpon>
+    </Compile>
+    <Compile Include="SFeel\Parser\SFeel.Scanner.cs">
+      <DependentUpon>SFeel.parser</DependentUpon>
+    </Compile>
+    <Compile Include="SFeel\Parser\SFeel.Scanner.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SFeel.Language.analyzer.lex</DependentUpon>
+    </Compile>
+    <None Include="SFeel\Parser\SFeel.Language.analyzer.lex">
+      <DependentUpon>SFeel.parser</DependentUpon>
+    </None>
+    <None Include="SFeel\Parser\SFeel.Language.grammar.y">
+      <DependentUpon>SFeel.parser</DependentUpon>
+    </None>
+    <None Include="SFeel\Parser\SFeel.parser" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="BeforeBuild" DependsOnTargets="YltBuildGen" />
+  <Target Name="YltBuildGen" DependsOnTargets="GenerateSFeel" />
+  <Target Name="GenerateSFeel" Inputs="$(SFeelParser).Language.analyzer.lex;$(SFeelParser).Language.grammar.y" Outputs="$(SFeelParser).Scanner.Generated.cs;$(SFeelParser).Parser.Generated.cs">
+    <Message Text="Generating scanner for $(SFeelParser) ..." />
+    <Exec Command="$(GplexTool) &quot;/out:$(SFeelParser).Scanner.Generated.cs&quot; &quot;$(SFeelParser).Language.analyzer.lex&quot;" WorkingDirectory="$(ProjectDir)" Outputs="$(GenDir)Scanner.cs">
+      <Output TaskParameter="Outputs" ItemName="SFeelScanner" />
+    </Exec>
+    <Message Text="Generating parser for $(SFeelParser) ..." />
+    <Exec Command="$(GppgTool) /no-lines /gplex &quot;$(SFeelParser).Language.grammar.y&quot; &gt; &quot;$(SFeelParser).Parser.Generated.cs&quot;" WorkingDirectory="$(ProjectDir)" Outputs="$(SFeelParser).Parser.Generated.cs">
+      <Output TaskParameter="Outputs" ItemName="SFeel" />
+    </Exec>
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
