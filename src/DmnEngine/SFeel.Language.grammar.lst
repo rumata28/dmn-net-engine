@@ -1,11 +1,11 @@
 
 // ==========================================================================
-//  GPPG error listing for yacc source file <Sfeel\Parser\SFeel.Language.grammar.y - 6/27/2016 7:42:53 PM>
+//  GPPG error listing for yacc source file <Sfeel\Parser\SFeel.Language.grammar.y - 6/27/2016 11:12:57 PM>
 // ==========================================================================
 //  Version:  1.5.2
-//  Machine:  BEZUGLIY-10
-//  DateTime: 6/27/2016 7:43:01 PM
-//  UserName: rumata
+//  Machine:  CABINET
+//  DateTime: 6/27/2016 11:13:25 PM
+//  UserName: Andrey
 // ==========================================================================
 
 
@@ -49,6 +49,12 @@
 
 
 %%
+// Error: NonTerminal symbol "MINUS" has no productions
+// Warning: Terminating MINUS fixes the following size-1 NonTerminal set
+   // {MINUS}
+// Error: There are 1 non-terminating NonTerminal Symbols
+   //  {MINUS}
+// ---------------------------------------------------------------------
 
 main:
 	| simpleUnaryTests		{ Debug("main");		Root = $1; }
@@ -56,9 +62,6 @@ main:
 
 simpleUnaryTests:
 	| simplePositiveUnaryTests								{ Debug("simpleUnaryTests");		$$ = $1;			}
-	| NOT simplePositiveUnaryTests							{ Debug("simpleUnaryTests/not");	$$ = new Not($3);	}
-// Error: Semantic action index is out of bounds
-// ---------------------------------------------
 	| NOT P_OPEN simplePositiveUnaryTests P_CLOSE			{ Debug("simpleUnaryTests/not");	$$ = new Not($3);	}
 	;
 
@@ -75,21 +78,21 @@ simplePositiveUnaryTest:
 	;
 
 intervalStart:
-	| openIntervalStart	{ $$ = true; }
-	| SP_OPEN			{ $$ = false; }
+	| closeIntervalStart	{ $$ = false; }
+	| SP_OPEN				{ $$ = true;  }
 	;
 
-openIntervalStart:
-	| P_OPEN			{ Debug("openIntervalStart/P_OPEN"); }
+closeIntervalStart:
+	| P_OPEN
 	| SP_CLOSE
 	;
 
 intervalEnd:
-	| openIntervalEnd	{ $$ = true; }
-	| SP_CLOSE			{ $$ = false; }
+	| closeIntervalEnd	{ $$ = false; }
+	| SP_CLOSE			{ $$ = true;  }
 	;
 
-openIntervalEnd:
+closeIntervalEnd:
 	| P_CLOSE
 	| SP_OPEN
 	;
@@ -118,6 +121,7 @@ simpleLiteral:
 
 numericLiteral:
 	| NUMBER					{ Debug("numericLiteral"); $$ = new NumericLiteral($1); }
+	| MINUS NUMBER				{ Debug("numericLiteral/neg"); $$ = new NumericLiteral(-$1); }
 	;
 
 stringLiteral:

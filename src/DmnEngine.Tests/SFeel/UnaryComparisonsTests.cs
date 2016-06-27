@@ -158,18 +158,36 @@ namespace DmnEngine.Tests.SFeel
 		[Test]
 		public void Test_Range_Open_Open()
 		{
-			ExpectSfeel("[-5,5]", -5.01m, false);
-			ExpectSfeel("[-5,5]", -5, true);
-			ExpectSfeel("[-5,5]", 0, true);
-			ExpectSfeel("[-5,5]", 5, true);
-			ExpectSfeel("[-5,5]", 5.01m, false);
+			ExpectSfeel("[-5..5]", -5.01m, false);
+			ExpectSfeel("[-5..5]", -5, true);
+			ExpectSfeel("[-5..5]", 0, true);
+			ExpectSfeel("[-5..5]", 5, true);
+			ExpectSfeel("[-5..5]", 5.01m, false);
+		}
+
+		[Test]
+		public void Test_Range_vs_DecimalPoint()
+		{
+			ExpectSfeel("[-5...5]", -5.001m, false);
+			ExpectSfeel("[-5...5]", -5, true);
+			ExpectSfeel("[-5...5]", 0.5m, true);
+			ExpectSfeel("[-5...5]", 0.51m, false);
+		}
+
+		[Test]
+		public void Test_Range_NegativeEnd()
+		{
+			ExpectSfeel("[-5.5..-1.1]", -5.501m, false);
+			ExpectSfeel("[-5.5..-1.1]", -5.5m, true);
+			ExpectSfeel("[-5.5..-1.1]", -1.1m, true);
+			ExpectSfeel("[-5.5..-1.1]", -1.009m, false);
 		}
 
 		[Test]
 		public void Test_Range_Open_Close()
 		{
 			ExpectSfeel("[-5..5)", -5.01m, false);
-			ExpectSfeel("[-5..5)", -5, false);
+			ExpectSfeel("[-5..5)", -5, true);
 			ExpectSfeel("[-5..5)", 0, true);
 			ExpectSfeel("[-5..5)", 5, false);
 			ExpectSfeel("[-5..5)", 5.01m, false);
@@ -201,12 +219,79 @@ namespace DmnEngine.Tests.SFeel
 		public void Test_Range_Close_Close()
 		{
 			ExpectSfeel("(-5..5)", -5.01m, false);
-			ExpectSfeel("(-5 .. 5)", -5, false);
-			ExpectSfeel("(-5 .. 5)", 0, true);
-			ExpectSfeel("(-5 .. 5)", 5, false);
-			ExpectSfeel("(-5 .. 5)", 5.01m, false);
+			ExpectSfeel("(-5..5)", -5, false);
+			ExpectSfeel("(-5..5)", 0, true);
+			ExpectSfeel("(-5..5)", 5, false);
+			ExpectSfeel("(-5..5)", 5.01m, false);
 		}
 
+		[Test]
+		public void Test_not_Range()
+		{
+			ExpectSfeel("not([-5...5])", -5.001m, true);
+			ExpectSfeel("not([-5...5])", -5, false);
+			ExpectSfeel("not([-5...5])", 0.5m, false);
+			ExpectSfeel("not([-5...5])", 0.51m, true);
+		}
+
+		[Test]
+		public void Test_Range_List()
+		{
+			ExpectSfeel("[-5..-4],[1..2]", -5.01m, false);
+			ExpectSfeel("[-5..-4],[1..2]", -5, true);
+			ExpectSfeel("[-5..-4],[1..2]", -4, true);
+			ExpectSfeel("[-5..-4],[1..2]", .99m, false);
+			ExpectSfeel("[-5..-4],[1..2]", 1, true);
+			ExpectSfeel("[-5..-4],[1..2]", 2, true);
+			ExpectSfeel("[-5..-4],[1..2]", 2.01m, false);
+		}
+
+		[Test]
+		public void Test_not_Range_List()
+		{
+			ExpectSfeel("not([-5..-4],[1..2])", -5.01m, true);
+			ExpectSfeel("not([-5..-4],[1..2])", -5, false);
+			ExpectSfeel("not([-5..-4],[1..2])", -4, false);
+			ExpectSfeel("not([-5..-4],[1..2])", .99m, true);
+			ExpectSfeel("not([-5..-4],[1..2])", 1, false);
+			ExpectSfeel("not([-5..-4],[1..2])", 2, false);
+			ExpectSfeel("not([-5..-4],[1..2])", 2.01m, true);
+		}
+
+		[Test]
+		public void Test_combined_Range()
+		{
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -10, true);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -9.99m, false);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -5.01m, false);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -5, true);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -4, true);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 0, true);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", .99m, false);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 1, true);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 2, true);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 2.01m, false);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 10, false);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 10.001m, true);
+		}
+
+		[Test]
+		public void Test_not_combined_Range()
+		{
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -10, false);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -9.99m, true);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -5.01m, true);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -5, false);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -4, false);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 0, false);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", .99m, true);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 1, false);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 2, false);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 2.01m, true);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 10, true);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 10.001m, false);
+		}
+		
 		private void ExpectSfeel(string sfeelExpression, EvaluationValue input, EvaluationValue expectedResult)
 		{
 			var result = SFeelEval(sfeelExpression, input);

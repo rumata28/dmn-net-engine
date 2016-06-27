@@ -5,10 +5,10 @@
 //  See accompanying file GPLEXcopyright.rtf.
 //
 //  GPLEX Version:  1.2.2
-//  Machine:  BEZUGLIY-10
-//  DateTime: 6/27/2016 8:17:43 PM
-//  UserName: rumata
-//  GPLEX input file <Sfeel\Parser\SFeel.Language.analyzer.lex - 6/27/2016 8:16:47 PM>
+//  Machine:  CABINET
+//  DateTime: 6/28/2016 12:08:26 AM
+//  UserName: Andrey
+//  GPLEX input file <Sfeel\Parser\SFeel.Language.analyzer.lex - 6/28/2016 12:08:26 AM>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: verbose, parser, stack, minimize
@@ -166,7 +166,7 @@ namespace Softengi.DmnEngine.SFeel.Parser
 
     static int[] startState = new int[] {40, 0};
 
-    static Table[] NxS = new Table[45] {
+    static Table[] NxS = new Table[43] {
 /* NxS[   0] */ new Table(0, 0, 0, null), // Shortest string ""
 /* NxS[   1] */ new Table(0, 0, -1, null), // Shortest string "\x01"
 /* NxS[   2] */ // Shortest string "\t"
@@ -174,25 +174,23 @@ namespace Softengi.DmnEngine.SFeel.Parser
           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
           -1, 2}),
 /* NxS[   3] */ // Shortest string "\""
-      new Table(10, 25, 44, new sbyte[] {-1, 44, 44, -1, 44, 44, 
-          44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 
-          44, 44, 39}),
+      new Table(10, 25, 42, new sbyte[] {-1, 42, 42, -1, 42, 42, 
+          42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 
+          42, 42, 39}),
 /* NxS[   4] */ new Table(0, 0, -1, null), // Shortest string "("
 /* NxS[   5] */ new Table(0, 0, -1, null), // Shortest string ")"
 /* NxS[   6] */ // Shortest string "*"
       new Table(42, 1, -1, new sbyte[] {38}),
 /* NxS[   7] */ new Table(0, 0, -1, null), // Shortest string "+"
 /* NxS[   8] */ new Table(0, 0, -1, null), // Shortest string ","
-/* NxS[   9] */ // Shortest string "-"
-      new Table(46, 12, -1, new sbyte[] {42, -1, 43, 43, 43, 43, 
-          43, 43, 43, 43, 43, 43}),
+/* NxS[   9] */ new Table(0, 0, -1, null), // Shortest string "-"
 /* NxS[  10] */ // Shortest string "."
       new Table(46, 12, -1, new sbyte[] {36, -1, 37, 37, 37, 37, 
           37, 37, 37, 37, 37, 37}),
 /* NxS[  11] */ new Table(0, 0, -1, null), // Shortest string "/"
 /* NxS[  12] */ // Shortest string "0"
-      new Table(46, 12, 33, new sbyte[] {41, 33, 34, 34, 34, 34, 
-          34, 34, 34, 34, 34, 34}),
+      new Table(46, 12, -1, new sbyte[] {33, -1, 12, 12, 12, 12, 
+          12, 12, 12, 12, 12, 12}),
 /* NxS[  13] */ // Shortest string "<"
       new Table(61, 1, -1, new sbyte[] {32}),
 /* NxS[  14] */ new Table(0, 0, -1, null), // Shortest string "="
@@ -293,12 +291,12 @@ namespace Softengi.DmnEngine.SFeel.Parser
           16, 16, 16, 16, 16}),
 /* NxS[  31] */ new Table(0, 0, -1, null), // Shortest string ">="
 /* NxS[  32] */ new Table(0, 0, -1, null), // Shortest string "<="
-/* NxS[  33] */ new Table(0, 0, -1, null), // Shortest string "0\x01"
-/* NxS[  34] */ // Shortest string "00"
-      new Table(46, 12, 33, new sbyte[] {41, 33, 34, 34, 34, 34, 
-          34, 34, 34, 34, 34, 34}),
+/* NxS[  33] */ // Shortest string "0."
+      new Table(46, 12, -1, new sbyte[] {34, -1, 35, 35, 35, 35, 
+          35, 35, 35, 35, 35, 35}),
+/* NxS[  34] */ new Table(0, 0, -1, null), // Shortest string "0.."
 /* NxS[  35] */ // Shortest string "0.0"
-      new Table(46, 12, 33, new sbyte[] {-1, 33, 35, 35, 35, 35, 
+      new Table(46, 12, -1, new sbyte[] {41, -1, 35, 35, 35, 35, 
           35, 35, 35, 35, 35, 35}),
 /* NxS[  36] */ new Table(0, 0, -1, null), // Shortest string ".."
 /* NxS[  37] */ // Shortest string ".0"
@@ -315,19 +313,12 @@ namespace Softengi.DmnEngine.SFeel.Parser
           16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 1, 18, 1, 
           16, 1, 16, 16, 16, 16, 16, 19, 16, 16, 16, 16, 16, 16, 16, 20, 
           16, 16, 16, 16, 16, 21, 16, 16, 16, 16, 16, 16}),
-/* NxS[  41] */ // Shortest string "0."
-      new Table(46, 12, 33, new sbyte[] {-1, 33, 35, 35, 35, 35, 
-          35, 35, 35, 35, 35, 35}),
-/* NxS[  42] */ // Shortest string "-."
-      new Table(48, 10, -1, new sbyte[] {37, 37, 37, 37, 37, 37, 
-          37, 37, 37, 37}),
-/* NxS[  43] */ // Shortest string "-0"
-      new Table(46, 12, 33, new sbyte[] {41, 33, 34, 34, 34, 34, 
-          34, 34, 34, 34, 34, 34}),
-/* NxS[  44] */ // Shortest string "\"\x01"
-      new Table(10, 25, 44, new sbyte[] {-1, 44, 44, -1, 44, 44, 
-          44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 
-          44, 44, 39}),
+/* NxS[  41] */ // Shortest string "0.0."
+      new Table(46, 1, -1, new sbyte[] {34}),
+/* NxS[  42] */ // Shortest string "\"\x01"
+      new Table(10, 25, 42, new sbyte[] {-1, 42, 42, -1, 42, 42, 
+          42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 
+          42, 42, 39}),
     };
 
 int NextState() {
@@ -757,10 +748,9 @@ int NextState() {
             break;
         case 1: // Recognized '.',	Shortest string "\x01"
         case 3: // Recognized '.',	Shortest string "\""
-        case 12: // Recognized '.',	Shortest string "0"
 UnexpectedCharacter();
             break;
-        case 2: // Recognized '{Space}+',	Shortest string "\t"
+        case 2: // Recognized '{S}+',	Shortest string "\t"
 /* skip */
             break;
         case 4: // Recognized '\(',	Shortest string "("
@@ -787,6 +777,11 @@ Debug();		return (int) Token.DOT;
         case 11: // Recognized '\/',	Shortest string "/"
 Debug();		return (int) Token.OP_DIV;
             break;
+        case 12: // Recognized '({D}*\.)?{D}+',	Shortest string "0"
+        case 35: // Recognized '({D}*\.)?{D}+',	Shortest string "0.0"
+        case 37: // Recognized '({D}*\.)?{D}+',	Shortest string ".0"
+Debug(); GetNumber();	return (int) Token.NUMBER;
+            break;
         case 13: // Recognized '\<',	Shortest string "<"
 Debug();		return (int) Token.C_LT;
             break;
@@ -796,16 +791,16 @@ Debug();		return (int) Token.C_EQ;
         case 15: // Recognized '\>',	Shortest string ">"
 Debug();		return (int) Token.C_GT;
             break;
-        case 16: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "A"
-        case 19: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "f"
-        case 20: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "n"
-        case 21: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "t"
-        case 22: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "tr"
-        case 23: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "tru"
-        case 25: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "no"
-        case 27: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "fa"
-        case 28: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "fal"
-        case 29: // Recognized '{Alpha}({Alpha}|{Digit})*',	Shortest string "fals"
+        case 16: // Recognized '{L}({L}|{D})*',	Shortest string "A"
+        case 19: // Recognized '{L}({L}|{D})*',	Shortest string "f"
+        case 20: // Recognized '{L}({L}|{D})*',	Shortest string "n"
+        case 21: // Recognized '{L}({L}|{D})*',	Shortest string "t"
+        case 22: // Recognized '{L}({L}|{D})*',	Shortest string "tr"
+        case 23: // Recognized '{L}({L}|{D})*',	Shortest string "tru"
+        case 25: // Recognized '{L}({L}|{D})*',	Shortest string "no"
+        case 27: // Recognized '{L}({L}|{D})*',	Shortest string "fa"
+        case 28: // Recognized '{L}({L}|{D})*',	Shortest string "fal"
+        case 29: // Recognized '{L}({L}|{D})*',	Shortest string "fals"
 Debug();		return (int) Token.NAME;
             break;
         case 17: // Recognized '\[',	Shortest string "["
@@ -815,13 +810,13 @@ Debug();		return (int) Token.SP_OPEN;
 Debug();		return (int) Token.SP_CLOSE;
             break;
         case 24: // Recognized 'true',	Shortest string "true"
-Debug();GetBool();	return (int) Token.BOOLEAN;
+Debug(); GetBool();	return (int) Token.BOOLEAN;
             break;
         case 26: // Recognized 'not',	Shortest string "not"
 Debug();		return (int) Token.NOT;
             break;
         case 30: // Recognized 'false',	Shortest string "false"
-Debug();GetBool();	return (int) Token.BOOLEAN;
+Debug(); GetBool();	return (int) Token.BOOLEAN;
             break;
         case 31: // Recognized '\>=',	Shortest string ">="
 Debug();		return (int) Token.C_GE;
@@ -829,22 +824,20 @@ Debug();		return (int) Token.C_GE;
         case 32: // Recognized '\<=',	Shortest string "<="
 Debug();		return (int) Token.C_LE;
             break;
-        case 33: // Recognized '\-?{Digits}(\.({Digits})?)?[^\.]',	Shortest string "0\x01"
-        case 34: // Recognized '\-?{Digits}(\.({Digits})?)?[^\.]',	Shortest string "00"
-        case 35: // Recognized '\-?{Digits}(\.({Digits})?)?[^\.]',	Shortest string "0.0"
-Debug();GetNumber();	return (int) Token.NUMBER;
+        case 33: // Recognized '{D}+\.{D}*',	Shortest string "0."
+Debug(); GetNumber();	return (int) Token.NUMBER;
             break;
-        case 36: // Recognized '\.\.',	Shortest string ".."
+        case 34: // Recognized '{D}+(\.{D}+)?".."',	Shortest string "0.."
+Debug("numWithDot: {0}", yytext); yyless(yytext.Length - 2); Debug(); GetNumber();	return (int) Token.NUMBER;
+            break;
+        case 36: // Recognized '".."',	Shortest string ".."
 Debug();		return (int) Token.RANGE;
-            break;
-        case 37: // Recognized '\-?\.{Digits}',	Shortest string ".0"
-Debug();GetNumber();	return (int) Token.NUMBER;
             break;
         case 38: // Recognized '\*\*',	Shortest string "**"
 Debug();		return (int) Token.OP_POW;
             break;
-        case 39: // Recognized '{String}',	Shortest string "\"\""
-Debug();GetString();	return (int) Token.STRING;
+        case 39: // Recognized '\"[^\"\r\n]*\"',	Shortest string "\"\""
+Debug(); GetString();	return (int) Token.STRING;
             break;
         default:
             break;

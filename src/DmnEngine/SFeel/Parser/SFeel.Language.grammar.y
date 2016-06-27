@@ -92,8 +92,8 @@ endpoint:
 	;
 
 simpleValue:
-	| simpleLiteral				{ Debug("simpleLiteral/lit");	$$ = $1; }
-	| qualifiedName				{ Debug("simpleLiteral/qn");	$$ = $1; }
+	| simpleLiteral				{ Debug("simpleValue/lit");	$$ = $1; }
+	| qualifiedName				{ Debug("simpleValue/qn");	$$ = $1; }
 	;
 
 simpleLiteral:
@@ -104,6 +104,7 @@ simpleLiteral:
 
 numericLiteral:
 	| NUMBER					{ Debug("numericLiteral"); $$ = new NumericLiteral($1); }
+	| OP_MINUS NUMBER			{ Debug("numericLiteral/neg"); $$ = new NumericLiteral(-$2); }
 	;
 
 stringLiteral:

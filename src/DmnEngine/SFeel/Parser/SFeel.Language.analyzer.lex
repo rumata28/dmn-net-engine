@@ -5,35 +5,30 @@
 
 %option stack, minimize, parser, verbose, persistbuffer, noembedbuffers 
 
-Eol						(\r\n?|\n)
-NotWh					[^ \t\r\n]
-Space					[ \t]
-Digit					[0-9]
-Digits					{Digit}+
-Alpha					[A-Z_a-z]
-String					\"[^\"\r\n]*\"
+Eol					(\r\n?|\n)
+NotWh				[^ \t\r\n]
+S					[ \t]
+D					[0-9]
+L					[A-Z_a-z]
 
-%{
-
-%}
 
 %%
 
 /* Scanner body */
 
-\.\.						{ Debug();		return (int) Token.RANGE; }
+({D}*\.)?{D}+			{ Debug(); GetNumber();	return (int) Token.NUMBER; }
+{D}+\.{D}*				{ Debug(); GetNumber();	return (int) Token.NUMBER; }
 
-\-?{Digits}(\.({Digits})?)?	{ Debug();GetNumber();	return (int) Token.NUMBER; }
-\-?\.{Digits}				{ Debug();GetNumber();	return (int) Token.NUMBER; }
+{D}+(\.{D}+)?".."		{ Debug("numWithDot: {0}", yytext); yyless(yytext.Length - 2); Debug(); GetNumber();	return (int) Token.NUMBER; }
 
-true						{ Debug();GetBool();	return (int) Token.BOOLEAN; }
-false						{ Debug();GetBool();	return (int) Token.BOOLEAN; }
+true					{ Debug(); GetBool();	return (int) Token.BOOLEAN; }
+false					{ Debug(); GetBool();	return (int) Token.BOOLEAN; }
 
-{String}					{ Debug();GetString();	return (int) Token.STRING; }
+\"[^\"\r\n]*\"			{ Debug(); GetString();	return (int) Token.STRING; }
 
-not							{ Debug();		return (int) Token.NOT; }
+not						{ Debug();		return (int) Token.NOT; }
 
-{Alpha}({Alpha}|{Digit})*	{ Debug();		return (int) Token.NAME; }
+{L}({L}|{D})*			{ Debug();		return (int) Token.NAME; }
 
 \-						{ Debug();		return (int) Token.OP_MINUS; }
 \+						{ Debug();		return (int) Token.OP_PLUS; }
@@ -53,9 +48,10 @@ not							{ Debug();		return (int) Token.NOT; }
 \>						{ Debug();		return (int) Token.C_GT; }
 
 \.						{ Debug();		return (int) Token.DOT; }
+".."					{ Debug();		return (int) Token.RANGE; }
 \,						{ Debug();		return (int) Token.COMMA; }
 
-{Space}+				/* skip */
+{S}+					/* skip */
 .						{ UnexpectedCharacter(); }
 
 

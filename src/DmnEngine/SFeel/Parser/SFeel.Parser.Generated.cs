@@ -3,10 +3,10 @@
 // (see accompanying GPPGcopyright.rtf)
 
 // GPPG version 1.5.2
-// Machine:  BEZUGLIY-10
-// DateTime: 6/27/2016 8:17:43 PM
-// UserName: rumata
-// Input file <Sfeel\Parser\SFeel.Language.grammar.y - 6/27/2016 8:16:16 PM>
+// Machine:  CABINET
+// DateTime: 6/28/2016 12:08:26 AM
+// UserName: Andrey
+// Input file <Sfeel\Parser\SFeel.Language.grammar.y - 6/28/2016 12:03:31 AM>
 
 // options: no-lines gplex
 
@@ -63,8 +63,8 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
 #pragma warning disable 649
   private static Dictionary<int, string> aliases;
 #pragma warning restore 649
-  private static Rule[] rules = new Rule[50];
-  private static State[] states = new State[45];
+  private static Rule[] rules = new Rule[51];
+  private static State[] states = new State[47];
   private static string[] nonTerms = new string[] {
       "main", "simpleUnaryTests", "simplePositiveUnaryTests", "simplePositiveUnaryTest", 
       "endpoint", "simpleValue", "simpleLiteral", "numericLiteral", "booleanLiteral", 
@@ -72,51 +72,53 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
       "qualifiedName", "$accept", "closeIntervalStart", "closeIntervalEnd", };
 
   static SFeelParser() {
-    states[0] = new State(new int[]{6,11,4,13,7,15,5,19,9,22,10,23,11,24,12,25,18,36,21,37,20,38,13,40,25,41,3,-2,22,-7,23,-15,24,-15},new int[]{-1,1,-2,3,-3,4,-4,39,-5,7,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16,-11,20,-12,26,-16,35});
+    states[0] = new State(new int[]{6,11,13,42,4,15,7,17,5,21,9,24,10,25,11,26,12,27,18,38,21,39,20,40,25,43,3,-2,22,-7,23,-15,24,-15},new int[]{-1,1,-2,3,-3,4,-4,41,-5,7,-6,8,-7,9,-8,10,-10,14,-9,16,-14,18,-11,22,-12,28,-16,37});
     states[1] = new State(new int[]{3,2});
     states[2] = new State(-1);
     states[3] = new State(-3);
     states[4] = new State(new int[]{22,5,3,-5});
-    states[5] = new State(new int[]{6,11,4,13,7,15,5,19,9,22,10,23,11,24,12,25,18,36,21,37,20,38,22,-11,3,-11,19,-11,23,-15,24,-15},new int[]{-4,6,-5,7,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16,-11,20,-12,26,-16,35});
+    states[5] = new State(new int[]{6,11,13,12,4,15,7,17,5,21,9,24,10,25,11,26,12,27,18,38,21,39,20,40,22,-11,3,-11,19,-11,23,-15,24,-15},new int[]{-4,6,-5,7,-6,8,-7,9,-8,10,-10,14,-9,16,-14,18,-11,22,-12,28,-16,37});
     states[6] = new State(-9);
     states[7] = new State(-12);
     states[8] = new State(-33);
     states[9] = new State(-35);
     states[10] = new State(-38);
     states[11] = new State(-42);
-    states[12] = new State(-39);
-    states[13] = new State(-44);
-    states[14] = new State(-40);
-    states[15] = new State(-46);
-    states[16] = new State(new int[]{23,17,22,-36,3,-36,19,-36,24,-36,20,-36,21,-36});
-    states[17] = new State(new int[]{5,18});
-    states[18] = new State(-49);
-    states[19] = new State(-48);
-    states[20] = new State(new int[]{6,11,4,13,7,15,5,19,22,-32,3,-32,19,-32,23,-47},new int[]{-5,21,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16});
-    states[21] = new State(-13);
-    states[22] = new State(-28);
-    states[23] = new State(-29);
-    states[24] = new State(-30);
-    states[25] = new State(-31);
-    states[26] = new State(new int[]{6,11,4,13,7,15,5,19,24,-32,23,-47},new int[]{-5,27,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16});
-    states[27] = new State(new int[]{24,28});
-    states[28] = new State(new int[]{6,11,4,13,7,15,5,19,19,-32,20,-32,21,-32,22,-32,3,-32,23,-47},new int[]{-5,29,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16});
-    states[29] = new State(new int[]{19,32,20,33,21,34,22,-21,3,-21},new int[]{-13,30,-17,31});
-    states[30] = new State(-14);
-    states[31] = new State(-22);
-    states[32] = new State(-25);
-    states[33] = new State(-26);
-    states[34] = new State(-23);
-    states[35] = new State(-16);
-    states[36] = new State(-19);
-    states[37] = new State(-20);
-    states[38] = new State(-17);
-    states[39] = new State(-8);
-    states[40] = new State(-10);
-    states[41] = new State(new int[]{18,42});
-    states[42] = new State(new int[]{6,11,4,13,7,15,5,19,9,22,10,23,11,24,12,25,18,36,21,37,20,38,13,40,19,-7,22,-7,23,-15,24,-15},new int[]{-3,43,-4,39,-5,7,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16,-11,20,-12,26,-16,35});
-    states[43] = new State(new int[]{19,44,22,5});
-    states[44] = new State(-6);
+    states[12] = new State(new int[]{6,13});
+    states[13] = new State(-43);
+    states[14] = new State(-39);
+    states[15] = new State(-45);
+    states[16] = new State(-40);
+    states[17] = new State(-47);
+    states[18] = new State(new int[]{23,19,22,-36,3,-36,19,-36,24,-36,20,-36,21,-36});
+    states[19] = new State(new int[]{5,20});
+    states[20] = new State(-50);
+    states[21] = new State(-49);
+    states[22] = new State(new int[]{6,11,13,12,4,15,7,17,5,21,22,-32,3,-32,19,-32,23,-48},new int[]{-5,23,-6,8,-7,9,-8,10,-10,14,-9,16,-14,18});
+    states[23] = new State(-13);
+    states[24] = new State(-28);
+    states[25] = new State(-29);
+    states[26] = new State(-30);
+    states[27] = new State(-31);
+    states[28] = new State(new int[]{6,11,13,12,4,15,7,17,5,21,24,-32,23,-48},new int[]{-5,29,-6,8,-7,9,-8,10,-10,14,-9,16,-14,18});
+    states[29] = new State(new int[]{24,30});
+    states[30] = new State(new int[]{6,11,13,12,4,15,7,17,5,21,19,-32,20,-32,21,-32,22,-32,3,-32,23,-48},new int[]{-5,31,-6,8,-7,9,-8,10,-10,14,-9,16,-14,18});
+    states[31] = new State(new int[]{19,34,20,35,21,36,22,-21,3,-21},new int[]{-13,32,-17,33});
+    states[32] = new State(-14);
+    states[33] = new State(-22);
+    states[34] = new State(-25);
+    states[35] = new State(-26);
+    states[36] = new State(-23);
+    states[37] = new State(-16);
+    states[38] = new State(-19);
+    states[39] = new State(-20);
+    states[40] = new State(-17);
+    states[41] = new State(-8);
+    states[42] = new State(new int[]{6,13,22,-10,3,-10,19,-10});
+    states[43] = new State(new int[]{18,44});
+    states[44] = new State(new int[]{6,11,13,42,4,15,7,17,5,21,9,24,10,25,11,26,12,27,18,38,21,39,20,40,19,-7,22,-7,23,-15,24,-15},new int[]{-3,45,-4,41,-5,7,-6,8,-7,9,-8,10,-10,14,-9,16,-14,18,-11,22,-12,28,-16,37});
+    states[45] = new State(new int[]{19,46,22,5});
+    states[46] = new State(-6);
 
     for (int sNo = 0; sNo < states.Length; sNo++) states[sNo].number = sNo;
 
@@ -162,13 +164,14 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
     rules[40] = new Rule(-7, new int[]{-9});
     rules[41] = new Rule(-8, new int[]{});
     rules[42] = new Rule(-8, new int[]{6});
-    rules[43] = new Rule(-10, new int[]{});
-    rules[44] = new Rule(-10, new int[]{4});
-    rules[45] = new Rule(-9, new int[]{});
-    rules[46] = new Rule(-9, new int[]{7});
-    rules[47] = new Rule(-14, new int[]{});
-    rules[48] = new Rule(-14, new int[]{5});
-    rules[49] = new Rule(-14, new int[]{-14,23,5});
+    rules[43] = new Rule(-8, new int[]{13,6});
+    rules[44] = new Rule(-10, new int[]{});
+    rules[45] = new Rule(-10, new int[]{4});
+    rules[46] = new Rule(-9, new int[]{});
+    rules[47] = new Rule(-9, new int[]{7});
+    rules[48] = new Rule(-14, new int[]{});
+    rules[49] = new Rule(-14, new int[]{5});
+    rules[50] = new Rule(-14, new int[]{-14,23,5});
   }
 
   protected override void Initialize() {
@@ -240,10 +243,10 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
 { Debug("endpoint/value"); CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
         break;
       case 35: // simpleValue -> simpleLiteral
-{ Debug("simpleLiteral/lit");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
+{ Debug("simpleValue/lit");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
         break;
       case 36: // simpleValue -> qualifiedName
-{ Debug("simpleLiteral/qn");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].qn; }
+{ Debug("simpleValue/qn");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].qn; }
         break;
       case 38: // simpleLiteral -> numericLiteral
 { Debug("simpleLiteral/num");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
@@ -257,16 +260,19 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
       case 42: // numericLiteral -> NUMBER
 { Debug("numericLiteral"); CurrentSemanticValue.nd = new NumericLiteral(ValueStack[ValueStack.Depth-1].n); }
         break;
-      case 44: // stringLiteral -> STRING
+      case 43: // numericLiteral -> OP_MINUS, NUMBER
+{ Debug("numericLiteral/neg"); CurrentSemanticValue.nd = new NumericLiteral(-ValueStack[ValueStack.Depth-1].n); }
+        break;
+      case 45: // stringLiteral -> STRING
 { CurrentSemanticValue.nd = new StringLiteral(ValueStack[ValueStack.Depth-1].s); }
         break;
-      case 46: // booleanLiteral -> BOOLEAN
+      case 47: // booleanLiteral -> BOOLEAN
 { CurrentSemanticValue.nd = new BooleanLiteral(ValueStack[ValueStack.Depth-1].b); }
         break;
-      case 48: // qualifiedName -> NAME
+      case 49: // qualifiedName -> NAME
 { CurrentSemanticValue.qn = new QualifiedName(ValueStack[ValueStack.Depth-1].s);		}
         break;
-      case 49: // qualifiedName -> qualifiedName, DOT, NAME
+      case 50: // qualifiedName -> qualifiedName, DOT, NAME
 { CurrentSemanticValue.qn = ValueStack[ValueStack.Depth-3].qn;	CurrentSemanticValue.qn.AddComponent(ValueStack[ValueStack.Depth-1].s);	}
         break;
     }
