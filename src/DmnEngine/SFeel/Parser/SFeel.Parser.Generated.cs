@@ -3,10 +3,10 @@
 // (see accompanying GPPGcopyright.rtf)
 
 // GPPG version 1.5.2
-// Machine:  CABINET
-// DateTime: 6/27/2016 11:20:02 AM
-// UserName: Andrey
-// Input file <Sfeel\Parser\SFeel.Language.grammar.y - 6/27/2016 11:19:16 AM>
+// Machine:  BEZUGLIY-10
+// DateTime: 6/27/2016 8:17:43 PM
+// UserName: rumata
+// Input file <Sfeel\Parser\SFeel.Language.grammar.y - 6/27/2016 8:16:16 PM>
 
 // options: no-lines gplex
 
@@ -63,59 +63,60 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
 #pragma warning disable 649
   private static Dictionary<int, string> aliases;
 #pragma warning restore 649
-  private static Rule[] rules = new Rule[49];
-  private static State[] states = new State[44];
+  private static Rule[] rules = new Rule[50];
+  private static State[] states = new State[45];
   private static string[] nonTerms = new string[] {
       "main", "simpleUnaryTests", "simplePositiveUnaryTests", "simplePositiveUnaryTest", 
       "endpoint", "simpleValue", "simpleLiteral", "numericLiteral", "booleanLiteral", 
       "stringLiteral", "simplePositiveUnaryTestOp", "intervalStart", "intervalEnd", 
-      "qualifiedName", "$accept", "openIntervalStart", "openIntervalEnd", };
+      "qualifiedName", "$accept", "closeIntervalStart", "closeIntervalEnd", };
 
   static SFeelParser() {
-    states[0] = new State(new int[]{9,21,10,22,11,23,12,24,18,35,21,36,20,37,13,39,25,40,3,-2,22,-7,6,-14,4,-14,7,-14,5,-14,23,-14,24,-14},new int[]{-1,1,-2,3,-3,4,-4,38,-11,7,-12,25,-16,34});
+    states[0] = new State(new int[]{6,11,4,13,7,15,5,19,9,22,10,23,11,24,12,25,18,36,21,37,20,38,13,40,25,41,3,-2,22,-7,23,-15,24,-15},new int[]{-1,1,-2,3,-3,4,-4,39,-5,7,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16,-11,20,-12,26,-16,35});
     states[1] = new State(new int[]{3,2});
     states[2] = new State(-1);
     states[3] = new State(-3);
     states[4] = new State(new int[]{22,5,3,-5});
-    states[5] = new State(new int[]{9,21,10,22,11,23,12,24,18,35,21,36,20,37,22,-11,3,-11,19,-11,6,-14,4,-14,7,-14,5,-14,23,-14,24,-14},new int[]{-4,6,-11,7,-12,25,-16,34});
+    states[5] = new State(new int[]{6,11,4,13,7,15,5,19,9,22,10,23,11,24,12,25,18,36,21,37,20,38,22,-11,3,-11,19,-11,23,-15,24,-15},new int[]{-4,6,-5,7,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16,-11,20,-12,26,-16,35});
     states[6] = new State(-9);
-    states[7] = new State(new int[]{6,12,4,14,7,16,5,20,22,-31,3,-31,19,-31,23,-46},new int[]{-5,8,-6,9,-7,10,-8,11,-10,13,-9,15,-14,17});
-    states[8] = new State(-12);
-    states[9] = new State(-32);
-    states[10] = new State(-34);
-    states[11] = new State(-37);
-    states[12] = new State(-41);
-    states[13] = new State(-38);
-    states[14] = new State(-43);
-    states[15] = new State(-39);
-    states[16] = new State(-45);
-    states[17] = new State(new int[]{23,18,22,-35,3,-35,19,-35,24,-35,20,-35,21,-35});
-    states[18] = new State(new int[]{5,19});
+    states[7] = new State(-12);
+    states[8] = new State(-33);
+    states[9] = new State(-35);
+    states[10] = new State(-38);
+    states[11] = new State(-42);
+    states[12] = new State(-39);
+    states[13] = new State(-44);
+    states[14] = new State(-40);
+    states[15] = new State(-46);
+    states[16] = new State(new int[]{23,17,22,-36,3,-36,19,-36,24,-36,20,-36,21,-36});
+    states[17] = new State(new int[]{5,18});
+    states[18] = new State(-49);
     states[19] = new State(-48);
-    states[20] = new State(-47);
-    states[21] = new State(-27);
+    states[20] = new State(new int[]{6,11,4,13,7,15,5,19,22,-32,3,-32,19,-32,23,-47},new int[]{-5,21,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16});
+    states[21] = new State(-13);
     states[22] = new State(-28);
     states[23] = new State(-29);
     states[24] = new State(-30);
-    states[25] = new State(new int[]{6,12,4,14,7,16,5,20,24,-31,23,-46},new int[]{-5,26,-6,9,-7,10,-8,11,-10,13,-9,15,-14,17});
-    states[26] = new State(new int[]{24,27});
-    states[27] = new State(new int[]{6,12,4,14,7,16,5,20,19,-31,20,-31,21,-31,22,-31,3,-31,23,-46},new int[]{-5,28,-6,9,-7,10,-8,11,-10,13,-9,15,-14,17});
-    states[28] = new State(new int[]{19,31,20,32,21,33,22,-20,3,-20},new int[]{-13,29,-17,30});
-    states[29] = new State(-13);
-    states[30] = new State(-21);
-    states[31] = new State(-24);
+    states[25] = new State(-31);
+    states[26] = new State(new int[]{6,11,4,13,7,15,5,19,24,-32,23,-47},new int[]{-5,27,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16});
+    states[27] = new State(new int[]{24,28});
+    states[28] = new State(new int[]{6,11,4,13,7,15,5,19,19,-32,20,-32,21,-32,22,-32,3,-32,23,-47},new int[]{-5,29,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16});
+    states[29] = new State(new int[]{19,32,20,33,21,34,22,-21,3,-21},new int[]{-13,30,-17,31});
+    states[30] = new State(-14);
+    states[31] = new State(-22);
     states[32] = new State(-25);
-    states[33] = new State(-22);
-    states[34] = new State(-15);
-    states[35] = new State(-18);
+    states[33] = new State(-26);
+    states[34] = new State(-23);
+    states[35] = new State(-16);
     states[36] = new State(-19);
-    states[37] = new State(-16);
-    states[38] = new State(-8);
-    states[39] = new State(-10);
-    states[40] = new State(new int[]{18,41});
-    states[41] = new State(new int[]{9,21,10,22,11,23,12,24,18,35,21,36,20,37,13,39,19,-7,22,-7,6,-14,4,-14,7,-14,5,-14,23,-14,24,-14},new int[]{-3,42,-4,38,-11,7,-12,25,-16,34});
-    states[42] = new State(new int[]{19,43,22,5});
-    states[43] = new State(-6);
+    states[37] = new State(-20);
+    states[38] = new State(-17);
+    states[39] = new State(-8);
+    states[40] = new State(-10);
+    states[41] = new State(new int[]{18,42});
+    states[42] = new State(new int[]{6,11,4,13,7,15,5,19,9,22,10,23,11,24,12,25,18,36,21,37,20,38,13,40,19,-7,22,-7,23,-15,24,-15},new int[]{-3,43,-4,39,-5,7,-6,8,-7,9,-8,10,-10,12,-9,14,-14,16,-11,20,-12,26,-16,35});
+    states[43] = new State(new int[]{19,44,22,5});
+    states[44] = new State(-6);
 
     for (int sNo = 0; sNo < states.Length; sNo++) states[sNo].number = sNo;
 
@@ -130,43 +131,44 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
     rules[9] = new Rule(-3, new int[]{-3,22,-4});
     rules[10] = new Rule(-3, new int[]{13});
     rules[11] = new Rule(-4, new int[]{});
-    rules[12] = new Rule(-4, new int[]{-11,-5});
-    rules[13] = new Rule(-4, new int[]{-12,-5,24,-5,-13});
-    rules[14] = new Rule(-12, new int[]{});
-    rules[15] = new Rule(-12, new int[]{-16});
-    rules[16] = new Rule(-12, new int[]{20});
-    rules[17] = new Rule(-16, new int[]{});
-    rules[18] = new Rule(-16, new int[]{18});
-    rules[19] = new Rule(-16, new int[]{21});
-    rules[20] = new Rule(-13, new int[]{});
-    rules[21] = new Rule(-13, new int[]{-17});
-    rules[22] = new Rule(-13, new int[]{21});
-    rules[23] = new Rule(-17, new int[]{});
-    rules[24] = new Rule(-17, new int[]{19});
-    rules[25] = new Rule(-17, new int[]{20});
-    rules[26] = new Rule(-11, new int[]{});
-    rules[27] = new Rule(-11, new int[]{9});
-    rules[28] = new Rule(-11, new int[]{10});
-    rules[29] = new Rule(-11, new int[]{11});
-    rules[30] = new Rule(-11, new int[]{12});
-    rules[31] = new Rule(-5, new int[]{});
-    rules[32] = new Rule(-5, new int[]{-6});
-    rules[33] = new Rule(-6, new int[]{});
-    rules[34] = new Rule(-6, new int[]{-7});
-    rules[35] = new Rule(-6, new int[]{-14});
-    rules[36] = new Rule(-7, new int[]{});
-    rules[37] = new Rule(-7, new int[]{-8});
-    rules[38] = new Rule(-7, new int[]{-10});
-    rules[39] = new Rule(-7, new int[]{-9});
-    rules[40] = new Rule(-8, new int[]{});
-    rules[41] = new Rule(-8, new int[]{6});
-    rules[42] = new Rule(-10, new int[]{});
-    rules[43] = new Rule(-10, new int[]{4});
-    rules[44] = new Rule(-9, new int[]{});
-    rules[45] = new Rule(-9, new int[]{7});
-    rules[46] = new Rule(-14, new int[]{});
-    rules[47] = new Rule(-14, new int[]{5});
-    rules[48] = new Rule(-14, new int[]{-14,23,5});
+    rules[12] = new Rule(-4, new int[]{-5});
+    rules[13] = new Rule(-4, new int[]{-11,-5});
+    rules[14] = new Rule(-4, new int[]{-12,-5,24,-5,-13});
+    rules[15] = new Rule(-12, new int[]{});
+    rules[16] = new Rule(-12, new int[]{-16});
+    rules[17] = new Rule(-12, new int[]{20});
+    rules[18] = new Rule(-16, new int[]{});
+    rules[19] = new Rule(-16, new int[]{18});
+    rules[20] = new Rule(-16, new int[]{21});
+    rules[21] = new Rule(-13, new int[]{});
+    rules[22] = new Rule(-13, new int[]{-17});
+    rules[23] = new Rule(-13, new int[]{21});
+    rules[24] = new Rule(-17, new int[]{});
+    rules[25] = new Rule(-17, new int[]{19});
+    rules[26] = new Rule(-17, new int[]{20});
+    rules[27] = new Rule(-11, new int[]{});
+    rules[28] = new Rule(-11, new int[]{9});
+    rules[29] = new Rule(-11, new int[]{10});
+    rules[30] = new Rule(-11, new int[]{11});
+    rules[31] = new Rule(-11, new int[]{12});
+    rules[32] = new Rule(-5, new int[]{});
+    rules[33] = new Rule(-5, new int[]{-6});
+    rules[34] = new Rule(-6, new int[]{});
+    rules[35] = new Rule(-6, new int[]{-7});
+    rules[36] = new Rule(-6, new int[]{-14});
+    rules[37] = new Rule(-7, new int[]{});
+    rules[38] = new Rule(-7, new int[]{-8});
+    rules[39] = new Rule(-7, new int[]{-10});
+    rules[40] = new Rule(-7, new int[]{-9});
+    rules[41] = new Rule(-8, new int[]{});
+    rules[42] = new Rule(-8, new int[]{6});
+    rules[43] = new Rule(-10, new int[]{});
+    rules[44] = new Rule(-10, new int[]{4});
+    rules[45] = new Rule(-9, new int[]{});
+    rules[46] = new Rule(-9, new int[]{7});
+    rules[47] = new Rule(-14, new int[]{});
+    rules[48] = new Rule(-14, new int[]{5});
+    rules[49] = new Rule(-14, new int[]{-14,23,5});
   }
 
   protected override void Initialize() {
@@ -182,86 +184,89 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
     switch (action)
     {
       case 3: // main -> simpleUnaryTests
-{ Root = ValueStack[ValueStack.Depth-1].lg; }
+{ Debug("main");		Root = ValueStack[ValueStack.Depth-1].lg; }
         break;
       case 5: // simpleUnaryTests -> simplePositiveUnaryTests
-{ CurrentSemanticValue.lg = ValueStack[ValueStack.Depth-1].lg;			}
+{ Debug("simpleUnaryTests");		CurrentSemanticValue.lg = ValueStack[ValueStack.Depth-1].lg;			}
         break;
       case 6: // simpleUnaryTests -> NOT, P_OPEN, simplePositiveUnaryTests, P_CLOSE
-{ CurrentSemanticValue.lg = new Not(ValueStack[ValueStack.Depth-2].lg);	}
+{ Debug("simpleUnaryTests/not");	CurrentSemanticValue.lg = new Not(ValueStack[ValueStack.Depth-2].lg);	}
         break;
       case 8: // simplePositiveUnaryTests -> simplePositiveUnaryTest
-{ CurrentSemanticValue.lg = ValueStack[ValueStack.Depth-1].lg;							}
+{ Debug("simplePositiveUnaryTests");	CurrentSemanticValue.lg = ValueStack[ValueStack.Depth-1].lg;						}
         break;
       case 9: // simplePositiveUnaryTests -> simplePositiveUnaryTests, COMMA, 
               //                             simplePositiveUnaryTest
-{ CurrentSemanticValue.lg = new Or(ValueStack[ValueStack.Depth-3].lg, ValueStack[ValueStack.Depth-1].lg);				}
+{ Debug("simplePositiveUnaryTests/,");	CurrentSemanticValue.lg = new Or(ValueStack[ValueStack.Depth-3].lg, ValueStack[ValueStack.Depth-1].lg);			}
         break;
       case 10: // simplePositiveUnaryTests -> OP_MINUS
-{ CurrentSemanticValue.lg = new BooleanLiteral(true);	}
+{ Debug("simplePositiveUnaryTests/-");	CurrentSemanticValue.lg = new BooleanLiteral(true);	}
         break;
-      case 12: // simplePositiveUnaryTest -> simplePositiveUnaryTestOp, endpoint
-{ CurrentSemanticValue.lg = new Comparison(ValueStack[ValueStack.Depth-2].co, ValueStack[ValueStack.Depth-1].nd, new InputValue()); }
+      case 12: // simplePositiveUnaryTest -> endpoint
+{ Debug("simplePositiveUnaryTest");		CurrentSemanticValue.lg = new Comparison(ComparisonOperator.Equal, new InputValue(), ValueStack[ValueStack.Depth-1].nd); }
         break;
-      case 13: // simplePositiveUnaryTest -> intervalStart, endpoint, RANGE, endpoint, 
+      case 13: // simplePositiveUnaryTest -> simplePositiveUnaryTestOp, endpoint
+{ Debug("simplePositiveUnaryTest/cmp");	CurrentSemanticValue.lg = new Comparison(ValueStack[ValueStack.Depth-2].co, new InputValue(), ValueStack[ValueStack.Depth-1].nd); }
+        break;
+      case 14: // simplePositiveUnaryTest -> intervalStart, endpoint, RANGE, endpoint, 
                //                            intervalEnd
-{ CurrentSemanticValue.lg = new Range(ValueStack[ValueStack.Depth-5].b, ValueStack[ValueStack.Depth-1].b, ValueStack[ValueStack.Depth-4].nd, ValueStack[ValueStack.Depth-2].nd, new InputValue()); }
+{ Debug("simplePositiveUnaryTest/rng");	CurrentSemanticValue.lg = new Range(ValueStack[ValueStack.Depth-5].b, ValueStack[ValueStack.Depth-1].b, ValueStack[ValueStack.Depth-4].nd, ValueStack[ValueStack.Depth-2].nd, new InputValue()); }
         break;
-      case 15: // intervalStart -> openIntervalStart
-{ CurrentSemanticValue.b = true; }
-        break;
-      case 16: // intervalStart -> SP_OPEN
+      case 16: // intervalStart -> closeIntervalStart
 { CurrentSemanticValue.b = false; }
         break;
-      case 21: // intervalEnd -> openIntervalEnd
-{ CurrentSemanticValue.b = true; }
+      case 17: // intervalStart -> SP_OPEN
+{ CurrentSemanticValue.b = true;  }
         break;
-      case 22: // intervalEnd -> SP_CLOSE
+      case 22: // intervalEnd -> closeIntervalEnd
 { CurrentSemanticValue.b = false; }
         break;
-      case 27: // simplePositiveUnaryTestOp -> C_LT
+      case 23: // intervalEnd -> SP_CLOSE
+{ CurrentSemanticValue.b = true;  }
+        break;
+      case 28: // simplePositiveUnaryTestOp -> C_LT
 { CurrentSemanticValue.co = ComparisonOperator.LessThan;			  }
         break;
-      case 28: // simplePositiveUnaryTestOp -> C_LE
+      case 29: // simplePositiveUnaryTestOp -> C_LE
 { CurrentSemanticValue.co = ComparisonOperator.LessThanOrEqual;	  }
         break;
-      case 29: // simplePositiveUnaryTestOp -> C_GT
+      case 30: // simplePositiveUnaryTestOp -> C_GT
 { CurrentSemanticValue.co = ComparisonOperator.GreaterThan;		  }
         break;
-      case 30: // simplePositiveUnaryTestOp -> C_GE
+      case 31: // simplePositiveUnaryTestOp -> C_GE
 { CurrentSemanticValue.co = ComparisonOperator.GreaterThanOrEqual; }
         break;
-      case 32: // endpoint -> simpleValue
-{ CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
+      case 33: // endpoint -> simpleValue
+{ Debug("endpoint/value"); CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
         break;
-      case 34: // simpleValue -> simpleLiteral
-{ CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
+      case 35: // simpleValue -> simpleLiteral
+{ Debug("simpleLiteral/lit");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
         break;
-      case 35: // simpleValue -> qualifiedName
-{ CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].qn; }
+      case 36: // simpleValue -> qualifiedName
+{ Debug("simpleLiteral/qn");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].qn; }
         break;
-      case 37: // simpleLiteral -> numericLiteral
-{ CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
+      case 38: // simpleLiteral -> numericLiteral
+{ Debug("simpleLiteral/num");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
         break;
-      case 38: // simpleLiteral -> stringLiteral
-{ CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
+      case 39: // simpleLiteral -> stringLiteral
+{ Debug("simpleLiteral/str");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
         break;
-      case 39: // simpleLiteral -> booleanLiteral
-{ CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
+      case 40: // simpleLiteral -> booleanLiteral
+{ Debug("simpleLiteral/bool");	CurrentSemanticValue.nd = ValueStack[ValueStack.Depth-1].nd; }
         break;
-      case 41: // numericLiteral -> NUMBER
-{ CurrentSemanticValue.nd = new NumericLiteral(ValueStack[ValueStack.Depth-1].n); }
+      case 42: // numericLiteral -> NUMBER
+{ Debug("numericLiteral"); CurrentSemanticValue.nd = new NumericLiteral(ValueStack[ValueStack.Depth-1].n); }
         break;
-      case 43: // stringLiteral -> STRING
+      case 44: // stringLiteral -> STRING
 { CurrentSemanticValue.nd = new StringLiteral(ValueStack[ValueStack.Depth-1].s); }
         break;
-      case 45: // booleanLiteral -> BOOLEAN
+      case 46: // booleanLiteral -> BOOLEAN
 { CurrentSemanticValue.nd = new BooleanLiteral(ValueStack[ValueStack.Depth-1].b); }
         break;
-      case 47: // qualifiedName -> NAME
+      case 48: // qualifiedName -> NAME
 { CurrentSemanticValue.qn = new QualifiedName(ValueStack[ValueStack.Depth-1].s);		}
         break;
-      case 48: // qualifiedName -> qualifiedName, DOT, NAME
+      case 49: // qualifiedName -> qualifiedName, DOT, NAME
 { CurrentSemanticValue.qn = ValueStack[ValueStack.Depth-3].qn;	CurrentSemanticValue.qn.AddComponent(ValueStack[ValueStack.Depth-1].s);	}
         break;
     }

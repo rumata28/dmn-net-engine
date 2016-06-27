@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace Softengi.DmnEngine.SFeel.Evaluation
 {
-	[StructLayout(LayoutKind.Explicit)]
 	public struct EvaluationValue
 	{
 		static public EvaluationValue Null = new EvaluationValue {ValueType = EvaluationValueType.Null};
@@ -98,23 +96,12 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			return ev.Duration;
 		}
 
-		[FieldOffset(0)]
-		public decimal Number;
-
-		[FieldOffset(0)]
-		public string String;
-
-		[FieldOffset(0)]
-		public bool Bool;
-
-		[FieldOffset(0)]
-		public DateTime DateTime;
-
-		[FieldOffset(0)]
-		public TimeSpan Duration;
-
-		[FieldOffset(sizeof(decimal))]
 		public EvaluationValueType ValueType;
+		public decimal Number;
+		public bool Bool;
+		public DateTime DateTime;
+		public TimeSpan Duration;
+		public string String;
 
 		public enum EvaluationValueType
 		{

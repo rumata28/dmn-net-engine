@@ -40,41 +40,42 @@
 %%
 
 main:
-	| simpleUnaryTests		{ Root = $1; }
+	| simpleUnaryTests		{ Debug("main");		Root = $1; }
 	;
 
 simpleUnaryTests:
-	| simplePositiveUnaryTests								{ $$ = $1;			}
-	| NOT P_OPEN simplePositiveUnaryTests P_CLOSE			{ $$ = new Not($3);	}
+	| simplePositiveUnaryTests								{ Debug("simpleUnaryTests");		$$ = $1;			}
+	| NOT P_OPEN simplePositiveUnaryTests P_CLOSE			{ Debug("simpleUnaryTests/not");	$$ = new Not($3);	}
 	;
 
 simplePositiveUnaryTests:
-	| simplePositiveUnaryTest									{ $$ = $1;							}
-	| simplePositiveUnaryTests COMMA simplePositiveUnaryTest	{ $$ = new Or($1, $3);				}
-	| OP_MINUS													{ $$ = new BooleanLiteral(true);	}
+	| simplePositiveUnaryTest									{ Debug("simplePositiveUnaryTests");	$$ = $1;						}
+	| simplePositiveUnaryTests COMMA simplePositiveUnaryTest	{ Debug("simplePositiveUnaryTests/,");	$$ = new Or($1, $3);			}
+	| OP_MINUS													{ Debug("simplePositiveUnaryTests/-");	$$ = new BooleanLiteral(true);	}
 	;
 
 simplePositiveUnaryTest:
-	| simplePositiveUnaryTestOp endpoint				{ $$ = new Comparison($1, $2, new InputValue()); }
-	| intervalStart endpoint RANGE endpoint intervalEnd	{ $$ = new Range($1, $5, $2, $4, new InputValue()); }
+	| endpoint											{ Debug("simplePositiveUnaryTest");		$$ = new Comparison(ComparisonOperator.Equal, new InputValue(), $1); }
+	| simplePositiveUnaryTestOp endpoint				{ Debug("simplePositiveUnaryTest/cmp");	$$ = new Comparison($1, new InputValue(), $2); }
+	| intervalStart endpoint RANGE endpoint intervalEnd	{ Debug("simplePositiveUnaryTest/rng");	$$ = new Range($1, $5, $2, $4, new InputValue()); }
 	;
 
 intervalStart:
-	| openIntervalStart	{ $$ = true; }
-	| SP_OPEN			{ $$ = false; }
+	| closeIntervalStart	{ $$ = false; }
+	| SP_OPEN				{ $$ = true;  }
 	;
 
-openIntervalStart:
+closeIntervalStart:
 	| P_OPEN
 	| SP_CLOSE
 	;
 
 intervalEnd:
-	| openIntervalEnd	{ $$ = true; }
-	| SP_CLOSE			{ $$ = false; }
+	| closeIntervalEnd	{ $$ = false; }
+	| SP_CLOSE			{ $$ = true;  }
 	;
 
-openIntervalEnd:
+closeIntervalEnd:
 	| P_CLOSE
 	| SP_OPEN
 	;
@@ -87,22 +88,22 @@ simplePositiveUnaryTestOp:
 	;
 
 endpoint:
-	| simpleValue				{ $$ = $1; }
+	| simpleValue				{ Debug("endpoint/value"); $$ = $1; }
 	;
 
 simpleValue:
-	| simpleLiteral				{ $$ = $1; }
-	| qualifiedName				{ $$ = $1; }
+	| simpleLiteral				{ Debug("simpleLiteral/lit");	$$ = $1; }
+	| qualifiedName				{ Debug("simpleLiteral/qn");	$$ = $1; }
 	;
 
 simpleLiteral:
-	| numericLiteral			{ $$ = $1; }
-	| stringLiteral				{ $$ = $1; }
-	| booleanLiteral			{ $$ = $1; }
+	| numericLiteral			{ Debug("simpleLiteral/num");	$$ = $1; }
+	| stringLiteral				{ Debug("simpleLiteral/str");	$$ = $1; }
+	| booleanLiteral			{ Debug("simpleLiteral/bool");	$$ = $1; }
 	;
 
 numericLiteral:
-	| NUMBER					{ $$ = new NumericLiteral($1); }
+	| NUMBER					{ Debug("numericLiteral"); $$ = new NumericLiteral($1); }
 	;
 
 stringLiteral:

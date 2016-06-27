@@ -11,6 +11,11 @@ namespace Softengi.DmnEngine.SFeel.Parser
 			Console.WriteLine();
 		}
 
+		private void UnexpectedCharacter()
+		{
+			throw new Exception($"Unexpected character: '{yytext}'");
+		}
+
 		static private void Debug(string message, params object[] messageParams)
 		{
 			Console.WriteLine(message, messageParams);
@@ -35,7 +40,7 @@ namespace Softengi.DmnEngine.SFeel.Parser
 
 		private void GetString()
 		{
-			yylval.s = yytext;
+			yylval.s = yytext.Trim('"');
 		}
 	}
 }

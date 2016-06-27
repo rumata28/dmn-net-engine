@@ -1,11 +1,11 @@
 
 // ==========================================================================
-//  GPPG error listing for yacc source file <Sfeel\Parser\SFeel.Language.grammar.y - 6/24/2016 11:58:36 PM>
+//  GPPG error listing for yacc source file <Sfeel\Parser\SFeel.Language.grammar.y - 6/27/2016 7:42:53 PM>
 // ==========================================================================
 //  Version:  1.5.2
-//  Machine:  CABINET
-//  DateTime: 6/24/2016 11:58:42 PM
-//  UserName: Andrey
+//  Machine:  BEZUGLIY-10
+//  DateTime: 6/27/2016 7:43:01 PM
+//  UserName: rumata
 // ==========================================================================
 
 
@@ -16,29 +16,23 @@
 %tokentype Token
 %using Softengi.DmnEngine.SFeel.Ast
 
-%{
-    public AstNode Root;
-%}
-
 %union { 
 			public decimal n; 
 			public string s; 
-			public boolean b;
+			public bool b;
 
-			// Expression
-			public object e;
-
-			public AstNode nd;
+			public INode nd;
 			public QualifiedName qn;
-			public Logical lg;
+			public ILogical lg;
 
 			public ComparisonOperator co;
 	   }
 
 %start main
 
-%token <s> NAME
+%token <s> STRING, NAME
 %token <n> NUMBER
+%token <b> BOOLEAN
 
 %token	C_EQ, C_LT, C_LE, C_GT, C_GE,
 		OP_MINUS, OP_PLUS, OP_DIV, OP_MUL, OP_POW,
@@ -48,38 +42,36 @@
 		NOT
 
 %type <lg>	simpleUnaryTests, simplePositiveUnaryTests, simplePositiveUnaryTest
-%type <nd>	endpoint, simpleValue, simpleLiteral, numericLiteral
+%type <nd>	endpoint, simpleValue, simpleLiteral, numericLiteral, booleanLiteral, stringLiteral
 %type <co>	simplePositiveUnaryTestOp
 %type <b>	intervalStart, intervalEnd
-%type <qn>	qualifedName
+%type <qn>	qualifiedName
 
 
 %%
-// Warning: NonTerminal symbol "qualifedName" is unreachable
-// Error: NonTerminal symbol "qualifedName" has no productions
-// Error: There are 1 non-terminating NonTerminal Symbols
-   //  {qualifedName}
-// Warning: Terminating qualifedName fixes the following size-1 NonTerminal set
-   // {qualifedName}
-// ----------------------------------------------------------------------------
 
 main:
-	| simpleUnaryTests		{ $$ = $1; }
+	| simpleUnaryTests		{ Debug("main");		Root = $1; }
 	;
 
 simpleUnaryTests:
-	| simplePositiveUnaryTests								{ $$ = $1;			}
-	| NOT P_OPEN simplePositiveUnaryTests P_CLOSE			{ $$ = new Not($1);	}
+	| simplePositiveUnaryTests								{ Debug("simpleUnaryTests");		$$ = $1;			}
+	| NOT simplePositiveUnaryTests							{ Debug("simpleUnaryTests/not");	$$ = new Not($3);	}
+// Error: Semantic action index is out of bounds
+// ---------------------------------------------
+	| NOT P_OPEN simplePositiveUnaryTests P_CLOSE			{ Debug("simpleUnaryTests/not");	$$ = new Not($3);	}
 	;
 
 simplePositiveUnaryTests:
-	| simplePositiveUnaryTest									{ $$ = $1;			   }
-	| simplePositiveUnaryTests COMMA simplePositiveUnaryTest	{ $$ = new Or($1, $2); }
+	| simplePositiveUnaryTest									{ Debug("simplePositiveUnaryTests");	$$ = $1;						}
+	| simplePositiveUnaryTests COMMA simplePositiveUnaryTest	{ Debug("simplePositiveUnaryTests/,");	$$ = new Or($1, $3);			}
+	| OP_MINUS													{ Debug("simplePositiveUnaryTests/-");	$$ = new BooleanLiteral(true);	}
 	;
 
 simplePositiveUnaryTest:
-	| simplePositiveUnaryTestOp endpoint				{ $$ = new Comparison($1, $2, new InputValue()); }
-	| intervalStart endpoint RANGE endpoint intervalEnd	{ $$ = new Range($1, $3, $2, $4, new InputValue()); }
+	| endpoint											{ Debug("simplePositiveUnaryTest");		$$ = new Comparison(ComparisonOperator.Equal, new InputValue(), $1); }
+	| simplePositiveUnaryTestOp endpoint				{ Debug("simplePositiveUnaryTest/cmp");	$$ = new Comparison($1, new InputValue(), $2); }
+	| intervalStart endpoint RANGE endpoint intervalEnd	{ Debug("simplePositiveUnaryTest/rng");	$$ = new Range($1, $5, $2, $4, new InputValue()); }
 	;
 
 intervalStart:
@@ -88,7 +80,7 @@ intervalStart:
 	;
 
 openIntervalStart:
-	| P_OPEN
+	| P_OPEN			{ Debug("openIntervalStart/P_OPEN"); }
 	| SP_CLOSE
 	;
 
@@ -110,20 +102,30 @@ simplePositiveUnaryTestOp:
 	;
 
 endpoint:
-	| simpleValue				{ $$ = $1; }
+	| simpleValue				{ Debug("endpoint/value"); $$ = $1; }
 	;
 
 simpleValue:
-	| simpleLiteral				{ $$ = $1; }
-	| qualifiedName				{ $$ = $1; }
+	| simpleLiteral				{ Debug("simpleLiteral/lit");	$$ = $1; }
+	| qualifiedName				{ Debug("simpleLiteral/qn");	$$ = $1; }
 	;
 
 simpleLiteral:
-	| numericLiteral			{ $$ = $1; }
+	| numericLiteral			{ Debug("simpleLiteral/num");	$$ = $1; }
+	| stringLiteral				{ Debug("simpleLiteral/str");	$$ = $1; }
+	| booleanLiteral			{ Debug("simpleLiteral/bool");	$$ = $1; }
 	;
 
 numericLiteral:
-	| NUMBER					{ $$ = new Literal<decimal>($1); }
+	| NUMBER					{ Debug("numericLiteral"); $$ = new NumericLiteral($1); }
+	;
+
+stringLiteral:
+	| STRING					{ $$ = new StringLiteral($1); }
+	;
+
+booleanLiteral:
+	| BOOLEAN					{ $$ = new BooleanLiteral($1); }
 	;
 
 qualifiedName:

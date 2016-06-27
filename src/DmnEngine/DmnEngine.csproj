@@ -54,6 +54,7 @@
     <Compile Include="DmnEngine.cs" />
     <Compile Include="GplexBuffers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SFeel\Ast\DateTimeLiteral.cs" />
     <Compile Include="SFeel\Ast\INode.cs" />
     <Compile Include="SFeel\Ast\AstVisitor.cs" />
     <Compile Include="SFeel\Ast\Comparison.cs" />
@@ -63,9 +64,11 @@
     <Compile Include="SFeel\Ast\Literal.cs" />
     <Compile Include="SFeel\Ast\BooleanLiteral.cs" />
     <Compile Include="SFeel\Ast\Not.cs" />
+    <Compile Include="SFeel\Ast\NumericLiteral.cs" />
     <Compile Include="SFeel\Ast\Or.cs" />
     <Compile Include="SFeel\Ast\QualifiedName.cs" />
     <Compile Include="SFeel\Ast\Range.cs" />
+    <Compile Include="SFeel\Ast\StringLiteral.cs" />
     <Compile Include="SFeel\Evaluation\Compare.cs" />
     <Compile Include="SFeel\Evaluation\EvaluationException.cs" />
     <Compile Include="SFeel\Evaluation\EvaluationValue.cs" />

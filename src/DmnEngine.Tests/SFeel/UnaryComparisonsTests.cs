@@ -1,23 +1,244 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using NUnit.Framework;
+
+using Softengi.DmnEngine.SFeel.Evaluation;
 
 namespace DmnEngine.Tests.SFeel
 {
 	[TestFixture]
 	public class UnaryComparisonsTests : AssertionHelper
 	{
+		[Test]
 		public void Test_GreaterThan()
 		{
-			// var unary = SFeelParser.ParseUnary<decimal>(">10");
-			// Assert.That(unary.Evaluate(5), EqualTo(false));
-			// Assert.That(unary.Evaluate(10), EqualTo(false));
-			// Assert.That(unary.Evaluate(11), EqualTo(true));
-			// Assert.That(unary.Evaluate(10.1), EqualTo(true));
+			ExpectSfeel(">10", 20, true);
+			ExpectSfeel(">10", 10.1m, true);
+			ExpectSfeel(">10", 10, false);
+		}
+
+		[Test]
+		public void Test_not_GreaterThan()
+		{
+			ExpectSfeel("not(>10)", 20, false);
+			ExpectSfeel("not(>10)", 10.1m, false);
+			ExpectSfeel("not(>10)", 10, true);
+		}
+
+		[Test]
+		public void Test_GreaterThanOrEqual()
+		{
+			ExpectSfeel(">=10", 20, true);
+			ExpectSfeel(">=10", 10, true);
+			ExpectSfeel(">=10", 9.999m, false);
+		}
+
+		[Test]
+		public void Test_not_GreaterThanOrEqual()
+		{
+			ExpectSfeel("not(>=10)", 20, false);
+			ExpectSfeel("not(>=10)", 10, false);
+			ExpectSfeel("not(>=10)", 9.999m, true);
+		}
+
+		[Test]
+		public void Test_LessThan()
+		{
+			ExpectSfeel("<10", 20, false);
+			ExpectSfeel("<10", 10.1m, false);
+			ExpectSfeel("<10", 10, false);
+			ExpectSfeel("<10", 9.999m, true);
+			ExpectSfeel("<10", -20, true);
+		}
+
+		[Test]
+		public void Test_not_LessThan()
+		{
+			ExpectSfeel("not(<10)", 20, true);
+			ExpectSfeel("not(<10)", 10.1m, true);
+			ExpectSfeel("not(<10)", 10, true);
+			ExpectSfeel("not(<10)", 9.999m, false);
+			ExpectSfeel("not(<10)", -20, false);
+		}
+
+		[Test]
+		public void Test_LessThanOrEqual()
+		{
+			ExpectSfeel("<=10", 20, false);
+			ExpectSfeel("<=10", 10.1m, false);
+			ExpectSfeel("<=10", 10, true);
+			ExpectSfeel("<=10", 9.999m, true);
+			ExpectSfeel("<=10", -20, true);
+		}
+
+		[Test]
+		public void Test_not_LessThanOrEqual()
+		{
+			ExpectSfeel("not(<=10)", 20, true);
+			ExpectSfeel("not(<=10)", 10.1m, true);
+			ExpectSfeel("not(<=10)", 10, false);
+			ExpectSfeel("not(<=10)", 9.999m, false);
+			ExpectSfeel("not(<=10)", -20, false);
+		}
+
+		[Test]
+		public void Test_Equal()
+		{
+			ExpectSfeel("10", 20, false);
+			ExpectSfeel("10", 10.1m, false);
+			ExpectSfeel("10", 10, true);
+			ExpectSfeel("10", 9.999m, false);
+			ExpectSfeel("10", -10, false);
+		}
+
+		[Test]
+		public void Test_not_Equal()
+		{
+			ExpectSfeel("not(10)", 20, true);
+			ExpectSfeel("not(10)", 10.1m, true);
+			ExpectSfeel("not(10)", 10, false);
+			ExpectSfeel("not(10)", 9.999m, true);
+			ExpectSfeel("not(10)", -10, true);
+		}
+
+		[Test]
+		public void Test_Literal_Numeric()
+		{
+			ExpectSfeel("10", 10, true);
+			ExpectSfeel("-10", -10, true);
+			ExpectSfeel("10.", 10, true);
+			ExpectSfeel("-10.", -10, true);
+			ExpectSfeel("10.1000", 10.1m, true);
+			ExpectSfeel("-10.1000", -10.1m, true);
+			ExpectSfeel(".1", .1m, true);
+			ExpectSfeel("-.1", -.1m, true);
+			ExpectSfeel(".100000", .1m, true);
+			ExpectSfeel("-.100000", -.1m, true);
+			ExpectSfeel("000.100000", .1m, true);
+			ExpectSfeel("-000.100000", -.1m, true);
+		}
+
+		[Test]
+		public void Test_Literal_Boolean()
+		{
+			ExpectSfeel("true", true, true);
+			ExpectSfeel("false", false, true);
+		}
+
+		[Test]
+		public void Test_Literal_String()
+		{
+			ExpectSfeel(@"""a string""", "a string", true);
+		}
+
+		[Test]
+		public void Test_CompareList()
+		{
+			ExpectSfeel(">10,<-10,0,1", 0, true);
+			ExpectSfeel(">10,<-10,0,1", 1, true);
+			ExpectSfeel(">10,<-10,0,1", 2, false);
+			ExpectSfeel(">10,<-10,0,1", 10, false);
+			ExpectSfeel(">10,<-10,0,1", 10.01m, true);
+			ExpectSfeel(">10,<-10,0,1", -10, false);
+			ExpectSfeel(">10,<-10,0,1", -10.01m, true);
+		}
+
+		[Test]
+		public void Test_not_CompareList()
+		{
+			ExpectSfeel("not(>10,<-10,0,1)", 0, false);
+			ExpectSfeel("not(>10,<-10,0,1)", 1, false);
+			ExpectSfeel("not(>10,<-10,0,1)", 2, true);
+			ExpectSfeel("not(>10,<-10,0,1)", 10, true);
+			ExpectSfeel("not(>10,<-10,0,1)", 10.01m, false);
+			ExpectSfeel("not(>10,<-10,0,1)", -10, true);
+			ExpectSfeel("not(>10,<-10,0,1)", -10.01m, false);
+		}
+
+		[Test]
+		public void Test_Range_Open_Open()
+		{
+			ExpectSfeel("[-5,5]", -5.01m, false);
+			ExpectSfeel("[-5,5]", -5, true);
+			ExpectSfeel("[-5,5]", 0, true);
+			ExpectSfeel("[-5,5]", 5, true);
+			ExpectSfeel("[-5,5]", 5.01m, false);
+		}
+
+		[Test]
+		public void Test_Range_Open_Close()
+		{
+			ExpectSfeel("[-5..5)", -5.01m, false);
+			ExpectSfeel("[-5..5)", -5, false);
+			ExpectSfeel("[-5..5)", 0, true);
+			ExpectSfeel("[-5..5)", 5, false);
+			ExpectSfeel("[-5..5)", 5.01m, false);
+
+			ExpectSfeel("[-5..5[", -5.01m, false);
+			ExpectSfeel("[-5..5[", -5, true);
+			ExpectSfeel("[-5..5[", 0, true);
+			ExpectSfeel("[-5..5[", 5, false);
+			ExpectSfeel("[-5..5[", 5.01m, false);
+		}
+
+		[Test]
+		public void Test_Range_Close_Open()
+		{
+			ExpectSfeel("(-5..5]", -5.01m, false);
+			ExpectSfeel("(-5..5]", -5, false);
+			ExpectSfeel("(-5..5]", 0, true);
+			ExpectSfeel("(-5..5]", 5, true);
+			ExpectSfeel("(-5..5]", 5.01m, false);
+
+			ExpectSfeel("]-5..5]", -5.01m, false);
+			ExpectSfeel("]-5..5]", -5, false);
+			ExpectSfeel("]-5..5]", 0, true);
+			ExpectSfeel("]-5..5]", 5, true);
+			ExpectSfeel("]-5..5]", 5.01m, false);
+		}
+
+		[Test]
+		public void Test_Range_Close_Close()
+		{
+			ExpectSfeel("(-5..5)", -5.01m, false);
+			ExpectSfeel("(-5 .. 5)", -5, false);
+			ExpectSfeel("(-5 .. 5)", 0, true);
+			ExpectSfeel("(-5 .. 5)", 5, false);
+			ExpectSfeel("(-5 .. 5)", 5.01m, false);
+		}
+
+		private void ExpectSfeel(string sfeelExpression, EvaluationValue input, EvaluationValue expectedResult)
+		{
+			var result = SFeelEval(sfeelExpression, input);
+			Expect(result.ValueType, EqualTo(expectedResult.ValueType));
+			switch (result.ValueType)
+			{
+				case EvaluationValue.EvaluationValueType.Number:
+					Expect(result.Number, EqualTo(expectedResult.Number));
+					break;
+				case EvaluationValue.EvaluationValueType.Boolean:
+					Expect(result.Bool, EqualTo(expectedResult.Bool));
+					break;
+				case EvaluationValue.EvaluationValueType.DateTime:
+					Expect(result.DateTime, EqualTo(expectedResult.DateTime));
+					break;
+				case EvaluationValue.EvaluationValueType.String:
+					Expect(result.String, EqualTo(expectedResult.String));
+					break;
+				case EvaluationValue.EvaluationValueType.Duration:
+					Expect(result.Duration, EqualTo(expectedResult.Duration));
+					break;
+				case EvaluationValue.EvaluationValueType.Null:
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+
+		static private EvaluationValue SFeelEval(string sfeelExpression, EvaluationValue input)
+		{
+			var dmnEngine = new Softengi.DmnEngine.DmnEngine(null);
+			return dmnEngine.EvaluateSFeel(sfeelExpression, input);
 		}
 	}
 }

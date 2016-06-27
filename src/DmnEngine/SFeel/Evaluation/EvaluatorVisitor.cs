@@ -8,6 +8,11 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 {
 	public class EvaluatorVisitor : AstVisitor
 	{
+		public EvaluationValue PopResult()
+		{
+			return _stack.Pop();
+		}
+
 		public override void VisitComparison(Comparison comparison)
 		{
 			var left = AcceptAndPop(comparison.Left);
@@ -30,7 +35,7 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 		public override void VisitInputValue(InputValue input)
 		{
 			// TODO: the visitor shall be able to resolve it
-			throw new NotImplementedException();
+			_stack.Push(ContextValue);
 		}
 
 		public override void VisitNot(Not not)
@@ -86,5 +91,6 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 		}
 
 		private readonly Stack<EvaluationValue> _stack = new Stack<EvaluationValue>();
+		public EvaluationValue ContextValue { get; set; }
 	}
 }

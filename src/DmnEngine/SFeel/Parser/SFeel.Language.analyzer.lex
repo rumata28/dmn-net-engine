@@ -11,7 +11,7 @@ Space					[ \t]
 Digit					[0-9]
 Digits					{Digit}+
 Alpha					[A-Z_a-z]
-String					"[^\"\r\n]*"
+String					\"[^\"\r\n]*\"
 
 %{
 
@@ -21,18 +21,19 @@ String					"[^\"\r\n]*"
 
 /* Scanner body */
 
-[\-]{Digits}[[\.]{Digits}]	{ Debug();GetNumber();	return (int) Token.NUMBER; }
-[\-]\.{Digits}				{ Debug();GetNumber();	return (int) Token.NUMBER; }
+\.\.						{ Debug();		return (int) Token.RANGE; }
+
+\-?{Digits}(\.({Digits})?)?	{ Debug();GetNumber();	return (int) Token.NUMBER; }
+\-?\.{Digits}				{ Debug();GetNumber();	return (int) Token.NUMBER; }
 
 true						{ Debug();GetBool();	return (int) Token.BOOLEAN; }
 false						{ Debug();GetBool();	return (int) Token.BOOLEAN; }
 
 {String}					{ Debug();GetString();	return (int) Token.STRING; }
 
+not							{ Debug();		return (int) Token.NOT; }
 
 {Alpha}({Alpha}|{Digit})*	{ Debug();		return (int) Token.NAME; }
-
-not							{ Debug();		return (int) Token.NOT; }
 
 \-						{ Debug();		return (int) Token.OP_MINUS; }
 \+						{ Debug();		return (int) Token.OP_PLUS; }
@@ -51,12 +52,11 @@ not							{ Debug();		return (int) Token.NOT; }
 \>=						{ Debug();		return (int) Token.C_GE; }
 \>						{ Debug();		return (int) Token.C_GT; }
 
-\.\.					{ Debug();		return (int) Token.RANGE; }
 \.						{ Debug();		return (int) Token.DOT; }
 \,						{ Debug();		return (int) Token.COMMA; }
 
 {Space}+				/* skip */
-.						{ throw new Exception("Unexpected character"); }
+.						{ UnexpectedCharacter(); }
 
 
 %%

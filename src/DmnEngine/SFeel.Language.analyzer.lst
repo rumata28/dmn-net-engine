@@ -3,9 +3,9 @@
 //  GPLEX error listing for lex source file <SFeel.Language.analyzer.lex>
 // ==========================================================================
 //  Version:  1.2.2
-//  Machine:  CABINET
-//  DateTime: 6/27/2016 11:20:02 AM
-//  UserName: Andrey
+//  Machine:  BEZUGLIY-10
+//  DateTime: 6/27/2016 7:58:55 PM
+//  UserName: rumata
 // ==========================================================================
 
 
@@ -32,23 +32,24 @@ String					"[^\"\r\n]*"
 
 /* Scanner body */
 
-[\-]{Digits}[[\.]{Digits}]	{ Debug();GetNumber();	return (int) Token.NUMBER; }
-[\-]\.{Digits}				{ Debug();GetNumber();	return (int) Token.NUMBER; }
+\-?{Digits}(\.{Digits})?	{ Debug();GetNumber();	return (int) Token.NUMBER; }
+\-?\.{Digits}				{ Debug();GetNumber();	return (int) Token.NUMBER; }
+//^^^^^^^^^^^
+// Warning: This pattern always overrides "\.{Digits}" 
+// ----------------------------------------------------
+\.{Digits}					{ Debug();GetNumber();	return (int) Token.NUMBER; }
+//^^^^^^^^
+// Warning: This pattern always overridden by "\-?\.{Digits}" 
+// -----------------------------------------------------------
 
 true						{ Debug();GetBool();	return (int) Token.BOOLEAN; }
 false						{ Debug();GetBool();	return (int) Token.BOOLEAN; }
 
-{String}					{ Debug();GetString();	return (int) Token.STRING; }
-
-
-{Alpha}({Alpha}|{Digit})*	{ Debug();		return (int) Token.NAME; }
-//^^^^^^^^^^^^^^^^^^^^^^^
-// Warning: This pattern always overrides "not" 
-// ---------------------------------------------
+{String}					{ Debug();	return (int) Token.STRING; }
 
 not							{ Debug();		return (int) Token.NOT; }
-// Warning: This pattern always overridden by "{Alpha}({Alpha}|{Digit})*" 
-// -----------------------------------------------------------------------
+
+{Alpha}({Alpha}|{Digit})*	{ Debug();		return (int) Token.NAME; }
 
 \-						{ Debug();		return (int) Token.OP_MINUS; }
 \+						{ Debug();		return (int) Token.OP_PLUS; }
@@ -72,7 +73,7 @@ not							{ Debug();		return (int) Token.NOT; }
 \,						{ Debug();		return (int) Token.COMMA; }
 
 {Space}+				/* skip */
-.						{ throw new Exception("Unexpected character"); }
+.						{ UnexpectedCharacter(); }
 
 
 %%

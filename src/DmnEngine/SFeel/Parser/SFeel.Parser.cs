@@ -23,5 +23,10 @@ namespace Softengi.DmnEngine.SFeel.Parser
 			Scanner = new SFeelScanner(stream);
 			Parse();
 		}
+
+		private void Debug(string rule)
+		{
+			Console.WriteLine("rule: {0}", rule);
+		}
 	}
 }
