@@ -184,6 +184,12 @@ namespace DmnEngine.Tests.SFeel
 		}
 
 		[Test]
+		public void Test_Spaces()
+		{
+			ExpectSfeel("	 [	-  5.5    ..	 -   1.1 ] ", -5.501m, false);
+		}
+
+		[Test]
 		public void Test_Range_Open_Close()
 		{
 			ExpectSfeel("[-5..5)", -5.01m, false);
