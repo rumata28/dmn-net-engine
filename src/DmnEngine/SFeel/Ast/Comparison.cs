@@ -1,8 +1,8 @@
 ﻿namespace Softengi.DmnEngine.SFeel.Ast
 {
-	public class Comparison : Logical
+	public class Comparison : ILogical
 	{
-		public Comparison(ComparisonOperator comparisonOperator, AstNode left, AstNode right)
+		public Comparison(ComparisonOperator comparisonOperator, INode left, INode right)
 		{
 			ComparisonOperator = comparisonOperator;
 			Left = left;
@@ -10,6 +10,11 @@
 		}
 
 		public ComparisonOperator ComparisonOperator;
-		public AstNode Left, Right;
+		public INode Left, Right;
+
+		public void Accept(AstVisitor v)
+		{
+			v.VisitComparison(this);
+		}
 	}
 }

@@ -11,6 +11,8 @@ namespace Softengi.DmnEngine.SFeel.Parser
 		public SFeelParser() : base(null)
 		{}
 
+		public INode Root;
+
 		public void Parse(string s)
 		{
 			Parse(new MemoryStream(Encoding.Default.GetBytes(s)));
@@ -20,11 +22,6 @@ namespace Softengi.DmnEngine.SFeel.Parser
 		{
 			Scanner = new SFeelScanner(stream);
 			Parse();
-		}
-
-		static private void Debug(string message, params object[] messageParams)
-		{
-			Console.WriteLine(message, messageParams);
 		}
 	}
 }

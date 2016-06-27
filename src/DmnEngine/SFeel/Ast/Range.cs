@@ -1,8 +1,8 @@
 ﻿namespace Softengi.DmnEngine.SFeel.Ast
 {
-	public class Range : Logical
+	public class Range : ILogical
 	{
-		public Range(bool openedStart, bool openedEnd, AstNode start, AstNode end, AstNode value)
+		public Range(bool openedStart, bool openedEnd, INode start, INode end, INode value)
 		{
 			OpenedStart = openedStart;
 			OpenedEnd = openedEnd;
@@ -12,6 +12,11 @@
 		}
 
 		public bool OpenedStart, OpenedEnd;
-		public AstNode Start, End, Value;
+		public INode Start, End, Value;
+
+		public void Accept(AstVisitor v)
+		{
+			v.VisitRange(this);
+		}
 	}
 }

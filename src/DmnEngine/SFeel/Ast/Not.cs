@@ -1,12 +1,17 @@
 ﻿namespace Softengi.DmnEngine.SFeel.Ast
 {
-	public class Not : Logical
+	public class Not : ILogical
 	{
-		public Not(Logical logical)
+		public Not(ILogical logical)
 		{
 			Logical = logical;
 		}
 
-		public Logical Logical;
+		public ILogical Logical;
+
+		public void Accept(AstVisitor v)
+		{
+			v.VisitNot(this);
+		}
 	}
 }

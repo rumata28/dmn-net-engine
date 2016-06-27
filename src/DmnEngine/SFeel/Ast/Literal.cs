@@ -1,6 +1,6 @@
 ﻿namespace Softengi.DmnEngine.SFeel.Ast
 {
-	public class Literal<T> : AstNode
+	public class Literal<T> : INode
 	{
 		public Literal(T value)
 		{
@@ -8,5 +8,10 @@
 		}
 
 		public T Value;
+
+		public void Accept(AstVisitor v)
+		{
+			v.VisitLiteral(this);
+		}
 	}
 }

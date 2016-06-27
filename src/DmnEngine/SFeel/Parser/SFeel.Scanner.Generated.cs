@@ -6,9 +6,9 @@
 //
 //  GPLEX Version:  1.2.2
 //  Machine:  CABINET
-//  DateTime: 6/25/2016 12:05:52 AM
+//  DateTime: 6/25/2016 12:20:59 AM
 //  UserName: Andrey
-//  GPLEX input file <Sfeel\Parser\SFeel.Language.analyzer.lex - 6/25/2016 12:01:48 AM>
+//  GPLEX input file <Sfeel\Parser\SFeel.Language.analyzer.lex - 6/25/2016 12:15:12 AM>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: verbose, parser, stack, minimize

@@ -5,17 +5,10 @@
 %tokentype Token
 %using Softengi.DmnEngine.SFeel.Ast
 
-%{
-    public AstNode Root;
-%}
-
 %union { 
 			public decimal n; 
 			public string s; 
 			public bool b;
-
-			// Expression
-			public object e;
 
 			public AstNode nd;
 			public QualifiedName qn;
@@ -46,7 +39,7 @@
 %%
 
 main:
-	| simpleUnaryTests		{ $$.lg = $1; }
+	| simpleUnaryTests		{ Root = $1; }
 	;
 
 simpleUnaryTests:
@@ -55,8 +48,9 @@ simpleUnaryTests:
 	;
 
 simplePositiveUnaryTests:
-	| simplePositiveUnaryTest									{ $$ = $1;			   }
-	| simplePositiveUnaryTests COMMA simplePositiveUnaryTest	{ $$ = new Or($1, $3); }
+	| simplePositiveUnaryTest									{ $$ = $1;							}
+	| simplePositiveUnaryTests COMMA simplePositiveUnaryTest	{ $$ = new Or($1, $3);				}
+	| OP_MINUS													{ $$ = new LogicalLiteral(true);	}
 	;
 
 simplePositiveUnaryTest:

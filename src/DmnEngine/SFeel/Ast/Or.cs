@@ -2,21 +2,26 @@
 
 namespace Softengi.DmnEngine.SFeel.Ast
 {
-	public class Or : Logical
+	public class Or : ILogical
 	{
-		public Or(params Logical[] comparisons)
+		public Or(params ILogical[] comparisons)
 		{
-			Comparisons = new List<Logical>();
+			Logicals = new List<ILogical>();
 			foreach (var c in comparisons)
 			{
 				var or = c as Or;
 				if (or != null)
-					Comparisons.AddRange(or.Comparisons);
+					Logicals.AddRange(or.Logicals);
 				else
-					Comparisons.Add(c);
+					Logicals.Add(c);
 			}
 		}
 
-		public List<Logical> Comparisons;
+		public List<ILogical> Logicals;
+
+		public void Accept(AstVisitor v)
+		{
+			v.VisitOr(this);
+		}
 	}
 }
