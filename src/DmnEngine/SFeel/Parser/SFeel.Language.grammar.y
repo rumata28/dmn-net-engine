@@ -10,17 +10,18 @@
 			public string s; 
 			public bool b;
 
-			public AstNode nd;
+			public INode nd;
 			public QualifiedName qn;
-			public Logical lg;
+			public ILogical lg;
 
 			public ComparisonOperator co;
 	   }
 
 %start main
 
-%token <s> NAME
+%token <s> STRING, NAME
 %token <n> NUMBER
+%token <b> BOOLEAN
 
 %token	C_EQ, C_LT, C_LE, C_GT, C_GE,
 		OP_MINUS, OP_PLUS, OP_DIV, OP_MUL, OP_POW,
@@ -30,7 +31,7 @@
 		NOT
 
 %type <lg>	simpleUnaryTests, simplePositiveUnaryTests, simplePositiveUnaryTest
-%type <nd>	endpoint, simpleValue, simpleLiteral, numericLiteral
+%type <nd>	endpoint, simpleValue, simpleLiteral, numericLiteral, booleanLiteral, stringLiteral
 %type <co>	simplePositiveUnaryTestOp
 %type <b>	intervalStart, intervalEnd
 %type <qn>	qualifiedName
@@ -50,7 +51,7 @@ simpleUnaryTests:
 simplePositiveUnaryTests:
 	| simplePositiveUnaryTest									{ $$ = $1;							}
 	| simplePositiveUnaryTests COMMA simplePositiveUnaryTest	{ $$ = new Or($1, $3);				}
-	| OP_MINUS													{ $$ = new LogicalLiteral(true);	}
+	| OP_MINUS													{ $$ = new BooleanLiteral(true);	}
 	;
 
 simplePositiveUnaryTest:
@@ -96,10 +97,20 @@ simpleValue:
 
 simpleLiteral:
 	| numericLiteral			{ $$ = $1; }
+	| stringLiteral				{ $$ = $1; }
+	| booleanLiteral			{ $$ = $1; }
 	;
 
 numericLiteral:
-	| NUMBER					{ $$ = new Literal<decimal>($1); }
+	| NUMBER					{ $$ = new NumericLiteral($1); }
+	;
+
+stringLiteral:
+	| STRING					{ $$ = new StringLiteral($1); }
+	;
+
+booleanLiteral:
+	| BOOLEAN					{ $$ = new BooleanLiteral($1); }
 	;
 
 qualifiedName:

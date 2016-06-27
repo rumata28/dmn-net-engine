@@ -1,17 +1,47 @@
-﻿namespace Softengi.DmnEngine.SFeel.Ast
+﻿using System;
+
+namespace Softengi.DmnEngine.SFeel.Ast
 {
-	public class Literal<T> : INode
+	public abstract class Literal<T>
 	{
-		public Literal(T value)
+		protected Literal(T value)
 		{
 			Value = value;
 		}
 
 		public T Value;
+	}
+
+	public class NumericLiteral : Literal<decimal>, INode
+	{
+		public NumericLiteral(decimal value) : base(value)
+		{}
 
 		public void Accept(AstVisitor v)
 		{
-			v.VisitLiteral(this);
+			v.VisitNumericLiteral(this);
+		}
+	}
+
+	public class StringLiteral : Literal<string>, INode
+	{
+		public StringLiteral(string value) : base(value)
+		{}
+
+		public void Accept(AstVisitor v)
+		{
+			v.VisitStringLiteral(this);
+		}
+	}
+
+	public class DateTimeLiteral : Literal<DateTime>, INode
+	{
+		public DateTimeLiteral(DateTime value) : base(value)
+		{}
+
+		public void Accept(AstVisitor v)
+		{
+			v.VisitDateTimeLiteral(this);
 		}
 	}
 }

@@ -61,7 +61,7 @@
     <Compile Include="SFeel\Ast\ILogical.cs" />
     <Compile Include="SFeel\Ast\InputValue.cs" />
     <Compile Include="SFeel\Ast\Literal.cs" />
-    <Compile Include="SFeel\Ast\LogicalLiteral.cs" />
+    <Compile Include="SFeel\Ast\BooleanLiteral.cs" />
     <Compile Include="SFeel\Ast\Not.cs" />
     <Compile Include="SFeel\Ast\Or.cs" />
     <Compile Include="SFeel\Ast\QualifiedName.cs" />

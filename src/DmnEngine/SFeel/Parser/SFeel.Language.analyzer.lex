@@ -11,6 +11,7 @@ Space					[ \t]
 Digit					[0-9]
 Digits					{Digit}+
 Alpha					[A-Z_a-z]
+String					"[^\"\r\n]*"
 
 %{
 
@@ -20,13 +21,18 @@ Alpha					[A-Z_a-z]
 
 /* Scanner body */
 
-[\-]{Digits}[[\.]{Digits}]	{ Debug();		GetNumber(); return (int) Token.NUMBER; }
-[\-]\.{Digits}				{ Debug();		GetNumber(); return (int) Token.NUMBER; }
+[\-]{Digits}[[\.]{Digits}]	{ Debug();GetNumber();	return (int) Token.NUMBER; }
+[\-]\.{Digits}				{ Debug();GetNumber();	return (int) Token.NUMBER; }
 
-not							{ Debug();		return (int) Token.NOT; }
+true						{ Debug();GetBool();	return (int) Token.BOOLEAN; }
+false						{ Debug();GetBool();	return (int) Token.BOOLEAN; }
+
+{String}					{ Debug();GetString();	return (int) Token.STRING; }
+
 
 {Alpha}({Alpha}|{Digit})*	{ Debug();		return (int) Token.NAME; }
 
+not							{ Debug();		return (int) Token.NOT; }
 
 \-						{ Debug();		return (int) Token.OP_MINUS; }
 \+						{ Debug();		return (int) Token.OP_PLUS; }

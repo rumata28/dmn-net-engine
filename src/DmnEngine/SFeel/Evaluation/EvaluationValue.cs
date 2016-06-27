@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Softengi.DmnEngine.SFeel.Evaluation
 {
@@ -17,6 +18,18 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			ValueType = EvaluationValueType.Boolean;
 		}
 
+		public EvaluationValue(string str) : this()
+		{
+			String = str;
+			ValueType = EvaluationValueType.String;
+		}
+
+		public EvaluationValue(DateTime dt) : this()
+		{
+			DateTime = dt;
+			ValueType = EvaluationValueType.DateTime;
+		}
+
 		static public implicit operator EvaluationValue(decimal d)
 		{
 			return new EvaluationValue(d);
@@ -25,6 +38,16 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 		static public implicit operator EvaluationValue(bool b)
 		{
 			return new EvaluationValue(b);
+		}
+
+		static public implicit operator EvaluationValue(string s)
+		{
+			return new EvaluationValue(s);
+		}
+
+		static public implicit operator EvaluationValue(DateTime dt)
+		{
+			return new EvaluationValue(dt);
 		}
 
 		static public implicit operator bool(EvaluationValue ev)
@@ -42,6 +65,9 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 
 		[FieldOffset(0)]
 		public bool Bool;
+
+		[FieldOffset(0)]
+		public DateTime DateTime;
 
 		[FieldOffset(sizeof(decimal))]
 		public EvaluationValueType ValueType;

@@ -6,9 +6,13 @@
 		public abstract void VisitRange(Range range);
 
 		public abstract void VisitInputValue(InputValue input);
-		public abstract void VisitLiteral<T>(Literal<T> literal);
 		public abstract void VisitNot(Not not);
 		public abstract void VisitOr(Or or);
 		public abstract void VisitQualifiedName(QualifiedName qn);
+
+		public abstract void VisitNumericLiteral(NumericLiteral numericLiteral);
+		public abstract void VisitBooleanLiteral(BooleanLiteral numericLiteral);
+		public abstract void VisitStringLiteral(StringLiteral numericLiteral);
+		public abstract void VisitDateTimeLiteral(DateTimeLiteral numericLiteral);
 	}
 }

@@ -26,5 +26,16 @@ namespace Softengi.DmnEngine.SFeel.Parser
 			yylval.s = yytext;
 			yylval.n = decimal.Parse(yytext);
 		}
+
+		private void GetBool()
+		{
+			yylval.s = yytext;
+			yylval.b = bool.Parse(yytext);
+		}
+
+		private void GetString()
+		{
+			yylval.s = yytext;
+		}
 	}
 }

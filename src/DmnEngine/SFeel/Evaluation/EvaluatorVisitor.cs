@@ -51,14 +51,6 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			throw new System.NotImplementedException();
 		}
 
-		public override void VisitLiteral<T>(Literal<T> literal)
-		{
-			var value = new EvaluationValue();
-			// TODO: set value depending on literal type
-			// literal.Value;
-			_stack.Push(value);
-		}
-
 		public override void VisitNot(Not not)
 		{
 			var value = AcceptAndPop(not.Logical);
@@ -84,6 +76,26 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 		{
 			// TODO: the visitor shall be able to resolve it
 			throw new System.NotImplementedException();
+		}
+
+		public override void VisitNumericLiteral(NumericLiteral numericLiteral)
+		{
+			_stack.Push(numericLiteral.Value);
+		}
+
+		public override void VisitBooleanLiteral(BooleanLiteral numericLiteral)
+		{
+			_stack.Push(numericLiteral.Value);
+		}
+
+		public override void VisitStringLiteral(StringLiteral numericLiteral)
+		{
+			_stack.Push(numericLiteral.Value);
+		}
+
+		public override void VisitDateTimeLiteral(DateTimeLiteral numericLiteral)
+		{
+			_stack.Push(numericLiteral.Value);
 		}
 	}
 
