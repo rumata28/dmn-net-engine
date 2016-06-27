@@ -11,8 +11,8 @@
 		public abstract void VisitQualifiedName(QualifiedName qn);
 
 		public abstract void VisitNumericLiteral(NumericLiteral numericLiteral);
-		public abstract void VisitBooleanLiteral(BooleanLiteral numericLiteral);
+		public abstract void VisitBooleanLiteral(BooleanLiteral booleanLiteral);
 		public abstract void VisitStringLiteral(StringLiteral numericLiteral);
-		public abstract void VisitDateTimeLiteral(DateTimeLiteral numericLiteral);
+		public abstract void VisitDateTimeLiteral(DateTimeLiteral dateTimeLiteral);
 	}
 }

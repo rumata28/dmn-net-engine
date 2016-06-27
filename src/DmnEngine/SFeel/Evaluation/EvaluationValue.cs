@@ -6,6 +6,8 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 	[StructLayout(LayoutKind.Explicit)]
 	public struct EvaluationValue
 	{
+		static public EvaluationValue Null = new EvaluationValue {ValueType = EvaluationValueType.Null};
+
 		public EvaluationValue(decimal number) : this()
 		{
 			Number = number;
@@ -30,6 +32,12 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			ValueType = EvaluationValueType.DateTime;
 		}
 
+		public EvaluationValue(TimeSpan ts) : this()
+		{
+			Duration = ts;
+			ValueType = EvaluationValueType.Duration;
+		}
+
 		static public implicit operator EvaluationValue(decimal d)
 		{
 			return new EvaluationValue(d);
@@ -50,11 +58,44 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			return new EvaluationValue(dt);
 		}
 
+		static public implicit operator EvaluationValue(TimeSpan ts)
+		{
+			return new EvaluationValue(ts);
+		}
+
 		static public implicit operator bool(EvaluationValue ev)
 		{
-			if (ev.ValueType != EvaluationValue.EvaluationValueType.Boolean)
+			if (ev.ValueType != EvaluationValueType.Boolean)
 				throw new EvaluationException("Expected boolean value.");
 			return ev.Bool;
+		}
+
+		static public implicit operator decimal(EvaluationValue ev)
+		{
+			if (ev.ValueType != EvaluationValueType.Number)
+				throw new EvaluationException("Expected number value.");
+			return ev.Number;
+		}
+
+		static public implicit operator string(EvaluationValue ev)
+		{
+			if (ev.ValueType != EvaluationValueType.String)
+				throw new EvaluationException("Expected string value.");
+			return ev.String;
+		}
+
+		static public implicit operator DateTime(EvaluationValue ev)
+		{
+			if (ev.ValueType != EvaluationValueType.DateTime)
+				throw new EvaluationException("Expected DateTime value.");
+			return ev.DateTime;
+		}
+
+		static public implicit operator TimeSpan(EvaluationValue ev)
+		{
+			if (ev.ValueType != EvaluationValueType.Duration)
+				throw new EvaluationException("Expected Duration value.");
+			return ev.Duration;
 		}
 
 		[FieldOffset(0)]
@@ -69,6 +110,9 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 		[FieldOffset(0)]
 		public DateTime DateTime;
 
+		[FieldOffset(0)]
+		public TimeSpan Duration;
+
 		[FieldOffset(sizeof(decimal))]
 		public EvaluationValueType ValueType;
 
@@ -76,8 +120,11 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 		{
 			Number,
 			String,
+			Boolean,
 			DateTime,
-			Boolean
+			Time,
+			Duration,
+			Null
 		}
 	}
 }

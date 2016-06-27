@@ -6,18 +6,18 @@ namespace Softengi.DmnEngine.SFeel.Ast
 	{
 		public Or(params ILogical[] comparisons)
 		{
-			Logicals = new List<ILogical>();
+			Items = new List<ILogical>();
 			foreach (var c in comparisons)
 			{
 				var or = c as Or;
 				if (or != null)
-					Logicals.AddRange(or.Logicals);
+					Items.AddRange(or.Items);
 				else
-					Logicals.Add(c);
+					Items.Add(c);
 			}
 		}
 
-		public List<ILogical> Logicals;
+		public List<ILogical> Items;
 
 		public void Accept(AstVisitor v)
 		{

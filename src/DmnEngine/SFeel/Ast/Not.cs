@@ -2,12 +2,12 @@
 {
 	public class Not : ILogical
 	{
-		public Not(ILogical logical)
+		public Not(ILogical item)
 		{
-			Logical = logical;
+			Item = item;
 		}
 
-		public ILogical Logical;
+		public ILogical Item;
 
 		public void Accept(AstVisitor v)
 		{

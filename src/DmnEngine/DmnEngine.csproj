@@ -66,6 +66,8 @@
     <Compile Include="SFeel\Ast\Or.cs" />
     <Compile Include="SFeel\Ast\QualifiedName.cs" />
     <Compile Include="SFeel\Ast\Range.cs" />
+    <Compile Include="SFeel\Evaluation\Compare.cs" />
+    <Compile Include="SFeel\Evaluation\EvaluationException.cs" />
     <Compile Include="SFeel\Evaluation\EvaluationValue.cs" />
     <Compile Include="SFeel\Evaluation\EvaluatorVisitor.cs" />
     <Compile Include="ShiftReduceParserCode.cs" />
