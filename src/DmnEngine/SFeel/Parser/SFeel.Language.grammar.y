@@ -28,10 +28,11 @@
 		P_OPEN, P_CLOSE,
 		SP_OPEN, SP_CLOSE,
 		COMMA, DOT, RANGE,
-		NOT
+		NOT,
+		DATE, TIME, DURATION
 
 %type <lg>	simpleUnaryTests, simplePositiveUnaryTests, simplePositiveUnaryTest
-%type <nd>	endpoint, simpleValue, simpleLiteral, numericLiteral, booleanLiteral, stringLiteral
+%type <nd>	endpoint, simpleValue, simpleLiteral, numericLiteral, booleanLiteral, stringLiteral, dateTimeLiteral
 %type <co>	simplePositiveUnaryTestOp
 %type <b>	intervalStart, intervalEnd
 %type <qn>	qualifiedName
@@ -81,6 +82,7 @@ closeIntervalEnd:
 	;
 
 simplePositiveUnaryTestOp:
+	| C_EQ		{ $$ = ComparisonOperator.Equal;			  }
 	| C_LT		{ $$ = ComparisonOperator.LessThan;			  }
 	| C_LE		{ $$ = ComparisonOperator.LessThanOrEqual;	  }
 	| C_GT		{ $$ = ComparisonOperator.GreaterThan;		  }
@@ -100,6 +102,7 @@ simpleLiteral:
 	| numericLiteral			{ Debug("simpleLiteral/num");	$$ = $1; }
 	| stringLiteral				{ Debug("simpleLiteral/str");	$$ = $1; }
 	| booleanLiteral			{ Debug("simpleLiteral/bool");	$$ = $1; }
+	| dateTimeLiteral			{ Debug("simpleLiteral/dt");	$$ = $1; }
 	;
 
 numericLiteral:
@@ -114,6 +117,13 @@ stringLiteral:
 booleanLiteral:
 	| BOOLEAN					{ $$ = new BooleanLiteral($1); }
 	;
+
+dateTimeLiteral:
+	| DATE P_OPEN stringLiteral P_CLOSE	{ $$ = DateTimeLiteral.ParseDate(((StringLiteral) $3).Value); }
+	| TIME P_OPEN stringLiteral P_CLOSE	{ $$ = DateTimeLiteral.ParseTime(((StringLiteral) $3).Value); }
+	| DURATION P_OPEN stringLiteral P_CLOSE	{ $$ = TimeSpanLiteral.Parse(((StringLiteral) $3).Value); }
+	;
+
 
 qualifiedName:
 	| NAME						{ $$ = new QualifiedName($1);		}

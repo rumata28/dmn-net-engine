@@ -7,6 +7,16 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 {
 	static internal class Compare
 	{
+		/// <remarks>
+		/// The spec says:
+		/// 
+		/// Comparison operators are defined only when the two operands have the same type, except for years and months duration
+		/// and days and time duration, which can be compared for equality. Notice, however, that “with the exception of the zerolength
+		/// duration, no instance of xs:dayTimeDuration can ever be equal to an instance of xs:yearMonthDuration.” [XFO].
+		/// 
+		/// Remark: month duration could not be compared to days duration, because different months have different days number.  So,
+		/// they could be compared only approximately, for example, if assume that 1 month is 30 days (while it could be 28, 29 or 31).
+		/// </remarks>
 		static internal bool Values(ComparisonOperator comparisonOperator, EvaluationValue left, EvaluationValue right)
 		{
 			if (left.ValueType == right.ValueType)

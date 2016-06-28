@@ -69,6 +69,7 @@
     <Compile Include="SFeel\Ast\QualifiedName.cs" />
     <Compile Include="SFeel\Ast\Range.cs" />
     <Compile Include="SFeel\Ast\StringLiteral.cs" />
+    <Compile Include="SFeel\Ast\TimeSpanLiteral.cs" />
     <Compile Include="SFeel\Evaluation\Compare.cs" />
     <Compile Include="SFeel\Evaluation\EvaluationException.cs" />
     <Compile Include="SFeel\Evaluation\EvaluationValue.cs" />

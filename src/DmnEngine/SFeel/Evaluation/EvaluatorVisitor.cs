@@ -79,6 +79,11 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			_stack.Push(dateTimeLiteral.Value);
 		}
 
+		public override void VisitTimeSpanLiteral(TimeSpanLiteral timeSpanLiteral)
+		{
+			_stack.Push(timeSpanLiteral.Duration.Value);
+		}
+
 		static private ComparisonOperator ComparisonOperatorForRange(bool open)
 		{
 			return open ? ComparisonOperator.LessThanOrEqual : ComparisonOperator.LessThan;

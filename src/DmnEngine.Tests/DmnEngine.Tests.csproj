@@ -45,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SFeel\BooleanUnaryComparisonsTests.cs" />
+    <Compile Include="SFeel\DateUnaryComparisonsTests.cs" />
+    <Compile Include="SFeel\DaysAndHoursDurationUnaryComparisonsTests.cs" />
+    <Compile Include="SFeel\NumericUnaryComparisonsTests.cs" />
+    <Compile Include="SFeel\SfeelTester.cs" />
+    <Compile Include="SFeel\StringUnaryComparisonsTests.cs" />
     <Compile Include="SFeel\UnaryComparisonsTests.cs" />
   </ItemGroup>
   <ItemGroup>

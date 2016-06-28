@@ -27,6 +27,9 @@ false					{ Debug(); GetBool();	return (int) Token.BOOLEAN; }
 \"[^\"\r\n]*\"			{ Debug(); GetString();	return (int) Token.STRING; }
 
 not						{ Debug();		return (int) Token.NOT; }
+date					{ Debug();		return (int) Token.DATE; }
+time					{ Debug();		return (int) Token.TIME; }
+duration				{ Debug();		return (int) Token.DURATION; }
 
 {L}({L}|{D})*			{ Debug();		return (int) Token.NAME; }
 

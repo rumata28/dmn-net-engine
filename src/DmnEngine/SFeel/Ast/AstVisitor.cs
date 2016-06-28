@@ -14,5 +14,6 @@
 		public abstract void VisitBooleanLiteral(BooleanLiteral booleanLiteral);
 		public abstract void VisitStringLiteral(StringLiteral numericLiteral);
 		public abstract void VisitDateTimeLiteral(DateTimeLiteral dateTimeLiteral);
+		public abstract void VisitTimeSpanLiteral(TimeSpanLiteral timeSpanLiteral);
 	}
 }
