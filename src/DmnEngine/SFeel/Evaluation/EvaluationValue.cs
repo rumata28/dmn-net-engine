@@ -36,6 +36,22 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			ValueType = EvaluationValueType.Duration;
 		}
 
+		public EvaluationValue(EvaluationValueType yearsAndMonthsDuration, int months) : this()
+		{
+			ValueType = yearsAndMonthsDuration;
+			Number = months;
+		}
+
+		static public EvaluationValue Years(int years, int months = 0)
+		{
+			return Months(years * 12 + months);
+		}
+
+		static public EvaluationValue Months(int months)
+		{
+			return new EvaluationValue(EvaluationValueType.YearsAndMonthsDuration, months);
+		}
+
 		static public implicit operator EvaluationValue(decimal d)
 		{
 			return new EvaluationValue(d);
@@ -111,6 +127,7 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			DateTime,
 			Time,
 			Duration,
+			YearsAndMonthsDuration,
 			Null
 		}
 	}

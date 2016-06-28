@@ -48,6 +48,7 @@
     <Compile Include="SFeel\BooleanUnaryComparisonsTests.cs" />
     <Compile Include="SFeel\DateUnaryComparisonsTests.cs" />
     <Compile Include="SFeel\DaysAndHoursDurationUnaryComparisonsTests.cs" />
+    <Compile Include="SFeel\MonthsAndYearsDurationUnaryComparisonsTests.cs" />
     <Compile Include="SFeel\NumericUnaryComparisonsTests.cs" />
     <Compile Include="SFeel\SfeelTester.cs" />
     <Compile Include="SFeel\StringUnaryComparisonsTests.cs" />

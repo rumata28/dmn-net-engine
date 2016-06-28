@@ -5,20 +5,20 @@ namespace DmnEngine.Tests.SFeel
 	[TestFixture]
 	public class BooleanUnaryComparisonsTests : SfeelTester
 	{
-		[Test]
-		public void Test_Literal()
+		[TestCase("true", true)]
+		[TestCase("false", false)]
+		public void Test_Literal(string sfeelExpression, bool expectedValue)
 		{
-			ExpectSfeel("true", true, true);
-			ExpectSfeel("false", false, true);
+			ExpectSfeel(sfeelExpression, expectedValue, true);
 		}
 
-		[Test]
-		public void Test_CannotCompare()
+		[TestCase(">true")]
+		[TestCase(">=true")]
+		[TestCase("<true")]
+		[TestCase("<=true")]
+		public void Test_CannotCompare(string sfeelExpressionToFail)
 		{
-			Expect(() => SFeelEval(">true", true), Throws.Exception);
-			Expect(() => SFeelEval("<true", true), Throws.Exception);
-			Expect(() => SFeelEval(">=true", true), Throws.Exception);
-			Expect(() => SFeelEval("<=true", true), Throws.Exception);
+			Expect(() => SFeelEval(sfeelExpressionToFail, true), Throws.Exception);
 		}
 	}
 }

@@ -23,20 +23,20 @@ namespace DmnEngine.Tests.SFeel
 			ExpectSfeel(@"""a string"", ""string2""", "string2", true);
 		}
 
-		[Test]
-		public void Test_not_List()
+		[TestCase("string2", false)]
+		[TestCase("string3", true)]
+		public void Test_not_List(string value, bool expectation)
 		{
-			ExpectSfeel(@"not(""a string"", ""string2"")", "string2", false);
-			ExpectSfeel(@"not(""a string"", ""string2"")", "string3", true);
+			ExpectSfeel(@"not(""a string"", ""string2"")", value, expectation);
 		}
 
-		[Test]
-		public void Test_CannotCompare()
+		[TestCase(@">""a string""")]
+		[TestCase(@">=""a string""")]
+		[TestCase(@"<""a string""")]
+		[TestCase(@"<=""a string""")]
+		public void Test_CannotCompare(string sfeel)
 		{
-			Expect(() => SFeelEval(@">""a string""", "a string"), Throws.Exception);
-			Expect(() => SFeelEval(@">=""a string""", "a string"), Throws.Exception);
-			Expect(() => SFeelEval(@"<""a string""", "a string"), Throws.Exception);
-			Expect(() => SFeelEval(@"<=""a string""", "a string"), Throws.Exception);
+			Expect(() => SFeelEval(sfeel, "a string"), Throws.Exception);
 		}
 	}
 }

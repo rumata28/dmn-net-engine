@@ -5,165 +5,163 @@ namespace DmnEngine.Tests.SFeel
 	[TestFixture]
 	public class NumericUnaryComparisonsTests : SfeelTester
 	{
-		[Test]
-		public void Test_GreaterThan()
+		[TestCase(20, true)]
+		[TestCase(10.1, true)]
+		[TestCase(10, false)]
+		public void Test_GreaterThan(decimal value, bool expectation)
 		{
-			ExpectSfeel(">10", 20, true);
-			ExpectSfeel(">10", 10.1m, true);
-			ExpectSfeel(">10", 10, false);
+			ExpectSfeel(">10", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_GreaterThan()
+		[TestCase(20, false)]
+		[TestCase(10.1, false)]
+		[TestCase(10, true)]
+		public void Test_not_GreaterThan(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(>10)", 20, false);
-			ExpectSfeel("not(>10)", 10.1m, false);
-			ExpectSfeel("not(>10)", 10, true);
+			ExpectSfeel("not(>10)", value, expectation);
 		}
 
-		[Test]
-		public void Test_GreaterThanOrEqual()
+		[TestCase(20, true)]
+		[TestCase(10, true)]
+		[TestCase(9.999, false)]
+		public void Test_GreaterThanOrEqual(decimal value, bool expectation)
 		{
-			ExpectSfeel(">=10", 20, true);
-			ExpectSfeel(">=10", 10, true);
-			ExpectSfeel(">=10", 9.999m, false);
+			ExpectSfeel(">=10", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_GreaterThanOrEqual()
+		[TestCase(20, false)]
+		[TestCase(10, false)]
+		[TestCase(9.999, true)]
+		public void Test_not_GreaterThanOrEqual(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(>=10)", 20, false);
-			ExpectSfeel("not(>=10)", 10, false);
-			ExpectSfeel("not(>=10)", 9.999m, true);
+			ExpectSfeel("not(>=10)", value, expectation);
 		}
 
-		[Test]
-		public void Test_LessThan()
+		[TestCase(20, false)]
+		[TestCase(10.1, false)]
+		[TestCase(10, false)]
+		[TestCase(9.999, true)]
+		[TestCase(-20, true)]
+		public void Test_LessThan(decimal value, bool expectation)
 		{
-			ExpectSfeel("<10", 20, false);
-			ExpectSfeel("<10", 10.1m, false);
-			ExpectSfeel("<10", 10, false);
-			ExpectSfeel("<10", 9.999m, true);
-			ExpectSfeel("<10", -20, true);
+			ExpectSfeel("<10", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_LessThan()
+		[TestCase(20, true)]
+		[TestCase(10.1, true)]
+		[TestCase(10, true)]
+		[TestCase(9.999, false)]
+		[TestCase(-20, false)]
+		public void Test_not_LessThan(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(<10)", 20, true);
-			ExpectSfeel("not(<10)", 10.1m, true);
-			ExpectSfeel("not(<10)", 10, true);
-			ExpectSfeel("not(<10)", 9.999m, false);
-			ExpectSfeel("not(<10)", -20, false);
+			ExpectSfeel("not(<10)", value, expectation);
 		}
 
-		[Test]
-		public void Test_LessThanOrEqual()
+		[TestCase(20, false)]
+		[TestCase(10.1, false)]
+		[TestCase(10, true)]
+		[TestCase(9.999, true)]
+		[TestCase(-20, true)]
+		public void Test_LessThanOrEqual(decimal value, bool expectation)
 		{
-			ExpectSfeel("<=10", 20, false);
-			ExpectSfeel("<=10", 10.1m, false);
-			ExpectSfeel("<=10", 10, true);
-			ExpectSfeel("<=10", 9.999m, true);
-			ExpectSfeel("<=10", -20, true);
+			ExpectSfeel("<=10", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_LessThanOrEqual()
+		[TestCase(20, true)]
+		[TestCase(10.1, true)]
+		[TestCase(10, false)]
+		[TestCase(9.999, false)]
+		[TestCase(-20, false)]
+		public void Test_not_LessThanOrEqual(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(<=10)", 20, true);
-			ExpectSfeel("not(<=10)", 10.1m, true);
-			ExpectSfeel("not(<=10)", 10, false);
-			ExpectSfeel("not(<=10)", 9.999m, false);
-			ExpectSfeel("not(<=10)", -20, false);
+			ExpectSfeel("not(<=10)", value, expectation);
 		}
 
-		[Test]
-		public void Test_Equal()
+		[TestCase(10.1, false)]
+		[TestCase(10, true)]
+		[TestCase(9.999, false)]
+		[TestCase(-10, false)]
+		public void Test_Equal(decimal value, bool expectation)
 		{
-			ExpectSfeel("10", 20, false);
-			ExpectSfeel("10", 10.1m, false);
-			ExpectSfeel("10", 10, true);
-			ExpectSfeel("10", 9.999m, false);
-			ExpectSfeel("10", -10, false);
+			ExpectSfeel("10", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_Equal()
+		[TestCase(10.1, true)]
+		[TestCase(10, false)]
+		[TestCase(9.999, true)]
+		[TestCase(-10, true)]
+		public void Test_not_Equal(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(10)", 20, true);
-			ExpectSfeel("not(10)", 10.1m, true);
-			ExpectSfeel("not(10)", 10, false);
-			ExpectSfeel("not(10)", 9.999m, true);
-			ExpectSfeel("not(10)", -10, true);
+			ExpectSfeel("not(10)", value, expectation);
 		}
 
-		[Test]
-		public void Test_Formats()
+		[TestCase("10", 10, true)]
+		[TestCase("-10", -10, true)]
+		[TestCase("10.", 10, true)]
+		[TestCase("-10.", -10, true)]
+		[TestCase("10.1000", 10.1, true)]
+		[TestCase("-10.1000", -10.1, true)]
+		[TestCase(".1", .1, true)]
+		[TestCase("-.1", -.1, true)]
+		[TestCase(".100000", .1, true)]
+		[TestCase("-.100000", -.1, true)]
+		[TestCase("000.100000", .1, true)]
+		[TestCase("-000.100000", -.1, true)]
+		public void Test_Formats(string sfeel, decimal value, bool expectation)
 		{
-			ExpectSfeel("10", 10, true);
-			ExpectSfeel("-10", -10, true);
-			ExpectSfeel("10.", 10, true);
-			ExpectSfeel("-10.", -10, true);
-			ExpectSfeel("10.1000", 10.1m, true);
-			ExpectSfeel("-10.1000", -10.1m, true);
-			ExpectSfeel(".1", .1m, true);
-			ExpectSfeel("-.1", -.1m, true);
-			ExpectSfeel(".100000", .1m, true);
-			ExpectSfeel("-.100000", -.1m, true);
-			ExpectSfeel("000.100000", .1m, true);
-			ExpectSfeel("-000.100000", -.1m, true);
+			ExpectSfeel(sfeel, value, expectation);
 		}
 
-		[Test]
-		public void Test_CompareList()
+		[TestCase(0, true)]
+		[TestCase(1, true)]
+		[TestCase(2, false)]
+		[TestCase(10, false)]
+		[TestCase(10.01, true)]
+		[TestCase(-10, false)]
+		[TestCase(-10.01, true)]
+		public void Test_CompareList(decimal value, bool expectation)
 		{
-			ExpectSfeel(">10,<-10,0,1", 0, true);
-			ExpectSfeel(">10,<-10,0,1", 1, true);
-			ExpectSfeel(">10,<-10,0,1", 2, false);
-			ExpectSfeel(">10,<-10,0,1", 10, false);
-			ExpectSfeel(">10,<-10,0,1", 10.01m, true);
-			ExpectSfeel(">10,<-10,0,1", -10, false);
-			ExpectSfeel(">10,<-10,0,1", -10.01m, true);
+			ExpectSfeel(">10,<-10,0,1", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_CompareList()
+		[TestCase(0, false)]
+		[TestCase(1, false)]
+		[TestCase(2, true)]
+		[TestCase(10, true)]
+		[TestCase(10.01, false)]
+		[TestCase(-10, true)]
+		[TestCase(-10.01, false)]
+		public void Test_not_CompareList(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(>10,<-10,0,1)", 0, false);
-			ExpectSfeel("not(>10,<-10,0,1)", 1, false);
-			ExpectSfeel("not(>10,<-10,0,1)", 2, true);
-			ExpectSfeel("not(>10,<-10,0,1)", 10, true);
-			ExpectSfeel("not(>10,<-10,0,1)", 10.01m, false);
-			ExpectSfeel("not(>10,<-10,0,1)", -10, true);
-			ExpectSfeel("not(>10,<-10,0,1)", -10.01m, false);
+			ExpectSfeel("not(>10,<-10,0,1)", value, expectation);
 		}
 
-		[Test]
-		public void Test_Range_Open_Open()
+		[TestCase(-5.01, false)]
+		[TestCase(-5, true)]
+		[TestCase(0, true)]
+		[TestCase(5, true)]
+		[TestCase(5.01, false)]
+		public void Test_Range_Open_Open(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5..5]", -5.01m, false);
-			ExpectSfeel("[-5..5]", -5, true);
-			ExpectSfeel("[-5..5]", 0, true);
-			ExpectSfeel("[-5..5]", 5, true);
-			ExpectSfeel("[-5..5]", 5.01m, false);
+			ExpectSfeel("[-5..5]", value, expectation);
 		}
 
-		[Test]
-		public void Test_Range_vs_DecimalPoint()
+		[TestCase(-5.001, false)]
+		[TestCase(-5, true)]
+		[TestCase(0.5, true)]
+		[TestCase(0.51, false)]
+		public void Test_Range_vs_DecimalPoint(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5...5]", -5.001m, false);
-			ExpectSfeel("[-5...5]", -5, true);
-			ExpectSfeel("[-5...5]", 0.5m, true);
-			ExpectSfeel("[-5...5]", 0.51m, false);
+			ExpectSfeel("[-5...5]", value, expectation);
 		}
 
-		[Test]
-		public void Test_Range_NegativeEnd()
+		[TestCase(-5.501, false)]
+		[TestCase(-5.5, true)]
+		[TestCase(-1.1, true)]
+		[TestCase(-1.009, false)]
+		public void Test_Range_NegativeEnd(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5.5..-1.1]", -5.501m, false);
-			ExpectSfeel("[-5.5..-1.1]", -5.5m, true);
-			ExpectSfeel("[-5.5..-1.1]", -1.1m, true);
-			ExpectSfeel("[-5.5..-1.1]", -1.009m, false);
+			ExpectSfeel("[-5.5..-1.1]", value, expectation);
 		}
 
 		[Test]
@@ -172,113 +170,111 @@ namespace DmnEngine.Tests.SFeel
 			ExpectSfeel("	 [	-  5.5    ..	 -   1.1 ] ", -5.501m, false);
 		}
 
-		[Test]
-		public void Test_Range_Open_Close()
+		[TestCase(-5.01, false)]
+		[TestCase(-5, true)]
+		[TestCase(0, true)]
+		[TestCase(5, false)]
+		[TestCase(5.01, false)]
+		[TestCase(-5.01, false)]
+		[TestCase(-5, true)]
+		[TestCase(0, true)]
+		[TestCase(5, false)]
+		[TestCase(5.01, false)]
+		public void Test_Range_Open_Close(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5..5)", -5.01m, false);
-			ExpectSfeel("[-5..5)", -5, true);
-			ExpectSfeel("[-5..5)", 0, true);
-			ExpectSfeel("[-5..5)", 5, false);
-			ExpectSfeel("[-5..5)", 5.01m, false);
-
-			ExpectSfeel("[-5..5[", -5.01m, false);
-			ExpectSfeel("[-5..5[", -5, true);
-			ExpectSfeel("[-5..5[", 0, true);
-			ExpectSfeel("[-5..5[", 5, false);
-			ExpectSfeel("[-5..5[", 5.01m, false);
+			ExpectSfeel("[-5..5)", value, expectation);
 		}
 
-		[Test]
-		public void Test_Range_Close_Open()
+		[TestCase(-5.01, false)]
+		[TestCase(-5, false)]
+		[TestCase(0, true)]
+		[TestCase(5, true)]
+		[TestCase(5.01, false)]
+		[TestCase(-5.01, false)]
+		[TestCase(-5, false)]
+		[TestCase(0, true)]
+		[TestCase(5, true)]
+		[TestCase(5.01, false)]
+		public void Test_Range_Close_Open(decimal value, bool expectation)
 		{
-			ExpectSfeel("(-5..5]", -5.01m, false);
-			ExpectSfeel("(-5..5]", -5, false);
-			ExpectSfeel("(-5..5]", 0, true);
-			ExpectSfeel("(-5..5]", 5, true);
-			ExpectSfeel("(-5..5]", 5.01m, false);
-
-			ExpectSfeel("]-5..5]", -5.01m, false);
-			ExpectSfeel("]-5..5]", -5, false);
-			ExpectSfeel("]-5..5]", 0, true);
-			ExpectSfeel("]-5..5]", 5, true);
-			ExpectSfeel("]-5..5]", 5.01m, false);
+			ExpectSfeel("(-5..5]", value, expectation);
 		}
 
-		[Test]
-		public void Test_Range_Close_Close()
+		[TestCase(-5.01, false)]
+		[TestCase(-5, false)]
+		[TestCase(0, true)]
+		[TestCase(5, false)]
+		[TestCase(5.01, false)]
+		public void Test_Range_Close_Close(decimal value, bool expectation)
 		{
-			ExpectSfeel("(-5..5)", -5.01m, false);
-			ExpectSfeel("(-5..5)", -5, false);
-			ExpectSfeel("(-5..5)", 0, true);
-			ExpectSfeel("(-5..5)", 5, false);
-			ExpectSfeel("(-5..5)", 5.01m, false);
+			ExpectSfeel("(-5..5)", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_Range()
+		[TestCase(-5.001, true)]
+		[TestCase(-5, false)]
+		[TestCase(0.5, false)]
+		[TestCase(0.51, true)]
+		public void Test_not_Range(decimal value, bool expectation)
 		{
-			ExpectSfeel("not([-5...5])", -5.001m, true);
-			ExpectSfeel("not([-5...5])", -5, false);
-			ExpectSfeel("not([-5...5])", 0.5m, false);
-			ExpectSfeel("not([-5...5])", 0.51m, true);
+			ExpectSfeel("not([-5...5])", value, expectation);
 		}
 
-		[Test]
-		public void Test_Range_List()
+		[TestCase(-5.01, false)]
+		[TestCase(-5, true)]
+		[TestCase(-4, true)]
+		[TestCase(.99, false)]
+		[TestCase(1, true)]
+		[TestCase(2, true)]
+		[TestCase(2.01, false)]
+		public void Test_Range_List(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5..-4],[1..2]", -5.01m, false);
-			ExpectSfeel("[-5..-4],[1..2]", -5, true);
-			ExpectSfeel("[-5..-4],[1..2]", -4, true);
-			ExpectSfeel("[-5..-4],[1..2]", .99m, false);
-			ExpectSfeel("[-5..-4],[1..2]", 1, true);
-			ExpectSfeel("[-5..-4],[1..2]", 2, true);
-			ExpectSfeel("[-5..-4],[1..2]", 2.01m, false);
+			ExpectSfeel("[-5..-4],[1..2]", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_Range_List()
+		[TestCase(-5.01, true)]
+		[TestCase(-5, false)]
+		[TestCase(-4, false)]
+		[TestCase(.99, true)]
+		[TestCase(1, false)]
+		[TestCase(2, false)]
+		[TestCase(2.01, true)]
+		public void Test_not_Range_List(decimal value, bool expectation)
 		{
-			ExpectSfeel("not([-5..-4],[1..2])", -5.01m, true);
-			ExpectSfeel("not([-5..-4],[1..2])", -5, false);
-			ExpectSfeel("not([-5..-4],[1..2])", -4, false);
-			ExpectSfeel("not([-5..-4],[1..2])", .99m, true);
-			ExpectSfeel("not([-5..-4],[1..2])", 1, false);
-			ExpectSfeel("not([-5..-4],[1..2])", 2, false);
-			ExpectSfeel("not([-5..-4],[1..2])", 2.01m, true);
+			ExpectSfeel("not([-5..-4],[1..2])", value, expectation);
 		}
 
-		[Test]
-		public void Test_combined_Range()
+		[TestCase(-10, true)]
+		[TestCase(-9.99, false)]
+		[TestCase(-5.01, false)]
+		[TestCase(-5, true)]
+		[TestCase(-4, true)]
+		[TestCase(0, true)]
+		[TestCase(.99, false)]
+		[TestCase(1, true)]
+		[TestCase(2, true)]
+		[TestCase(2.01, false)]
+		[TestCase(10, false)]
+		[TestCase(10.001, true)]
+		public void Test_combined_Range(decimal value, bool expectation)
 		{
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -10, true);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -9.99m, false);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -5.01m, false);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -5, true);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", -4, true);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 0, true);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", .99m, false);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 1, true);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 2, true);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 2.01m, false);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 10, false);
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", 10.001m, true);
+			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", value, expectation);
 		}
 
-		[Test]
-		public void Test_not_combined_Range()
+		[TestCase(-10, false)]
+		[TestCase(-9.99, true)]
+		[TestCase(-5.01, true)]
+		[TestCase(-5, false)]
+		[TestCase(-4, false)]
+		[TestCase(0, false)]
+		[TestCase(.99, true)]
+		[TestCase(1, false)]
+		[TestCase(2, false)]
+		[TestCase(2.01, true)]
+		[TestCase(10, true)]
+		[TestCase(10.001, false)]
+		public void Test_not_combined_Range(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -10, false);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -9.99m, true);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -5.01m, true);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -5, false);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", -4, false);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 0, false);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", .99m, true);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 1, false);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 2, false);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 2.01m, true);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 10, true);
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", 10.001m, false);
+			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", value, expectation);
 		}
 	}
 }
