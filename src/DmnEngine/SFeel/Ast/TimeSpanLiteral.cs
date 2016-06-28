@@ -7,11 +7,10 @@ namespace Softengi.DmnEngine.SFeel.Ast
 	// TODO: split into 2 literals
 	public class TimeSpanLiteral : INode
 	{
-		public TimeSpanLiteral(int? months, TimeSpan? duration = null, bool negative = false)
+		public TimeSpanLiteral(int? months, TimeSpan? duration = null)
 		{
 			Months = months;
 			Duration = duration;
-			Negative = negative;
 		}
 
 		static public TimeSpanLiteral Parse(string value)
@@ -21,7 +20,7 @@ namespace Softengi.DmnEngine.SFeel.Ast
 				throw new EvaluateException("Invalid time-span literal: \"" + value + "\"");
 
 			var signGroup = m.Groups["sign"];
-			var negative = signGroup.Success;
+			int negative = signGroup.Success ? -1 : 1;
 
 			var months = 0;
 
@@ -36,26 +35,26 @@ namespace Softengi.DmnEngine.SFeel.Ast
 			var duration = new TimeSpan();
 			var daysGroup = m.Groups["D"];
 			if (daysGroup.Success)
-				duration += TimeSpan.FromDays(int.Parse(daysGroup.Value.TrimEnd('D')));
+				duration += TimeSpan.FromDays(negative * int.Parse(daysGroup.Value.TrimEnd('D')));
 			var hoursGroup = m.Groups["H"];
 			if (hoursGroup.Success)
-				duration += TimeSpan.FromHours(int.Parse(hoursGroup.Value.TrimEnd('H')));
-			var secondsGroup = m.Groups["s"];
+				duration += TimeSpan.FromHours(negative * int.Parse(hoursGroup.Value.TrimEnd('H')));
+			var minutesGroup = m.Groups["m"];
+			if (minutesGroup.Success)
+				duration += TimeSpan.FromMinutes(negative * int.Parse(minutesGroup.Value.TrimEnd('M')));
+			var secondsGroup = m.Groups["S"];
 			if (secondsGroup.Success)
-				duration += TimeSpan.FromSeconds(int.Parse(secondsGroup.Value.TrimEnd('S')));
+				duration += TimeSpan.FromSeconds(negative * int.Parse(secondsGroup.Value.TrimEnd('S')));
 
 			return new TimeSpanLiteral(
-				months == 0 ? (int?) null : months,
-				duration.Ticks == 0 ? (TimeSpan?) null : duration,
-				negative);
+				months == 0 ? (int?) null : months * negative,
+				duration.Ticks == 0 ? (TimeSpan?) null : duration);
 		}
 
 		public void Accept(AstVisitor v)
 		{
 			v.VisitTimeSpanLiteral(this);
 		}
-
-		public bool Negative { get; }
 
 		/// <summary>
 		/// "Years and months" part.  Value is in months.
