@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data;
 
-using Softengi.DmnEngine.SFeel.Ast;
+using Softengi.DmnEngine.Ast;
 
-namespace Softengi.DmnEngine.SFeel.Evaluation
+namespace Softengi.DmnEngine.Evaluation
 {
 	static internal class Compare
 	{
@@ -31,12 +31,17 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 						return Strings(comparisonOperator, left, right);
 					case EvaluationValue.EvaluationValueType.DateTime:
 						return DateTimes(comparisonOperator, left, right);
-					case EvaluationValue.EvaluationValueType.Duration:
+					case EvaluationValue.EvaluationValueType.YearsAndMonthsDuration:
+						return Numbers(comparisonOperator, left, right);
+					case EvaluationValue.EvaluationValueType.DaysAndHoursDuration:
 						return Durations(comparisonOperator, left, right);
+					case EvaluationValue.EvaluationValueType.Null:
+						return true;
 				}
 			}
 
-			// TODO: compare values of different types
+			// TODO: equality comparison with null - exception or throw?
+			// TODO: equality comparison of different types - exception or throw?
 
 			throw new EvaluateException($"Cannot compare {left.ValueType} with {right.ValueType}");
 		}

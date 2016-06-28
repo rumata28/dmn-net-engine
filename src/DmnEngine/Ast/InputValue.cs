@@ -1,4 +1,4 @@
-﻿namespace Softengi.DmnEngine.SFeel.Ast
+﻿namespace Softengi.DmnEngine.Ast
 {
 	/// <summary>
 	/// Represent a node for input value for unary test call.

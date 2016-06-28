@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.2
 // Machine:  CABINET
-// DateTime: 6/28/2016 1:46:00 PM
+// DateTime: 6/28/2016 9:51:57 PM
 // UserName: Andrey
-// Input file <Sfeel\Parser\SFeel.Language.grammar.y - 6/28/2016 12:20:34 PM>
+// Input file <Parsers\SFeel.Language.grammar.y - 6/28/2016 9:51:12 PM>
 
 // options: no-lines gplex
 
@@ -16,9 +16,9 @@ using System.CodeDom.Compiler;
 using System.Globalization;
 using System.Text;
 using QUT.Gppg;
-using Softengi.DmnEngine.SFeel.Ast;
+using Softengi.DmnEngine.Ast;
 
-namespace Softengi.DmnEngine.SFeel.Parser
+namespace Softengi.DmnEngine.Parsers
 {
 internal enum Token {error=2,EOF=3,STRING=4,NAME=5,NUMBER=6,
     BOOLEAN=7,C_EQ=8,C_LT=9,C_LE=10,C_GT=11,C_GE=12,

@@ -1,6 +1,6 @@
 using System;
 
-namespace Softengi.DmnEngine.SFeel.Parser
+namespace Softengi.DmnEngine.Parsers
 {
 	internal partial class SFeelScanner
 	{

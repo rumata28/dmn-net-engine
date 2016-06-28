@@ -1,7 +1,8 @@
-%namespace Softengi.DmnEngine.SFeel.Parser
+%namespace Softengi.DmnEngine.Parsers
 %scannertype SFeelScanner
 %visibility internal
 %tokentype Token
+
 
 %option stack, minimize, parser, verbose, persistbuffer, noembedbuffers 
 

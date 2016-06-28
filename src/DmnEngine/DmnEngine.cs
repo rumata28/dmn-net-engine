@@ -1,4 +1,4 @@
-﻿using Softengi.DmnEngine.SFeel.Evaluation;
+﻿using Softengi.DmnEngine.Evaluation;
 using Softengi.DmnEngine.XmlTypes;
 
 namespace Softengi.DmnEngine
@@ -12,7 +12,7 @@ namespace Softengi.DmnEngine
 
 		public EvaluationValue EvaluateSFeel(string unaryTests, EvaluationValue value)
 		{
-			var parser = new SFeel.Parser.SFeelParser();
+			var parser = new Parsers.SFeelParser();
 			parser.Parse(unaryTests);
 			var root = parser.Root;
 

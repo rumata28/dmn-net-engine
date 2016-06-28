@@ -6,9 +6,9 @@
 //
 //  GPLEX Version:  1.2.2
 //  Machine:  CABINET
-//  DateTime: 6/28/2016 1:45:59 PM
+//  DateTime: 6/28/2016 9:51:57 PM
 //  UserName: Andrey
-//  GPLEX input file <Sfeel\Parser\SFeel.Language.analyzer.lex - 6/28/2016 12:41:57 AM>
+//  GPLEX input file <Parsers\SFeel.Language.analyzer.lex - 6/28/2016 9:51:57 PM>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: verbose, parser, stack, minimize
@@ -35,7 +35,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using QUT.GplexBuffers;
 
-namespace Softengi.DmnEngine.SFeel.Parser
+namespace Softengi.DmnEngine.Parsers
 {   
     /// <summary>
     /// Summary Canonical example of GPLEX automaton

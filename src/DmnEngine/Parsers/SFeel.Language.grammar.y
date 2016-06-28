@@ -1,9 +1,9 @@
-%namespace Softengi.DmnEngine.SFeel.Parser
+%namespace Softengi.DmnEngine.Parsers
 %partial
 %parsertype SFeelParser
 %visibility internal
 %tokentype Token
-%using Softengi.DmnEngine.SFeel.Ast
+%using Softengi.DmnEngine.Ast
 
 %union { 
 			public decimal n; 

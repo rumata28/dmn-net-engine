@@ -1,4 +1,4 @@
-﻿namespace Softengi.DmnEngine.SFeel.Ast
+﻿namespace Softengi.DmnEngine.Ast
 {
 	public abstract class Literal<T>
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Xml;
 
-namespace Softengi.DmnEngine.SFeel.Ast
+namespace Softengi.DmnEngine.Ast
 {
 	public class DateTimeLiteral : Literal<DateTime>, INode
 	{

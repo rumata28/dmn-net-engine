@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Softengi.DmnEngine.SFeel.Evaluation
+namespace Softengi.DmnEngine.Evaluation
 {
 	public class EvaluationException : ApplicationException
 	{

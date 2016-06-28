@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Softengi.DmnEngine.SFeel.Ast;
+using Softengi.DmnEngine.Ast;
 
-namespace Softengi.DmnEngine.SFeel.Evaluation
+namespace Softengi.DmnEngine.Evaluation
 {
 	public class EvaluatorVisitor : AstVisitor
 	{

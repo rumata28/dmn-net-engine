@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Softengi.DmnEngine.SFeel.Ast
+namespace Softengi.DmnEngine.Ast
 {
 	public class Or : ILogical
 	{

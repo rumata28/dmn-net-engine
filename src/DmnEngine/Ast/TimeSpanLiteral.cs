@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Text.RegularExpressions;
 
-namespace Softengi.DmnEngine.SFeel.Ast
+namespace Softengi.DmnEngine.Ast
 {
 	// TODO: split into 2 literals
 	public class TimeSpanLiteral : INode

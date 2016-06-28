@@ -2,7 +2,7 @@
 
 using NUnit.Framework;
 
-using Softengi.DmnEngine.SFeel.Evaluation;
+using Softengi.DmnEngine.Evaluation;
 
 namespace DmnEngine.Tests.SFeel
 {

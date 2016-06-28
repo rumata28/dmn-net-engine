@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Text;
 
-using Softengi.DmnEngine.SFeel.Ast;
+using Softengi.DmnEngine.Ast;
 
-namespace Softengi.DmnEngine.SFeel.Parser
+namespace Softengi.DmnEngine.Parsers
 {
 	internal partial class SFeelParser
 	{

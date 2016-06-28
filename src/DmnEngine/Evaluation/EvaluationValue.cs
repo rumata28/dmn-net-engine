@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Softengi.DmnEngine.SFeel.Evaluation
+namespace Softengi.DmnEngine.Evaluation
 {
 	public struct EvaluationValue
 	{
@@ -33,7 +33,7 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 		public EvaluationValue(TimeSpan ts) : this()
 		{
 			Duration = ts;
-			ValueType = EvaluationValueType.Duration;
+			ValueType = EvaluationValueType.DaysAndHoursDuration;
 		}
 
 		public EvaluationValue(EvaluationValueType yearsAndMonthsDuration, int months) : this()
@@ -107,7 +107,7 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 
 		static public implicit operator TimeSpan(EvaluationValue ev)
 		{
-			if (ev.ValueType != EvaluationValueType.Duration)
+			if (ev.ValueType != EvaluationValueType.DaysAndHoursDuration)
 				throw new EvaluationException("Expected Duration value.");
 			return ev.Duration;
 		}
@@ -126,7 +126,7 @@ namespace Softengi.DmnEngine.SFeel.Evaluation
 			Boolean,
 			DateTime,
 			Time,
-			Duration,
+			DaysAndHoursDuration,
 			YearsAndMonthsDuration,
 			Null
 		}

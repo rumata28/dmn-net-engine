@@ -2,7 +2,7 @@ using System;
 
 using NUnit.Framework;
 
-using Softengi.DmnEngine.SFeel.Evaluation;
+using Softengi.DmnEngine.Evaluation;
 
 namespace DmnEngine.Tests.SFeel
 {
@@ -26,7 +26,7 @@ namespace DmnEngine.Tests.SFeel
 				case EvaluationValue.EvaluationValueType.String:
 					Expect(result.String, EqualTo(expectedResult.String));
 					break;
-				case EvaluationValue.EvaluationValueType.Duration:
+				case EvaluationValue.EvaluationValueType.DaysAndHoursDuration:
 					Expect(result.Duration, EqualTo(expectedResult.Duration));
 					break;
 				case EvaluationValue.EvaluationValueType.Null:
