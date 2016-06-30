@@ -61,9 +61,7 @@
 
 %%
 
-main:
-	  simpleUnaryTests		{ Debug("main/simpleUnaryTests");	Root = $1; }
-	| expression			{ Debug("main/expression");			Root = $1; }
+main: simpleUnaryTests		{ Debug("main/simpleUnaryTests");	Root = $1; }
 	;
 
 // 1
@@ -93,9 +91,8 @@ textualExpression:
 	;
 
 // 3
-textualExpressions:
-	  textualExpression								{ Debug("textualExpressions");	 $$ = $1;				}
-	| textualExpressions COMMA textualExpression	{ Debug("textualExpressions/,"); $$ = new Or($1, $3);	}
+textualExpressions:			   textualExpression	{ Debug("textualExpressions");	 $$ = $1;			  }
+	| textualExpressions COMMA textualExpression	{ Debug("textualExpressions/,"); $$ = new Or($1, $3); }
 	;
 
 // 4
@@ -195,8 +192,7 @@ simpleValue:
 	;
 
 // 20
-qualifiedName:
-      NAME						{ $$ = new QualifiedName($1);		}
+qualifiedName:			NAME	{ $$ = new QualifiedName($1);		}
 	| qualifiedName DOT NAME	{ $$ = $1;	$$.AddComponent($3);	}
 	;
 
@@ -246,16 +242,12 @@ parameters:
 	;
 
 // 42
-namedParameters:
-	  namedParameter						{ Debug("namedParameters");	  $$ = new NamedParameterList($1); }
+namedParameters:			namedParameter	{ Debug("namedParameters");	  $$ = new NamedParameterList($1); }
 	| namedParameters COMMA namedParameter	{ Debug("namedParameters/,"); $$ = $1; $$.Add($3);			   }
 	;
 
 // 42
-namedParameter:	parameterName COLON expression		{ Debug("namedParameter");	  $$ = new NamedParam($1, $3); };
-
-// 43
-parameterName: NAME	{ Debug("parameterName"); $$ = $1; };
+namedParameter:	NAME COLON expression		{ Debug("namedParameter");	  $$ = new NamedParam($1, $3); };
 
 // 45
 pathExpression: expression DOT NAME		{ Debug("pathExpression"); $$ = new PathExpression($1, $3); };
@@ -282,7 +274,7 @@ inParts:
 	;
 
 // 46,48:
-inPart:   NAME IN expression		{ Debug("inPart");   $$ = new InPart($1, $3); };
+inPart: NAME IN expression		{ Debug("inPart");   $$ = new InPart($1, $3); };
 
 // 49-50
 disjunction: expression OR expression	{ Debug("disjunction");  $$ = new Or($1, $3); };
@@ -308,49 +300,34 @@ comparisonOp:
 // 52
 filterExpression: expression SP_OPEN expression SP_CLOSE	{ Debug("filterExpression"); $$ = new Filter($1, $3); };
 
-// 53
-instanceOf: expression INSTANCE OF type	{ Debug("instanceOf"); $$ = new InstanceOf($1, $4); };
+// 53,54
+instanceOf: expression INSTANCE OF qualifiedName	{ Debug("instanceOf"); $$ = new InstanceOf($1, $4); };
 
-// 54
-type: qualifiedName	{ Debug("type"); $$ = $1; };
-
-// 55
+// 55, 56, 59
 boxedExpression:
-	  list					{ Debug("boxedExpression/list");	$$ = $1; }
-	| functionDefinition	{ Debug("boxedExpression/funDef");  $$ = $1; }
-	| context				{ Debug("boxedExpression/context"); $$ = $1; }
+	  SP_OPEN expressionList SP_CLOSE		{ Debug("boxedExpression/list");	$$ = $2; }
+	| CP_OPEN contextEntries CP_CLOSE		{ Debug("boxedExpression/context"); $$ = $2; }
+	| functionDefinition					{ Debug("boxedExpression/funDef");  $$ = $1; }
 	;
 
-// 56
-list: SP_OPEN expressionList SP_CLOSE;
-
 // 44, 56
-expressionList:
-	  expression							{ Debug("expressionList");   $$ = new ExpressionList($1); }
+expressionList:			   expression		{ Debug("expressionList");   $$ = new ExpressionList($1); }
 	| expressionList COMMA expression		{ Debug("expressionList/,"); $$ = $1;		  $$.Add($3); }
 	;
 
 // 57
 functionDefinition:
-	  FUNCTION P_OPEN formalParameterList P_CLOSE expression
-	| FUNCTION P_OPEN formalParameterList P_CLOSE EXTERNAL expression
+	  FUNCTION P_OPEN nameList P_CLOSE			expression
+	| FUNCTION P_OPEN nameList P_CLOSE EXTERNAL expression
 	;
 
 // 57
-formalParameterList:
-	  formalParameter								{ Debug("formatParameterList/,"); $$ = new FormalParameterList($1); }
-	| formalParameterList COMMA formalParameter		{ Debug("formatParameterList/,"); $$ = $1; $$.Add($3);				}
+nameList:			 NAME	{ Debug("formatParameterList");   $$ = new nameList($1); }
+	| nameList COMMA NAME	{ Debug("formatParameterList/,"); $$ = $1; $$.Add($3);	 }
 	;
 
-// 58
-formalParameter: parameterName		{ Debug("formalParameter"); $$ = $1; };
-
 // 59
-context: CP_OPEN contextEntries CP_CLOSE;
-
-// 59
-contextEntries:
-	  contextEntry							{ Debug("contextEntries/,"); $$ = new ContextEntryList($1); }
+contextEntries:			   contextEntry		{ Debug("contextEntries/,"); $$ = new ContextEntryList($1); }
 	| contextEntries COMMA contextEntry		{ Debug("contextEntries/,"); $$ = $1; $$.Add($3);			}
 	;
 
