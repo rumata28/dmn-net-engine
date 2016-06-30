@@ -10,6 +10,7 @@
 		public abstract void VisitBetween(Between between);
 		public abstract void VisitIn(In @in);
 		public abstract void VisitInstanceOf(InstanceOf instanceOf);
+		public abstract void VisitInPart(InPart inPart);
 
 		public abstract void VisitFilter(Filter filter);
 
@@ -24,8 +25,10 @@
 		public abstract void VisitPow(Pow neg);
 		public abstract void VisitNeg(Neg neg);
 
+		public abstract void VisitFunctionInvocation(FunctionInvocation funcInv);
 		public abstract void VisitInputValue(InputValue input);
 		public abstract void VisitQualifiedName(QualifiedName qn);
+		public abstract void VisitPath(PathExpression path);
 
 		public abstract void VisitNumericLiteral(NumericLiteral numericLiteral);
 		public abstract void VisitBooleanLiteral(BooleanLiteral booleanLiteral);

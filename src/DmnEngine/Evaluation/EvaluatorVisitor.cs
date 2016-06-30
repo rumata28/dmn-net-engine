@@ -13,6 +13,11 @@ namespace Softengi.DmnEngine.Evaluation
 			return _stack.Pop();
 		}
 
+		public override void VisitIf(If ifExpression)
+		{
+			throw new NotImplementedException();
+		}
+
 		public override void VisitComparison(Comparison comparison)
 		{
 			var left = AcceptAndPop(comparison.Left);
@@ -30,6 +35,36 @@ namespace Softengi.DmnEngine.Evaluation
 				Compare.Values(ComparisonOperatorForRange(range.OpenedStart), AcceptAndPop(range.Start), value) &&
 				Compare.Values(ComparisonOperatorForRange(range.OpenedEnd), value, AcceptAndPop(range.End))
 				);
+		}
+
+		public override void VisitBetween(Between between)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitIn(In @in)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitInstanceOf(InstanceOf instanceOf)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitInPart(InPart inPart)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitFilter(Filter filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitNeg(Neg neg)
+		{
+			throw new NotImplementedException();
 		}
 
 		public override void VisitInputValue(InputValue input)
@@ -53,9 +88,44 @@ namespace Softengi.DmnEngine.Evaluation
 			_stack.Push(or.Items.Any(l => AcceptAndPop(l) == true));
 		}
 
+		public override void VisitAnd(And and)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitAdd(Add neg)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitSub(Sub neg)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitMul(Mul neg)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitDiv(Div neg)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void VisitPow(Pow neg)
+		{
+			throw new NotImplementedException();
+		}
+
 		public override void VisitQualifiedName(QualifiedName qn)
 		{
 			// TODO: the visitor shall be able to resolve it
+			throw new NotImplementedException();
+		}
+
+		public override void VisitPath(PathExpression path)
+		{
 			throw new NotImplementedException();
 		}
 

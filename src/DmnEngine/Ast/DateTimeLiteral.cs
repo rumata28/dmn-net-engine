@@ -10,6 +10,14 @@ namespace Softengi.DmnEngine.Ast
 
 		static public DateTimeLiteral ParseDate(string str)
 		{
+			// TODO: more strict format
+			var d = XmlConvert.ToDateTime(str, XmlDateTimeSerializationMode.Unspecified);
+			return new DateTimeLiteral(d);
+		}
+
+		static public DateTimeLiteral ParseDateAndTime(string str)
+		{
+			// TODO: more strict format
 			var d = XmlConvert.ToDateTime(str, XmlDateTimeSerializationMode.Unspecified);
 			return new DateTimeLiteral(d);
 		}

@@ -1,4 +1,5 @@
 %namespace Softengi.DmnEngine.Parser
+%namespace Softengi.DmnEngine.Parser
 %scannertype FeelScanner
 %visibility internal
 %tokentype Token
