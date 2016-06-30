@@ -1,10 +1,10 @@
 
 // ==========================================================================
-//  GPPG error listing for yacc source file <Parser\Feel.Language.grammar.y - 6/30/2016 10:20:26 PM>
+//  GPPG error listing for yacc source file <Parser\Feel.Language.grammar.y - 7/1/2016 12:56:35 AM>
 // ==========================================================================
 //  Version:  1.5.2
 //  Machine:  CABINET
-//  DateTime: 6/30/2016 10:34:06 PM
+//  DateTime: 7/1/2016 1:09:59 AM
 //  UserName: Andrey
 // ==========================================================================
 
@@ -31,8 +31,6 @@
 
 			public ExpressionList el;
 	   }
-
-%start main
 
 %token <s> STRING, NAME
 %token <n> NUMBER
@@ -69,50 +67,23 @@
 %type <qn>	qualifiedName
 
 
-%%
-// Warning: NonTerminal symbol "division" is unreachable
-// Warning: NonTerminal symbol "multiplication" is unreachable
-// Warning: NonTerminal symbol "exponentiation" is unreachable
-// Warning: NonTerminal symbol "simpleExpression" is unreachable
-// Warning: NonTerminal symbol "arithmeticNegation" is unreachable
-// Warning: NonTerminal symbol "quantorOp" is unreachable
-// Warning: NonTerminal symbol "comparisonOp" is unreachable
-// Warning: NonTerminal symbol "textualExpressions" is unreachable
-// Warning: NonTerminal symbol "subtraction" is unreachable
-// Warning: NonTerminal symbol "addition" is unreachable
-// Warning: NonTerminal symbol "contextEntries" is unreachable
-// Warning: NonTerminal symbol "inPart" is unreachable
-// Warning: NonTerminal symbol "nameList" is unreachable
-// Warning: NonTerminal symbol "key" is unreachable
-// Warning: NonTerminal symbol "contextEntry" is unreachable
-// Warning: NonTerminal symbol "namedParameters" is unreachable
-// Warning: NonTerminal symbol "parameters" is unreachable
-// Warning: NonTerminal symbol "expressionList" is unreachable
-// Warning: NonTerminal symbol "inParts" is unreachable
-// Warning: NonTerminal symbol "namedParameter" is unreachable
-// Warning: NonTerminal symbol "forExpression" is unreachable
-// Warning: NonTerminal symbol "functionDefinition" is unreachable
-// Warning: NonTerminal symbol "ifExpression" is unreachable
-// Warning: NonTerminal symbol "disjunction" is unreachable
-// Warning: NonTerminal symbol "quantifiedExpression" is unreachable
-// Warning: NonTerminal symbol "functionInvocation" is unreachable
-// Warning: NonTerminal symbol "literal" is unreachable
-// Warning: NonTerminal symbol "expression" is unreachable
-// Warning: NonTerminal symbol "boxedExpression" is unreachable
-// Warning: NonTerminal symbol "textualExpression" is unreachable
-// Warning: NonTerminal symbol "positiveUnaryTest" is unreachable
-// Warning: NonTerminal symbol "positiveUnaryTests" is unreachable
-// Warning: NonTerminal symbol "instanceOf" is unreachable
-// Warning: NonTerminal symbol "simpleExpressions" is unreachable
-// Warning: NonTerminal symbol "comparison" is unreachable
-// Warning: NonTerminal symbol "arithmeticExpression" is unreachable
-// Warning: NonTerminal symbol "conjunction" is unreachable
-// Warning: NonTerminal symbol "pathExpression" is unreachable
-// Warning: NonTerminal symbol "unaryTests" is unreachable
-// Warning: NonTerminal symbol "filterExpression" is unreachable
-// -----------------------------------------------------------------
+%token UNARY_START
+%token EXPRESSION_START
+/* this is to allow to start from different rules each time
+*/
 
-main: simpleUnaryTests		{ Debug("main/simpleUnaryTests");	Root = $1; }
+%start main
+
+
+%%
+// Warning: NonTerminal symbol "textualExpressions" is unreachable
+// Warning: NonTerminal symbol "simpleExpression" is unreachable
+// Warning: NonTerminal symbol "unaryTests" is unreachable
+// Warning: NonTerminal symbol "simpleExpressions" is unreachable
+// ---------------------------------------------------------------
+
+main: UNARY_START simpleUnaryTests		{ Debug("main/unary");		Root = $1; }
+	| EXPRESSION_START expression		{ Debug("main/expression");	Root = $1; }
 	;
 
 // 1

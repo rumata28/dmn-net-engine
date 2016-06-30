@@ -7,7 +7,6 @@
 
 %option stack, minimize, parser, verbose, persistbuffer, noembedbuffers 
 
-%s DefaultCondition
 %x LineComment
 %x BlockComment
 
@@ -22,11 +21,20 @@ L					[A-Z_a-z]
 
 /* Scanner body */
 
-"//"						{ StartLineComment(); }
-<LineComment>Eol			{ EndLineComment(); }
+%{
+if (StartToken != 0)
+{
+	int t = StartToken;
+	StartToken = 0;
+	return t;
+}
+%}
 
-"/*"						{ StartBlockComment(); }
-<BlockComment>"*/"			{ EndBlockComment(); }
+"//"						{ BEGIN(LineComment); }
+<LineComment>Eol			{ BEGIN(INITIAL); }
+
+"/*"						{ BEGIN(BlockComment); }
+<BlockComment>"*/"			{ BEGIN(INITIAL); }
 
 ({D}*\.)?{D}+			{ Debug(); GetNumber();	return (int) Token.NUMBER; }
 {D}+\.{D}*				{ Debug(); GetNumber();	return (int) Token.NUMBER; }

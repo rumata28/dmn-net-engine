@@ -4,6 +4,8 @@ namespace Softengi.DmnEngine.Parser
 {
 	internal partial class FeelScanner
 	{
+		public int StartToken;
+
 		public override void yyerror(string format, params object[] args)
 		{
 			base.yyerror(format, args);
@@ -14,26 +16,6 @@ namespace Softengi.DmnEngine.Parser
 		private void UnexpectedCharacter()
 		{
 			throw new Exception($"Unexpected character: '{yytext}'");
-		}
-
-		private void StartLineComment()
-		{
-			BEGIN(LineComment);
-		}
-
-		private void EndLineComment()
-		{
-			BEGIN(DefaultCondition);
-		}
-
-		private void StartBlockComment()
-		{
-			BEGIN(BlockComment);
-		}
-
-		private void EndBlockComment()
-		{
-			BEGIN(DefaultCondition);
 		}
 
 		static private void Debug(string message, params object[] messageParams)

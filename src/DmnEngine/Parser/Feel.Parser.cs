@@ -13,14 +13,14 @@ namespace Softengi.DmnEngine.Parser
 
 		public INode Root;
 
-		public void Parse(string s)
+		public void Parse(string s, Token start = 0)
 		{
-			Parse(new MemoryStream(Encoding.Default.GetBytes(s)));
+			Parse(new MemoryStream(Encoding.Default.GetBytes(s)), start);
 		}
 
-		public void Parse(Stream stream)
+		public void Parse(Stream stream, Token start = 0)
 		{
-			Scanner = new FeelScanner(stream);
+			Scanner = new FeelScanner(stream) {StartToken = (int) start};
 			Parse();
 		}
 

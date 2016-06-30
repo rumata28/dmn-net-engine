@@ -6,9 +6,9 @@
 //
 //  GPLEX Version:  1.2.2
 //  Machine:  CABINET
-//  DateTime: 6/30/2016 10:34:06 PM
+//  DateTime: 7/1/2016 1:09:58 AM
 //  UserName: Andrey
-//  GPLEX input file <Parser\Feel.Language.analyzer.lex - 6/30/2016 10:34:06 PM>
+//  GPLEX input file <Parser\Feel.Language.analyzer.lex - 7/1/2016 1:09:57 AM>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: verbose, parser, stack, minimize
@@ -131,9 +131,8 @@ namespace Softengi.DmnEngine.Parser
         const int eofNum = 0;
         const int goStart = -1;
         const int INITIAL = 0;
-        const int DefaultCondition = 1;
-        const int LineComment = 2;
-        const int BlockComment = 3;
+        const int LineComment = 1;
+        const int BlockComment = 2;
 
 #region user code
 #endregion user code
@@ -167,7 +166,7 @@ namespace Softengi.DmnEngine.Parser
         }
     };
 
-    static int[] startState = new int[] {125, 125, 128, 131, 0};
+    static int[] startState = new int[] {125, 128, 131, 0};
 
     static Table[] NxS = new Table[133] {
 /* NxS[   0] */ new Table(0, 0, 0, null), // Shortest string ""
@@ -1254,6 +1253,14 @@ int NextState() {
         // ============== The main tokenizer code =================
 
         int Scan() {
+// User-specified prolog to scan()
+if (StartToken != 0)
+{
+	int t = StartToken;
+	StartToken = 0;
+	return t;
+}
+// End, user-specified prolog
                 for (; ; ) {
                     int next;              // next state to enter
 #if LEFTANCHORS
@@ -1515,10 +1522,10 @@ Debug(); GetNumber();	return (int) Token.NUMBER;
 Debug("numWithDot: {0}", yytext); yyless(yytext.Length - 2); Debug(); GetNumber();	return (int) Token.NUMBER;
             break;
         case 116: // Recognized '"/*"',	Shortest string "/*"
-StartBlockComment();
+BEGIN(BlockComment);
             break;
         case 117: // Recognized '"//"',	Shortest string "//"
-StartLineComment();
+BEGIN(LineComment);
             break;
         case 118: // Recognized '".."',	Shortest string ".."
 Debug();		return (int) Token.RANGE;
@@ -1533,10 +1540,10 @@ Debug(); GetString();	return (int) Token.STRING;
 Debug();		return (int) Token.C_NE;
             break;
         case 123: // In <LineComment> Recognized 'Eol',	Shortest string "Eol"
-EndLineComment();
+BEGIN(INITIAL);
             break;
         case 124: // In <BlockComment> Recognized '"*/"',	Shortest string "*/"
-EndBlockComment();
+BEGIN(INITIAL);
             break;
         default:
             break;

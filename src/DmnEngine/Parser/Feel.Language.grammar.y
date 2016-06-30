@@ -21,8 +21,6 @@
 			public ExpressionList el;
 	   }
 
-%start main
-
 %token <s> STRING, NAME
 %token <n> NUMBER
 %token <b> BOOLEAN
@@ -58,9 +56,18 @@
 %type <qn>	qualifiedName
 
 
+%token UNARY_START
+%token EXPRESSION_START
+/* this is to allow to start from different rules each time
+*/
+
+%start main
+
+
 %%
 
-main: simpleUnaryTests		{ Debug("main/simpleUnaryTests");	Root = $1; }
+main: UNARY_START simpleUnaryTests		{ Debug("main/unary");		Root = $1; }
+	| EXPRESSION_START expression		{ Debug("main/expression");	Root = $1; }
 	;
 
 // 1
