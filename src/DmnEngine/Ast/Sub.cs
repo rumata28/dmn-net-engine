@@ -2,13 +2,13 @@ namespace Softengi.DmnEngine.Ast
 {
 	public class Sub : IExpression
 	{
-		public Sub(IExpression left, IExpression right)
+		public Sub(IExpression subtrahend, IExpression minuend)
 		{
-			Left = left;
-			Right = right;
+			Subtrahend = subtrahend;
+			Minuend = minuend;
 		}
 
-		public IExpression Left, Right;
+		public IExpression Subtrahend, Minuend;
 
 		public void Accept(AstVisitor v)
 		{

@@ -42,6 +42,9 @@ namespace Softengi.DmnEngine.Evaluation
 			Number = months;
 		}
 
+		public bool IsNull => ValueType == EvaluationValueType.Null;
+		public bool IsNumber => ValueType == EvaluationValueType.Number;
+
 		static public EvaluationValue Years(int years, int months = 0)
 		{
 			return Months(years * 12 + months);

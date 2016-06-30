@@ -17,11 +17,11 @@
 		public abstract void VisitOr(Or or);
 		public abstract void VisitAnd(And and);
 
-		public abstract void VisitAdd(Add neg);
-		public abstract void VisitSub(Sub neg);
-		public abstract void VisitMul(Mul neg);
-		public abstract void VisitDiv(Div neg);
-		public abstract void VisitPow(Pow neg);
+		public abstract void VisitAdd(Add add);
+		public abstract void VisitSub(Sub sub);
+		public abstract void VisitMul(Mul mul);
+		public abstract void VisitDiv(Div div);
+		public abstract void VisitPow(Pow pow);
 		public abstract void VisitNeg(Neg neg);
 
 		public abstract void VisitFunctionInvocation(FunctionInvocation funcInv);

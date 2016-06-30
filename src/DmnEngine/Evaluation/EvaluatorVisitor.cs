@@ -107,29 +107,34 @@ namespace Softengi.DmnEngine.Evaluation
 			_stack.Push(and.Items.All(l => AcceptAndPop(l) == true));
 		}
 
-		public override void VisitAdd(Add neg)
+		public override void VisitAdd(Add add)
 		{
-			throw new NotImplementedException();
+			var r = FeelMath.Add(AcceptAndPop(add.Addend1), AcceptAndPop(add.Addend2));
+			_stack.Push(r);
 		}
 
-		public override void VisitSub(Sub neg)
+		public override void VisitSub(Sub sub)
 		{
-			throw new NotImplementedException();
+			var r = FeelMath.Sub(AcceptAndPop(sub.Subtrahend), AcceptAndPop(sub.Minuend));
+			_stack.Push(r);
 		}
 
-		public override void VisitMul(Mul neg)
+		public override void VisitMul(Mul mul)
 		{
-			throw new NotImplementedException();
+			var r = FeelMath.Mul(AcceptAndPop(mul.Multiplicand), AcceptAndPop(mul.Multiplier));
+			_stack.Push(r);
 		}
 
-		public override void VisitDiv(Div neg)
+		public override void VisitDiv(Div div)
 		{
-			throw new NotImplementedException();
+			var r = FeelMath.Div(AcceptAndPop(div.Dividend), AcceptAndPop(div.Divisor));
+			_stack.Push(r);
 		}
 
-		public override void VisitPow(Pow neg)
+		public override void VisitPow(Pow pow)
 		{
-			throw new NotImplementedException();
+			 var r = FeelMath.Power(AcceptAndPop(pow.Base), AcceptAndPop(pow.Exponent));
+			_stack.Push(r);
 		}
 
 		public override void VisitQualifiedName(QualifiedName qn)
@@ -165,7 +170,11 @@ namespace Softengi.DmnEngine.Evaluation
 
 		public override void VisitTimeSpanLiteral(TimeSpanLiteral timeSpanLiteral)
 		{
-			_stack.Push(timeSpanLiteral.Duration.Value);
+			if (timeSpanLiteral.Duration != null)
+				_stack.Push(timeSpanLiteral.Duration.Value);
+			else if (timeSpanLiteral.Months != null)
+				_stack.Push(EvaluationValue.Months(timeSpanLiteral.Months.Value));
+			else _stack.Push(EvaluationValue.Null);
 		}
 
 		public EvaluationValue ContextValue { get; set; }

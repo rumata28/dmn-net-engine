@@ -69,6 +69,7 @@
     <Compile Include="Ast\QuantorOperator.cs" />
     <Compile Include="Ast\Sub.cs" />
     <Compile Include="DmnEngine.cs" />
+    <Compile Include="Evaluation\FeelMath.cs" />
     <Compile Include="GplexBuffers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ast\DateTimeLiteral.cs" />
