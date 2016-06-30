@@ -5,10 +5,10 @@
 //  See accompanying file GPLEXcopyright.rtf.
 //
 //  GPLEX Version:  1.2.2
-//  Machine:  BEZUGLIY-10
-//  DateTime: 6/30/2016 6:35:10 PM
-//  UserName: rumata
-//  GPLEX input file <Parser\Feel.Language.analyzer.lex - 6/30/2016 6:11:32 PM>
+//  Machine:  CABINET
+//  DateTime: 6/30/2016 10:04:38 PM
+//  UserName: Andrey
+//  GPLEX input file <Parser\Feel.Language.analyzer.lex - 6/30/2016 9:55:27 PM>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: verbose, parser, stack, minimize

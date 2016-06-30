@@ -3,10 +3,10 @@
 // (see accompanying GPPGcopyright.rtf)
 
 // GPPG version 1.5.2
-// Machine:  BEZUGLIY-10
-// DateTime: 6/30/2016 6:35:11 PM
-// UserName: rumata
-// Input file <Parser\Feel.Language.grammar.y - 6/30/2016 6:35:06 PM>
+// Machine:  CABINET
+// DateTime: 6/30/2016 10:04:38 PM
+// UserName: Andrey
+// Input file <Parser\Feel.Language.grammar.y - 6/30/2016 10:02:09 PM>
 
 // options: no-lines gplex
 
@@ -571,16 +571,16 @@ internal partial class FeelParser: ShiftReduceParser<ValueType, LexLocation>
 { Debug("conjunction");  CurrentSemanticValue.ex = new And(ValueStack[ValueStack.Depth-3].ex, ValueStack[ValueStack.Depth-1].ex); }
         break;
       case 98: // comparison -> expression, comparisonOp, expression
-{ Debug("comparision/cmp");	 CurrentSemanticValue.lg = new Comparison(ValueStack[ValueStack.Depth-2].co, ValueStack[ValueStack.Depth-3].ex, ValueStack[ValueStack.Depth-1].ex); }
+{ Debug("comparision/cmp");	 CurrentSemanticValue.lg = new Comparison(ValueStack[ValueStack.Depth-2].co, ValueStack[ValueStack.Depth-3].ex, ValueStack[ValueStack.Depth-1].ex);		 }
         break;
       case 99: // comparison -> expression, BETWEEN, expression, AND, expression
-{ Debug("comparision/btw");	 CurrentSemanticValue.lg = new Between(ValueStack[ValueStack.Depth-5].ex, ValueStack[ValueStack.Depth-3].ex ,ValueStack[ValueStack.Depth-1].ex);    }
+{ Debug("comparision/btw");	 CurrentSemanticValue.lg = new Range(true, true, ValueStack[ValueStack.Depth-3].ex, ValueStack[ValueStack.Depth-1].ex, ValueStack[ValueStack.Depth-5].ex); }
         break;
       case 100: // comparison -> expression, IN, positiveUnaryTests
-{ Debug("comparision/in");	 CurrentSemanticValue.lg = new In(ValueStack[ValueStack.Depth-3].ex, ValueStack[ValueStack.Depth-1].lg);			  }
+{ Debug("comparision/in");	 CurrentSemanticValue.lg = new In(ValueStack[ValueStack.Depth-3].ex, ValueStack[ValueStack.Depth-1].lg);					 }
         break;
       case 101: // comparison -> expression, IN, P_OPEN, positiveUnaryTests, P_CLOSE
-{ Debug("comparision/P_in"); CurrentSemanticValue.lg = new In(ValueStack[ValueStack.Depth-5].ex, ValueStack[ValueStack.Depth-2].lg);			  }
+{ Debug("comparision/P_in"); CurrentSemanticValue.lg = new In(ValueStack[ValueStack.Depth-5].ex, ValueStack[ValueStack.Depth-2].lg);					 }
         break;
       case 102: // comparisonOp -> C_NE
 { CurrentSemanticValue.co = ComparisonOperator.NotEqual;			  }

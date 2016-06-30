@@ -280,10 +280,10 @@ disjunction: expression OR expression	{ Debug("disjunction");  $$ = new Or($1, $
 conjunction: expression AND expression	{ Debug("conjunction");  $$ = new And($1, $3); };
 
 // 51
-comparison:	  expression comparisonOp expression				{ Debug("comparision/cmp");	 $$ = new Comparison($2, $1, $3); }
-			| expression BETWEEN expression AND expression		{ Debug("comparision/btw");	 $$ = new Between($1, $3 ,$5);    }
-			| expression IN positiveUnaryTests					{ Debug("comparision/in");	 $$ = new In($1, $3);			  }
-			| expression IN P_OPEN positiveUnaryTests P_CLOSE	{ Debug("comparision/P_in"); $$ = new In($1, $4);			  }
+comparison:	  expression comparisonOp expression				{ Debug("comparision/cmp");	 $$ = new Comparison($2, $1, $3);		 }
+			| expression BETWEEN expression AND expression		{ Debug("comparision/btw");	 $$ = new Range(true, true, $3, $5, $1); }
+			| expression IN positiveUnaryTests					{ Debug("comparision/in");	 $$ = new In($1, $3);					 }
+			| expression IN P_OPEN positiveUnaryTests P_CLOSE	{ Debug("comparision/P_in"); $$ = new In($1, $4);					 }
 			;
 
 // 51

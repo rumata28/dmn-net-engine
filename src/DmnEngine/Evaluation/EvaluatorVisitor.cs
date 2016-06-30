@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 using Softengi.DmnEngine.Ast;
@@ -15,7 +16,12 @@ namespace Softengi.DmnEngine.Evaluation
 
 		public override void VisitIf(If ifExpression)
 		{
-			throw new NotImplementedException();
+			var conditionResult = AcceptAndPop(ifExpression.Condition);
+			_stack.Push(
+				conditionResult
+					? AcceptAndPop(ifExpression.ThenExpression)
+					: AcceptAndPop(ifExpression.ElseExpression)
+				);
 		}
 
 		public override void VisitComparison(Comparison comparison)
@@ -37,13 +43,11 @@ namespace Softengi.DmnEngine.Evaluation
 				);
 		}
 
-		public override void VisitBetween(Between between)
+		public override void VisitIn(In inExpression)
 		{
-			throw new NotImplementedException();
-		}
+			var value = AcceptAndPop(inExpression.Value);
+			var list = AcceptAndPop(inExpression.Tests);
 
-		public override void VisitIn(In @in)
-		{
 			throw new NotImplementedException();
 		}
 
@@ -63,6 +67,16 @@ namespace Softengi.DmnEngine.Evaluation
 		}
 
 		public override void VisitNeg(Neg neg)
+		{
+			var result = AcceptAndPop(neg.Item);
+			if (result.ValueType != EvaluationValue.EvaluationValueType.Number)
+				throw new EvaluateException(
+					$"Arithmetic negation is not supported for {result.ValueType} data type.  A numbers is expected.");
+
+			_stack.Push(-result);
+		}
+
+		public override void VisitFunctionInvocation(FunctionInvocation funcInv)
 		{
 			throw new NotImplementedException();
 		}
@@ -90,7 +104,7 @@ namespace Softengi.DmnEngine.Evaluation
 
 		public override void VisitAnd(And and)
 		{
-			throw new NotImplementedException();
+			_stack.Push(and.Items.All(l => AcceptAndPop(l) == true));
 		}
 
 		public override void VisitAdd(Add neg)
@@ -154,6 +168,8 @@ namespace Softengi.DmnEngine.Evaluation
 			_stack.Push(timeSpanLiteral.Duration.Value);
 		}
 
+		public EvaluationValue ContextValue { get; set; }
+
 		static private ComparisonOperator ComparisonOperatorForRange(bool open)
 		{
 			return open ? ComparisonOperator.LessThanOrEqual : ComparisonOperator.LessThan;
@@ -166,6 +182,5 @@ namespace Softengi.DmnEngine.Evaluation
 		}
 
 		private readonly Stack<EvaluationValue> _stack = new Stack<EvaluationValue>();
-		public EvaluationValue ContextValue { get; set; }
 	}
 }

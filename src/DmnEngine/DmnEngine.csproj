@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="Ast\Add.cs" />
     <Compile Include="Ast\And.cs" />
-    <Compile Include="Ast\Between.cs" />
     <Compile Include="Ast\ContextEntryList.cs" />
     <Compile Include="Ast\Div.cs" />
     <Compile Include="Ast\ExpressionList.cs" />

@@ -7,8 +7,7 @@
 
 		public abstract void VisitComparison(Comparison comparison);
 		public abstract void VisitRange(Range range);
-		public abstract void VisitBetween(Between between);
-		public abstract void VisitIn(In @in);
+		public abstract void VisitIn(In inExpression);
 		public abstract void VisitInstanceOf(InstanceOf instanceOf);
 		public abstract void VisitInPart(InPart inPart);
 
