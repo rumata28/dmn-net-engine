@@ -1,4 +1,5 @@
 ﻿using Softengi.DmnEngine.Evaluation;
+using Softengi.DmnEngine.Parser;
 using Softengi.DmnEngine.XmlTypes;
 
 namespace Softengi.DmnEngine
@@ -10,14 +11,13 @@ namespace Softengi.DmnEngine
 			_definitions = definitions;
 		}
 
-		public EvaluationValue EvaluateSFeel(string unaryTests, EvaluationValue value)
+		static public EvaluationValue EvaluateUnaryTest(string unaryTests, EvaluationValue value)
 		{
-			var parser = new Parsers.SFeelParser();
+			var parser = new FeelParser();
 			parser.Parse(unaryTests);
 			var root = parser.Root;
 
-			var evalVisitor = new EvaluatorVisitor();
-			evalVisitor.ContextValue = value;
+			var evalVisitor = new EvaluatorVisitor {ContextValue = value};
 			root.Accept(evalVisitor);
 			var result = evalVisitor.PopResult();
 

@@ -1,16 +1,16 @@
 using NUnit.Framework;
 
-namespace DmnEngine.Tests.SFeel
+namespace Softengi.DmnEngine.Tests.Feel
 {
 	[TestFixture]
-	public class NumericUnaryComparisonsTests : SfeelTester
+	public class NumericUnaryComparisonsTests : FeelTester
 	{
 		[TestCase(20, true)]
 		[TestCase(10.1, true)]
 		[TestCase(10, false)]
 		public void Test_GreaterThan(decimal value, bool expectation)
 		{
-			ExpectSfeel(">10", value, expectation);
+			ExpectFeel(">10", value, expectation);
 		}
 
 		[TestCase(20, false)]
@@ -18,7 +18,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(10, true)]
 		public void Test_not_GreaterThan(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(>10)", value, expectation);
+			ExpectFeel("not(>10)", value, expectation);
 		}
 
 		[TestCase(20, true)]
@@ -26,7 +26,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(9.999, false)]
 		public void Test_GreaterThanOrEqual(decimal value, bool expectation)
 		{
-			ExpectSfeel(">=10", value, expectation);
+			ExpectFeel(">=10", value, expectation);
 		}
 
 		[TestCase(20, false)]
@@ -34,7 +34,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(9.999, true)]
 		public void Test_not_GreaterThanOrEqual(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(>=10)", value, expectation);
+			ExpectFeel("not(>=10)", value, expectation);
 		}
 
 		[TestCase(20, false)]
@@ -44,7 +44,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-20, true)]
 		public void Test_LessThan(decimal value, bool expectation)
 		{
-			ExpectSfeel("<10", value, expectation);
+			ExpectFeel("<10", value, expectation);
 		}
 
 		[TestCase(20, true)]
@@ -54,7 +54,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-20, false)]
 		public void Test_not_LessThan(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(<10)", value, expectation);
+			ExpectFeel("not(<10)", value, expectation);
 		}
 
 		[TestCase(20, false)]
@@ -64,7 +64,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-20, true)]
 		public void Test_LessThanOrEqual(decimal value, bool expectation)
 		{
-			ExpectSfeel("<=10", value, expectation);
+			ExpectFeel("<=10", value, expectation);
 		}
 
 		[TestCase(20, true)]
@@ -74,7 +74,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-20, false)]
 		public void Test_not_LessThanOrEqual(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(<=10)", value, expectation);
+			ExpectFeel("not(<=10)", value, expectation);
 		}
 
 		[TestCase(10.1, false)]
@@ -83,7 +83,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-10, false)]
 		public void Test_Equal(decimal value, bool expectation)
 		{
-			ExpectSfeel("10", value, expectation);
+			ExpectFeel("10", value, expectation);
 		}
 
 		[TestCase(10.1, true)]
@@ -92,7 +92,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-10, true)]
 		public void Test_not_Equal(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(10)", value, expectation);
+			ExpectFeel("not(10)", value, expectation);
 		}
 
 		[TestCase("10", 10, true)]
@@ -109,7 +109,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase("-000.100000", -.1, true)]
 		public void Test_Formats(string sfeel, decimal value, bool expectation)
 		{
-			ExpectSfeel(sfeel, value, expectation);
+			ExpectFeel(sfeel, value, expectation);
 		}
 
 		[TestCase(0, true)]
@@ -121,7 +121,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-10.01, true)]
 		public void Test_CompareList(decimal value, bool expectation)
 		{
-			ExpectSfeel(">10,<-10,0,1", value, expectation);
+			ExpectFeel(">10,<-10,0,1", value, expectation);
 		}
 
 		[TestCase(0, false)]
@@ -133,7 +133,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-10.01, false)]
 		public void Test_not_CompareList(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(>10,<-10,0,1)", value, expectation);
+			ExpectFeel("not(>10,<-10,0,1)", value, expectation);
 		}
 
 		[TestCase(-5.01, false)]
@@ -143,7 +143,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(5.01, false)]
 		public void Test_Range_Open_Open(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5..5]", value, expectation);
+			ExpectFeel("[-5..5]", value, expectation);
 		}
 
 		[TestCase(-5.001, false)]
@@ -152,7 +152,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(0.51, false)]
 		public void Test_Range_vs_DecimalPoint(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5...5]", value, expectation);
+			ExpectFeel("[-5...5]", value, expectation);
 		}
 
 		[TestCase(-5.501, false)]
@@ -161,13 +161,13 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(-1.009, false)]
 		public void Test_Range_NegativeEnd(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5.5..-1.1]", value, expectation);
+			ExpectFeel("[-5.5..-1.1]", value, expectation);
 		}
 
 		[Test]
 		public void Test_Spaces()
 		{
-			ExpectSfeel("	 [	-  5.5    ..	 -   1.1 ] ", -5.501m, false);
+			ExpectFeel("	 [	-  5.5    ..	 -   1.1 ] ", -5.501m, false);
 		}
 
 		[TestCase(-5.01, false)]
@@ -182,7 +182,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(5.01, false)]
 		public void Test_Range_Open_Close(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5..5)", value, expectation);
+			ExpectFeel("[-5..5)", value, expectation);
 		}
 
 		[TestCase(-5.01, false)]
@@ -197,7 +197,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(5.01, false)]
 		public void Test_Range_Close_Open(decimal value, bool expectation)
 		{
-			ExpectSfeel("(-5..5]", value, expectation);
+			ExpectFeel("(-5..5]", value, expectation);
 		}
 
 		[TestCase(-5.01, false)]
@@ -207,7 +207,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(5.01, false)]
 		public void Test_Range_Close_Close(decimal value, bool expectation)
 		{
-			ExpectSfeel("(-5..5)", value, expectation);
+			ExpectFeel("(-5..5)", value, expectation);
 		}
 
 		[TestCase(-5.001, true)]
@@ -216,7 +216,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(0.51, true)]
 		public void Test_not_Range(decimal value, bool expectation)
 		{
-			ExpectSfeel("not([-5...5])", value, expectation);
+			ExpectFeel("not([-5...5])", value, expectation);
 		}
 
 		[TestCase(-5.01, false)]
@@ -228,7 +228,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(2.01, false)]
 		public void Test_Range_List(decimal value, bool expectation)
 		{
-			ExpectSfeel("[-5..-4],[1..2]", value, expectation);
+			ExpectFeel("[-5..-4],[1..2]", value, expectation);
 		}
 
 		[TestCase(-5.01, true)]
@@ -240,7 +240,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(2.01, true)]
 		public void Test_not_Range_List(decimal value, bool expectation)
 		{
-			ExpectSfeel("not([-5..-4],[1..2])", value, expectation);
+			ExpectFeel("not([-5..-4],[1..2])", value, expectation);
 		}
 
 		[TestCase(-10, true)]
@@ -257,7 +257,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(10.001, true)]
 		public void Test_combined_Range(decimal value, bool expectation)
 		{
-			ExpectSfeel("<=-10,[-5..-4],0,[1..2],>10", value, expectation);
+			ExpectFeel("<=-10,[-5..-4],0,[1..2],>10", value, expectation);
 		}
 
 		[TestCase(-10, false)]
@@ -274,7 +274,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(10.001, false)]
 		public void Test_not_combined_Range(decimal value, bool expectation)
 		{
-			ExpectSfeel("not(<=-10,[-5..-4],0,[1..2],>10)", value, expectation);
+			ExpectFeel("not(<=-10,[-5..-4],0,[1..2],>10)", value, expectation);
 		}
 	}
 }

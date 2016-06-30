@@ -4,11 +4,11 @@ using System.Text;
 
 using Softengi.DmnEngine.Ast;
 
-namespace Softengi.DmnEngine.Parsers
+namespace Softengi.DmnEngine.Parser
 {
-	internal partial class SFeelParser
+	internal partial class FeelParser
 	{
-		public SFeelParser() : base(null)
+		public FeelParser() : base(null)
 		{}
 
 		public INode Root;
@@ -20,7 +20,7 @@ namespace Softengi.DmnEngine.Parsers
 
 		public void Parse(Stream stream)
 		{
-			Scanner = new SFeelScanner(stream);
+			Scanner = new FeelScanner(stream);
 			Parse();
 		}
 

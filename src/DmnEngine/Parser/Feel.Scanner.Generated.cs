@@ -5,10 +5,10 @@
 //  See accompanying file GPLEXcopyright.rtf.
 //
 //  GPLEX Version:  1.2.2
-//  Machine:  CABINET
-//  DateTime: 6/28/2016 9:51:57 PM
-//  UserName: Andrey
-//  GPLEX input file <Parsers\SFeel.Language.analyzer.lex - 6/28/2016 9:51:57 PM>
+//  Machine:  BEZUGLIY-10
+//  DateTime: 6/30/2016 1:49:16 PM
+//  UserName: rumata
+//  GPLEX input file <Parser\Feel.Language.analyzer.lex - 6/30/2016 1:46:53 PM>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: verbose, parser, stack, minimize
@@ -35,7 +35,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using QUT.GplexBuffers;
 
-namespace Softengi.DmnEngine.Parsers
+namespace Softengi.DmnEngine.Parser
 {   
     /// <summary>
     /// Summary Canonical example of GPLEX automaton
@@ -88,7 +88,7 @@ namespace Softengi.DmnEngine.Parsers
     // If the compiler can't find the scanner base class maybe you
     // need to run GPPG with the /gplex option, or GPLEX with /noparser
 #if BABEL
-     internal sealed partial class SFeelScanner : ScanBase, IColorScan
+     internal sealed partial class FeelScanner : ScanBase, IColorScan
     {
         private ScanBuff buffer;
         int currentScOrd;  // start condition ordinal
@@ -105,7 +105,7 @@ namespace Softengi.DmnEngine.Parsers
                    currentStart = startState[value]; }
         }
 #else  // BABEL
-     internal sealed partial class SFeelScanner : ScanBase
+     internal sealed partial class FeelScanner : ScanBase
     {
         private ScanBuff buffer;
         int currentScOrd;  // start condition ordinal
@@ -499,12 +499,12 @@ int NextState() {
         // =================== End Nested classes =======================
 
 #if !NOFILES
-     internal SFeelScanner(Stream file) {
+     internal FeelScanner(Stream file) {
             SetSource(file); // no unicode option
         }   
 #endif // !NOFILES
 
-     internal SFeelScanner() { }
+     internal FeelScanner() { }
 
         private int readPos;
 

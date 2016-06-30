@@ -1,8 +1,8 @@
 using System;
 
-namespace Softengi.DmnEngine.Parsers
+namespace Softengi.DmnEngine.Parser
 {
-	internal partial class SFeelScanner
+	internal partial class FeelScanner
 	{
 		public override void yyerror(string format, params object[] args)
 		{

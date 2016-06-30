@@ -2,16 +2,16 @@
 
 using NUnit.Framework;
 
-namespace DmnEngine.Tests.SFeel
+namespace Softengi.DmnEngine.Tests.Feel
 {
 	[TestFixture]
-	public class DaysAndHoursDurationUnaryComparisonsTests : SfeelTester
+	public class DaysAndHoursDurationUnaryComparisonsTests : FeelTester
 	{
 		[TestCase(26, 0, false)]
 		[TestCase(26, 1, true)]
 		public void Test_GreaterThan(int hours, int ms, bool expected)
 		{
-			ExpectSfeel(@">duration(""PT26H"")", TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)), expected);
+			ExpectFeel(@">duration(""PT26H"")", TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)), expected);
 		}
 
 		[TestCase(26, -1, false)]
@@ -19,14 +19,14 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(26, 1, true)]
 		public void Test_GreaterThanOrEqual(int hours, int ms, bool expected)
 		{
-			ExpectSfeel(@">=duration(""PT26H"")", TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)), expected);
+			ExpectFeel(@">=duration(""PT26H"")", TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)), expected);
 		}
 
 		[TestCase(26, -1, true)]
 		[TestCase(26, 0, false)]
 		public void Test_LessThan(int hours, int ms, bool expected)
 		{
-			ExpectSfeel(@"<duration(""PT26H"")", TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)), expected);
+			ExpectFeel(@"<duration(""PT26H"")", TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)), expected);
 		}
 
 		[TestCase(26, -1, true)]
@@ -34,7 +34,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(26, 1, false)]
 		public void Test_LessThanOrEqual(int hours, int ms, bool expected)
 		{
-			ExpectSfeel(@"<=duration(""PT26H"")", TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)), expected);
+			ExpectFeel(@"<=duration(""PT26H"")", TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)), expected);
 		}
 
 		[TestCase(20, true)]
@@ -44,37 +44,37 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(26, true)]
 		public void Test_List(int hours, bool expectEqual)
 		{
-			ExpectSfeel(@"duration(""PT26H""), duration(""P1D""), duration(""PT20H"")", TimeSpan.FromHours(hours), expectEqual);
+			ExpectFeel(@"duration(""PT26H""), duration(""P1D""), duration(""PT20H"")", TimeSpan.FromHours(hours), expectEqual);
 		}
 
 		[Test]
 		public void Test_Literal_Days()
 		{
-			ExpectSfeel(@"duration(""P1D"")", TimeSpan.FromDays(1), true);
+			ExpectFeel(@"duration(""P1D"")", TimeSpan.FromDays(1), true);
 		}
 
 		[Test]
 		public void Test_Literal_Days_negative()
 		{
-			ExpectSfeel(@"duration(""-P1D"")", TimeSpan.FromDays(-1), true);
+			ExpectFeel(@"duration(""-P1D"")", TimeSpan.FromDays(-1), true);
 		}
 
 		[Test]
 		public void Test_Literal_DaysHours()
 		{
-			ExpectSfeel(@"duration(""P1DT26H"")", TimeSpan.FromHours(50), true);
+			ExpectFeel(@"duration(""P1DT26H"")", TimeSpan.FromHours(50), true);
 		}
 
 		[Test]
 		public void Test_Literal_DaysHours_negative()
 		{
-			ExpectSfeel(@"duration(""-P1DT26H"")", TimeSpan.FromHours(-50), true);
+			ExpectFeel(@"duration(""-P1DT26H"")", TimeSpan.FromHours(-50), true);
 		}
 
 		[Test]
 		public void Test_Literal_DaysHoursMinutesSeconds()
 		{
-			ExpectSfeel(
+			ExpectFeel(
 				@"duration(""P1DT26H15M10S"")",
 				TimeSpan
 					.FromHours(50)
@@ -86,7 +86,7 @@ namespace DmnEngine.Tests.SFeel
 		[Test]
 		public void Test_Literal_DaysHoursSeconds_negative()
 		{
-			ExpectSfeel(
+			ExpectFeel(
 				@"duration(""-P1DT26H15M10S"")",
 				TimeSpan
 					.FromHours(-50)
@@ -98,37 +98,37 @@ namespace DmnEngine.Tests.SFeel
 		[Test]
 		public void Test_Literal_Hours()
 		{
-			ExpectSfeel(@"duration(""PT26H"")", TimeSpan.FromHours(26), true);
+			ExpectFeel(@"duration(""PT26H"")", TimeSpan.FromHours(26), true);
 		}
 
 		[Test]
 		public void Test_Literal_Hours_negative()
 		{
-			ExpectSfeel(@"duration(""-PT26H"")", TimeSpan.FromHours(-26), true);
+			ExpectFeel(@"duration(""-PT26H"")", TimeSpan.FromHours(-26), true);
 		}
 
 		[Test]
 		public void Test_Literal_Minutes()
 		{
-			ExpectSfeel(@"duration(""PT15M"")", TimeSpan.FromMinutes(15), true);
+			ExpectFeel(@"duration(""PT15M"")", TimeSpan.FromMinutes(15), true);
 		}
 
 		[Test]
 		public void Test_Literal_Minutes_negative()
 		{
-			ExpectSfeel(@"duration(""-PT15M"")", TimeSpan.FromMinutes(-15), true);
+			ExpectFeel(@"duration(""-PT15M"")", TimeSpan.FromMinutes(-15), true);
 		}
 
 		[Test]
 		public void Test_Literal_Seconds()
 		{
-			ExpectSfeel(@"duration(""PT10S"")", TimeSpan.FromSeconds(10), true);
+			ExpectFeel(@"duration(""PT10S"")", TimeSpan.FromSeconds(10), true);
 		}
 
 		[Test]
 		public void Test_Literal_Seconds_negative()
 		{
-			ExpectSfeel(@"duration(""-PT10S"")", TimeSpan.FromSeconds(-10), true);
+			ExpectFeel(@"duration(""-PT10S"")", TimeSpan.FromSeconds(-10), true);
 		}
 
 		[TestCase(20, false)]
@@ -138,7 +138,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(26, false)]
 		public void Test_not_List(int hours, bool expected)
 		{
-			ExpectSfeel(@"not(duration(""PT26H""), duration(""P1D""), duration(""PT20H""))", TimeSpan.FromHours(hours), expected);
+			ExpectFeel(@"not(duration(""PT26H""), duration(""P1D""), duration(""PT20H""))", TimeSpan.FromHours(hours), expected);
 		}
 
 		[TestCase(1, -1, false)]
@@ -147,7 +147,7 @@ namespace DmnEngine.Tests.SFeel
 		[TestCase(2, 1, false)]
 		public void Test_Range(int hours, int ms, bool expected)
 		{
-			ExpectSfeel(
+			ExpectFeel(
 				@"[duration(""PT1H"")..duration(""PT2H"")]",
 				TimeSpan.FromHours(hours).Add(TimeSpan.FromMilliseconds(ms)),
 				expected

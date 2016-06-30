@@ -1,15 +1,15 @@
 using NUnit.Framework;
 
-namespace DmnEngine.Tests.SFeel
+namespace Softengi.DmnEngine.Tests.Feel
 {
 	[TestFixture]
-	public class BooleanUnaryComparisonsTests : SfeelTester
+	public class BooleanUnaryComparisonsTests : FeelTester
 	{
 		[TestCase("true", true)]
 		[TestCase("false", false)]
 		public void Test_Literal(string sfeelExpression, bool expectedValue)
 		{
-			ExpectSfeel(sfeelExpression, expectedValue, true);
+			ExpectFeel(sfeelExpression, expectedValue, true);
 		}
 
 		[TestCase(">true")]

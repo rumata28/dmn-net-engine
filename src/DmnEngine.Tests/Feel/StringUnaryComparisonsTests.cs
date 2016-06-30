@@ -1,33 +1,33 @@
 using NUnit.Framework;
 
-namespace DmnEngine.Tests.SFeel
+namespace Softengi.DmnEngine.Tests.Feel
 {
 	[TestFixture]
-	public class StringUnaryComparisonsTests : SfeelTester
+	public class StringUnaryComparisonsTests : FeelTester
 	{
 		[Test]
 		public void Test_String()
 		{
-			ExpectSfeel(@"""a string""", "a string", true);
+			ExpectFeel(@"""a string""", "a string", true);
 		}
 
 		[Test]
 		public void Test_not()
 		{
-			ExpectSfeel(@"not(""a string"")", "a string", false);
+			ExpectFeel(@"not(""a string"")", "a string", false);
 		}
 
 		[Test]
 		public void Test_List()
 		{
-			ExpectSfeel(@"""a string"", ""string2""", "string2", true);
+			ExpectFeel(@"""a string"", ""string2""", "string2", true);
 		}
 
 		[TestCase("string2", false)]
 		[TestCase("string3", true)]
 		public void Test_not_List(string value, bool expectation)
 		{
-			ExpectSfeel(@"not(""a string"", ""string2"")", value, expectation);
+			ExpectFeel(@"not(""a string"", ""string2"")", value, expectation);
 		}
 
 		[TestCase(@">""a string""")]

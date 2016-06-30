@@ -3,10 +3,10 @@
 // (see accompanying GPPGcopyright.rtf)
 
 // GPPG version 1.5.2
-// Machine:  CABINET
-// DateTime: 6/28/2016 9:51:57 PM
-// UserName: Andrey
-// Input file <Parsers\SFeel.Language.grammar.y - 6/28/2016 9:51:12 PM>
+// Machine:  BEZUGLIY-10
+// DateTime: 6/30/2016 1:49:16 PM
+// UserName: rumata
+// Input file <Parser\Feel.Language.grammar.y - 6/30/2016 1:45:24 PM>
 
 // options: no-lines gplex
 
@@ -18,7 +18,7 @@ using System.Text;
 using QUT.Gppg;
 using Softengi.DmnEngine.Ast;
 
-namespace Softengi.DmnEngine.Parsers
+namespace Softengi.DmnEngine.Parser
 {
 internal enum Token {error=2,EOF=3,STRING=4,NAME=5,NUMBER=6,
     BOOLEAN=7,C_EQ=8,C_LT=9,C_LE=10,C_GT=11,C_GE=12,
@@ -58,7 +58,7 @@ internal class ScanObj {
 }
 
 [GeneratedCodeAttribute( "Gardens Point Parser Generator", "1.5.2")]
-internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
+internal partial class FeelParser: ShiftReduceParser<ValueType, LexLocation>
 {
 #pragma warning disable 649
   private static Dictionary<int, string> aliases;
@@ -72,7 +72,7 @@ internal partial class SFeelParser: ShiftReduceParser<ValueType, LexLocation>
       "intervalEnd", "qualifiedName", "$accept", "closeIntervalStart", "closeIntervalEnd", 
       };
 
-  static SFeelParser() {
+  static FeelParser() {
     states[0] = new State(new int[]{6,11,13,56,4,15,7,17,26,19,27,23,28,27,5,34,8,37,9,38,10,39,11,40,12,41,18,52,21,53,20,54,25,57,3,-2,22,-7,23,-15,24,-15},new int[]{-1,1,-2,3,-3,4,-4,55,-5,7,-6,8,-7,9,-8,10,-10,14,-9,16,-11,18,-15,31,-12,35,-13,42,-17,51});
     states[1] = new State(new int[]{3,2});
     states[2] = new State(-1);

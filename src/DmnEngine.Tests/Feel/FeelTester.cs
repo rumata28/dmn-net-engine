@@ -4,11 +4,11 @@ using NUnit.Framework;
 
 using Softengi.DmnEngine.Evaluation;
 
-namespace DmnEngine.Tests.SFeel
+namespace Softengi.DmnEngine.Tests.Feel
 {
-	public class SfeelTester : AssertionHelper
+	public class FeelTester : AssertionHelper
 	{
-		protected void ExpectSfeel(string sfeelExpression, EvaluationValue input, EvaluationValue expectedResult)
+		protected void ExpectFeel(string sfeelExpression, EvaluationValue input, EvaluationValue expectedResult)
 		{
 			var result = SFeelEval(sfeelExpression, input);
 			Expect(result.ValueType, EqualTo(expectedResult.ValueType));
@@ -36,10 +36,9 @@ namespace DmnEngine.Tests.SFeel
 			}
 		}
 
-		static protected EvaluationValue SFeelEval(string sfeelExpression, EvaluationValue input)
+		static protected EvaluationValue SFeelEval(string feelExpression, EvaluationValue input)
 		{
-			var dmnEngine = new Softengi.DmnEngine.DmnEngine(null);
-			return dmnEngine.EvaluateSFeel(sfeelExpression, input);
+			return DmnEngine.EvaluateUnaryTest(feelExpression, input);
 		}
 	}
 }
