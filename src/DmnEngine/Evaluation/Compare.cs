@@ -53,16 +53,20 @@ namespace Softengi.DmnEngine.Evaluation
 
 		static internal bool Booleans(ComparisonOperator comparisonOperator, bool left, bool right)
 		{
-			if (comparisonOperator != ComparisonOperator.Equal)
+			if (comparisonOperator != ComparisonOperator.Equal && comparisonOperator != ComparisonOperator.NotEqual)
 				throw new InvalidOperationException("Booleans could be compared for equality only.");
-			return left == right;
+
+			var equality = left == right;
+			return comparisonOperator == ComparisonOperator.Equal ? equality : !equality;
 		}
 
 		static internal bool Strings(ComparisonOperator comparisonOperator, string left, string right)
 		{
-			if (comparisonOperator != ComparisonOperator.Equal)
+			if (comparisonOperator != ComparisonOperator.Equal && comparisonOperator != ComparisonOperator.NotEqual)
 				throw new InvalidOperationException("Booleans could be compared for equality only.");
-			return left == right;
+
+			var equality = left == right;
+			return comparisonOperator == ComparisonOperator.Equal ? equality : !equality;
 		}
 
 		static internal bool Durations(ComparisonOperator comparisonOperator, TimeSpan left, TimeSpan right)
@@ -81,6 +85,8 @@ namespace Softengi.DmnEngine.Evaluation
 			{
 				case ComparisonOperator.Equal:
 					return compareResult == 0;
+				case ComparisonOperator.NotEqual:
+					return compareResult != 0;
 				case ComparisonOperator.GreaterThan:
 					return compareResult > 0;
 				case ComparisonOperator.GreaterThanOrEqual:

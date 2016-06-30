@@ -51,6 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ast\Add.cs" />
+    <Compile Include="Ast\And.cs" />
+    <Compile Include="Ast\Between.cs" />
+    <Compile Include="Ast\Div.cs" />
+    <Compile Include="Ast\Filter.cs" />
+    <Compile Include="Ast\IExpression.cs" />
+    <Compile Include="Ast\If.cs" />
+    <Compile Include="Ast\In.cs" />
+    <Compile Include="Ast\InstanceOf.cs" />
+    <Compile Include="Ast\Mul.cs" />
+    <Compile Include="Ast\Neg.cs" />
+    <Compile Include="Ast\Pow.cs" />
+    <Compile Include="Ast\QuantorOperator.cs" />
+    <Compile Include="Ast\Sub.cs" />
     <Compile Include="DmnEngine.cs" />
     <Compile Include="GplexBuffers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

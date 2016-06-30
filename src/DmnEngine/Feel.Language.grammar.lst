@@ -1,3 +1,14 @@
+
+// ==========================================================================
+//  GPPG error listing for yacc source file <Parser\Feel.Language.grammar.y - 6/30/2016 3:47:48 PM>
+// ==========================================================================
+//  Version:  1.5.2
+//  Machine:  BEZUGLIY-10
+//  DateTime: 6/30/2016 3:47:51 PM
+//  UserName: rumata
+// ==========================================================================
+
+
 %namespace Softengi.DmnEngine.Parser
 %partial
 %parsertype FeelParser
@@ -49,6 +60,11 @@
 
 
 %%
+// Warning: NonTerminal symbol "simpleExpressions" is unreachable
+// Warning: NonTerminal symbol "unaryTests" is unreachable
+// Warning: NonTerminal symbol "textualExpressions" is unreachable
+// Warning: NonTerminal symbol "simpleExpression" is unreachable
+// ---------------------------------------------------------------
 
 main:
 	| simpleUnaryTests		{ Debug("main/simpleUnaryTests");	Root = $1; }
@@ -433,3 +449,5 @@ dateTimeLiteral:
 
 // The use code section.
 // It is empty, because use code goes in a partial class.
+// ==========================================================================
+
