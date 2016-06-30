@@ -1,5 +1,4 @@
 %namespace Softengi.DmnEngine.Parser
-%namespace Softengi.DmnEngine.Parser
 %partial
 %parsertype FeelParser
 %visibility internal
