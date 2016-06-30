@@ -16,6 +16,26 @@ namespace Softengi.DmnEngine.Parser
 			throw new Exception($"Unexpected character: '{yytext}'");
 		}
 
+		private void StartLineComment()
+		{
+			BEGIN(LineComment);
+		}
+
+		private void EndLineComment()
+		{
+			BEGIN(DefaultCondition);
+		}
+
+		private void StartBlockComment()
+		{
+			BEGIN(BlockComment);
+		}
+
+		private void EndBlockComment()
+		{
+			BEGIN(DefaultCondition);
+		}
+
 		static private void Debug(string message, params object[] messageParams)
 		{
 			Console.WriteLine(message, messageParams);

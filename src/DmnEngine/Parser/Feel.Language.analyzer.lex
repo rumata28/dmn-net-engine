@@ -7,6 +7,10 @@
 
 %option stack, minimize, parser, verbose, persistbuffer, noembedbuffers 
 
+%s DefaultCondition
+%x LineComment
+%x BlockComment
+
 Eol					(\r\n?|\n)
 NotWh				[^ \t\r\n]
 S					[ \t]
@@ -17,6 +21,12 @@ L					[A-Z_a-z]
 %%
 
 /* Scanner body */
+
+"//"						{ StartLineComment(); }
+<LineComment>Eol			{ EndLineComment(); }
+
+"/*"						{ StartBlockComment(); }
+<BlockComment>"*/"			{ EndBlockComment(); }
 
 ({D}*\.)?{D}+			{ Debug(); GetNumber();	return (int) Token.NUMBER; }
 {D}+\.{D}*				{ Debug(); GetNumber();	return (int) Token.NUMBER; }
